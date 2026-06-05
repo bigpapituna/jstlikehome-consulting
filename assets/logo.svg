@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="JSTLIKEHOME heart-house mark">
+  <path d="M50 82C35 68 14 55 14 36C14 24 24 16 34 16C42 16 47 21 50 26C53 21 58 16 66 16C76 16 86 24 86 36C86 55 65 68 50 82Z" fill="none" stroke="#E63946" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M30 52L50 32L70 52L50 72Z" fill="none" stroke="#E63946" stroke-width="4" stroke-linejoin="round"/>
+  <rect x="43.5" y="44" width="5.5" height="5.5" fill="#E63946"/>
+  <rect x="51" y="44" width="5.5" height="5.5" fill="#E63946"/>
+  <rect x="43.5" y="51" width="5.5" height="5.5" fill="#E63946"/>
+  <rect x="51" y="51" width="5.5" height="5.5" fill="#E63946"/>
+</svg>
