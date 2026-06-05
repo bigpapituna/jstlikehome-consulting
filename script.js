@@ -1,5 +1,5 @@
 /* ============================================================
-   JSTLIKEHOME · STR Consulting — interactions (shared)
+   JSTLIKEHOME · Vacation Rental Consulting — interactions (shared)
    ============================================================ */
 (function () {
   'use strict';
@@ -96,7 +96,7 @@
   /* ---- Contact form (mailto, no backend) ---- */
   var form = document.getElementById('contact-form');
   var hint = document.getElementById('form-hint');
-  var CONTACT_EMAIL = 'hello@jstlikehome.com'; // <-- change to your real email
+  var CONTACT_EMAIL = 'roy.y@jstlikehome.com'; // <-- change to your real email
 
   function showHint(msg, type) { if (hint) { hint.textContent = msg; hint.className = 'form-hint ' + (type || ''); } }
 
@@ -106,7 +106,7 @@
       var get = function (n) { return form[n] ? (form[n].value || '').trim() : ''; };
       var name = get('name'), email = get('email'), props = get('props'), message = get('message');
       if (!name || !email || !message) { showHint('Please add your name, email and a short message.', 'err'); return; }
-      var subject = 'STR consulting enquiry — ' + name;
+      var subject = 'Vacation rental consulting enquiry — ' + name;
       var body = 'Name: ' + name + '\nEmail: ' + email + '\nProperties: ' + (props || 'N/A') + '\n\n' + message + '\n';
       window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
       showHint('Opening your email app… if nothing happens, email ' + CONTACT_EMAIL + ' directly.', 'ok');

@@ -1,6 +1,6 @@
-# JSTLIKEHOME — STR Consulting (3-page site)
+# JSTLIKEHOME — Vacation Rental Consulting (3-page site)
 
-A premium, fully static **3-page** marketing site for Roy Younes' short-term-rental
+A premium, fully static **3-page** marketing site for Roy Younes' vacation rental
 consulting services. No framework, no build step — just HTML, CSS and a little
 JavaScript, so it deploys instantly on Vercel.
 
@@ -17,51 +17,47 @@ jstlikehome-consulting/
 ├── styles.css       ← all styling (brand tokens at the top in :root)
 ├── script.js        ← nav, scroll reveal, counters, FAQ, contact form
 ├── assets/
-│   ├── logo.svg      ← standalone heart-house mark
-│   └── img/          ← 9 stock photos (see "Replace the imagery" below)
+│   ├── logo.svg      ← standalone heart-house mark (SVG)
+│   └── img/          ← logo files + stock photos
 └── README.md
 ```
 
+Contact email is **roy.y@jstlikehome.com** (set in the 3 HTML files + `script.js`).
+The contact form opens the visitor's email app — clients book direct (no Upwork/phone).
+
 ---
 
-## ✅ Before you go live — replace these placeholders
+## ⚠️ Still worth reviewing before / after launch
 
-**1. Email** — currently `hello@jstlikehome.com`. Change it in **four** places:
-`index.html`, `services.html`, `about.html` (the `mailto:` link) and `script.js`
-(the `CONTACT_EMAIL` constant).
-
-**2. Upwork profile link** — currently points to `https://www.upwork.com`. Replace with
-your real profile URL (appears in each page's footer and on the About contact card).
-
-**3. Representative numbers** — these are placeholders I added so the site feels complete.
-Confirm or change them to your real figures:
-- Stat strip: **500+ listings optimized** (10+, 28 and 5 are your real numbers)
-- Hero pills: **$2.4M+ revenue managed**, **+34% avg revenue**
+**1. Representative numbers** — these are placeholders so the site feels complete.
+Confirm or change to your real figures:
+- Stat strips: **500+ listings optimized** (10+, 5, and 72 are real)
+- Hero pills: **$10M+ revenue managed**, **+34% avg revenue**
 - Results bento: **+41% ADR**, **+34% revenue**, **92% occupancy**
 
-**4. Testimonials** — `Sophie L.`, `Marcus T.`, `David & Mara` are **sample quotes**.
-Swap in real client testimonials (in `index.html` and `about.html`) before publishing.
+**2. Property count is intentionally different on two pages** — Home & About show
+**72** ("personally built & managed"); the Services stat strip shows **100+**. If you'd
+like them to match, change the `data-count` value in the relevant stat (`index.html`,
+`about.html` = 72; `services.html` = 100).
 
-**5. Pricing** — `$490`, `$1,500 from`, and `Custom` in `services.html` are starting
-suggestions. Set your real numbers (or keep "Custom" / "Request a quote").
+**3. Testimonials** — `Sophie L.`, `Marcus T.`, `David & Mara` are **sample quotes**.
+Swap in real client testimonials (in `index.html` and `about.html`).
 
-**6. Imagery** — see below.
+**4. Pricing** — Initial Audit is **$450–900**; Full Optimization **$1,500 from / listing**;
+Portfolio Partner **Custom**. Adjust the latter two if needed (`services.html`).
 
-**7. (Optional) Booking link** — the "Book a call" buttons point to the contact form
+**5. (Optional) Booking link** — "Book a call" buttons point to the contact form
 (`about.html#contact`). If you use Calendly/Cal.com, replace those `href`s with your link.
 
 ---
 
-## 🖼️ Replace the imagery
-`assets/img/` contains licensed-free **Unsplash stock** chosen to match the look. Swap any
-file for your own photo of the **same name** and it just works. Most important:
-- **`host-man.jpg`** — used as Roy's headshot on the About page. Replace with a real photo
-  of you (keep the name, or update the `src` in `about.html`).
-- The interior/property shots (`dining`, `bedroom`, `exterior`, `coastal`, `kitchen`,
-  `balcony`, `workspace`) — swap for real photos of listings you've optimized when you have them.
-
-> The logo is an inline SVG (the coral heart + house mark), so it's crisp at any size and
-> needs no image file. To use your official PNG instead, replace the `<svg>…</svg>` blocks.
+## 🖼️ Imagery & logo
+- **Logo:** your real logo is used in the header (cropped icon, `assets/img/logo-mark.jpg`)
+  and on the About page (full logo, `assets/img/logo-full.jpg`). Both come from your
+  `Photo from Roy.jpg`. The favicon is an inline SVG of the same mark.
+- **Stock photos** in `assets/img/` (Unsplash) fill the interiors/results sections. Swap any
+  file for your own photo of the **same name** and it just works — ideal once you have real
+  shots of listings you've optimized.
 
 ---
 
@@ -83,8 +79,8 @@ Then in Vercel: **Add New → Project → import the repo → Deploy** (Framewor
 ---
 
 ## 🖥️ Preview locally
-Open `index.html` directly, or serve the folder with any static server, e.g. the included
-PowerShell helper used during development, or VS Code's "Live Server" extension.
+Open `index.html` directly, or serve the folder with any static server (e.g. VS Code's
+"Live Server" extension).
 
 ## ✉️ Optional: a hosted contact form
 The form opens the visitor's email app (works everywhere, no setup). To collect submissions

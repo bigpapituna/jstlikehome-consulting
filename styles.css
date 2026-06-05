@@ -124,7 +124,8 @@ h3 { font-size: 1.34rem; letter-spacing: -0.015em; }
 .header-inner { display: flex; align-items: center; justify-content: space-between; height: 78px; gap: 20px; }
 
 .brand { display: flex; align-items: center; gap: 12px; }
-.brand__mark { width: 42px; height: 42px; display: grid; place-items: center; background: var(--ink); border-radius: 13px; flex-shrink: 0; }
+.brand__mark { width: 46px; height: 46px; display: grid; place-items: center; background: #fff; border: 1px solid var(--line); border-radius: 13px; flex-shrink: 0; overflow: hidden; }
+.brand__mark img { width: 100%; height: 100%; object-fit: contain; padding: 4px; }
 .brand__mark svg { width: 26px; height: 26px; }
 .brand__text { display: flex; flex-direction: column; line-height: 1; }
 .brand__name { font-family: var(--font-display); font-weight: 800; font-size: 1.12rem; letter-spacing: -0.01em; }
@@ -215,11 +216,11 @@ h3 { font-size: 1.34rem; letter-spacing: -0.015em; }
 /* ---------- Trust / logos ---------- */
 .trustbar { padding: 34px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .trustbar__label { text-align: center; font-size: 0.82rem; letter-spacing: 0.04em; color: var(--muted); margin-bottom: 20px; font-weight: 500; }
-.trustbar__logos { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 14px 40px; }
-.trustbar__logos li { font-family: var(--font-display); font-weight: 700; font-size: 1.08rem; color: #aaa093; letter-spacing: -0.01em; transition: color .2s; }
+.trustbar__logos { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 20px 38px; }
+.trustbar__logos li { display: inline-flex; flex-direction: column; align-items: center; gap: 5px; font-family: var(--font-display); font-weight: 700; font-size: 1.08rem; color: #aaa093; letter-spacing: -0.01em; transition: color .2s; }
 .trustbar__logos li:hover { color: var(--ink); }
-.trustbar__logos .pref { position: relative; color: var(--ink); }
-.trustbar__logos .pref::after { content: "★ Preferred Partner"; position: absolute; left: 0; top: 116%; font-family: var(--font-body); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.05em; color: var(--coral); white-space: nowrap; }
+.trustbar__logos .has-badge { color: var(--ink); }
+.tb-badge { font-family: var(--font-body); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.04em; color: var(--coral); white-space: nowrap; }
 
 /* ---------- Bento ---------- */
 .bento { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 200px; gap: 18px; }
@@ -353,6 +354,8 @@ h3 { font-size: 1.34rem; letter-spacing: -0.015em; }
 .about-hero__photo { position: relative; }
 .about-hero__photo-img { aspect-ratio: 4/4.6; border-radius: var(--r-xl); overflow: hidden; box-shadow: var(--shadow-lg); }
 .about-hero__photo-img img { width: 100%; height: 100%; object-fit: cover; }
+.about-brandcard { aspect-ratio: 4/4.6; border-radius: var(--r-xl); overflow: hidden; box-shadow: var(--shadow-lg); border: 1px solid var(--line); display: grid; place-items: center; padding: 14%; background: radial-gradient(130% 100% at 50% 0%, #fff 60%, var(--coral-50) 100%); }
+.about-brandcard img { width: 100%; max-width: 320px; }
 .about-hero__photo .float-pill { bottom: 24px; left: -22px; }
 .about-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
 .about-tags li { font-weight: 600; font-size: 0.84rem; color: var(--ink-2); background: #fff; border: 1px solid var(--line); padding: 9px 16px; border-radius: var(--pill); }
