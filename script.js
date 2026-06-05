@@ -1,23 +1,23 @@
 /* ============================================================
-   JSTLIKEHOME — STR Consulting · interactions
+   JSTLIKEHOME · STR Consulting — interactions (shared)
    ============================================================ */
 (function () {
   'use strict';
 
-  /* ---- Current year in footer ---- */
-  var yearEl = document.getElementById('year');
-  if (yearEl) { yearEl.textContent = new Date().getFullYear(); }
+  /* ---- Year ---- */
+  document.querySelectorAll('[data-year]').forEach(function (el) {
+    el.textContent = new Date().getFullYear();
+  });
 
-  /* ---- Sticky header shadow on scroll ---- */
+  /* ---- Sticky header shadow ---- */
   var header = document.querySelector('.site-header');
-  function onScroll() {
-    if (window.scrollY > 8) { header.classList.add('scrolled'); }
-    else { header.classList.remove('scrolled'); }
+  if (header) {
+    var onScroll = function () { header.classList.toggle('scrolled', window.scrollY > 8); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
   }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
 
-  /* ---- Mobile nav toggle ---- */
+  /* ---- Mobile nav ---- */
   var toggle = document.getElementById('nav-toggle');
   var nav = document.getElementById('main-nav');
   if (toggle && nav) {
@@ -26,12 +26,10 @@
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
       toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     });
-    // Close menu when a link is tapped
-    nav.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', function () {
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
         nav.classList.remove('open');
         toggle.setAttribute('aria-expanded', 'false');
-        toggle.setAttribute('aria-label', 'Open menu');
       });
     });
   }
@@ -40,60 +38,79 @@
   var reveals = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window && reveals.length) {
     var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-          io.unobserve(entry.target);
-        }
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
     reveals.forEach(function (el) { io.observe(el); });
   } else {
     reveals.forEach(function (el) { el.classList.add('in'); });
   }
 
-  /* ---- Contact form ----
-     No backend required: opens the visitor's email client with a
-     pre-filled message to Roy. To use a hosted form service instead
-     (e.g. Formspree), see the note in README.md. */
+  /* ---- Animated counters ---- */
+  var counters = document.querySelectorAll('[data-count]');
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function animateCount(el) {
+    var target = parseFloat(el.getAttribute('data-count'));
+    var decimals = (el.getAttribute('data-decimals')) ? parseInt(el.getAttribute('data-decimals'), 10) : 0;
+    if (prefersReduced) { el.textContent = target.toFixed(decimals); return; }
+    var dur = 1500, start = performance.now();
+    function tick(now) {
+      var p = Math.min((now - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = (target * eased).toFixed(decimals);
+      if (p < 1) { requestAnimationFrame(tick); }
+      else { el.textContent = target.toFixed(decimals); }
+    }
+    requestAnimationFrame(tick);
+  }
+  if ('IntersectionObserver' in window && counters.length) {
+    var cio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { animateCount(e.target); cio.unobserve(e.target); }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(function (el) { cio.observe(el); });
+  } else {
+    counters.forEach(function (el) { el.textContent = el.getAttribute('data-count'); });
+  }
+
+  /* ---- FAQ accordion ---- */
+  document.querySelectorAll('.faq__item').forEach(function (item) {
+    var q = item.querySelector('.faq__q');
+    var a = item.querySelector('.faq__a');
+    if (!q || !a) { return; }
+    q.setAttribute('aria-expanded', 'false');
+    q.addEventListener('click', function () {
+      var isOpen = item.classList.contains('open');
+      // close siblings
+      document.querySelectorAll('.faq__item.open').forEach(function (o) {
+        if (o !== item) { o.classList.remove('open'); o.querySelector('.faq__a').style.maxHeight = null; o.querySelector('.faq__q').setAttribute('aria-expanded', 'false'); }
+      });
+      item.classList.toggle('open', !isOpen);
+      q.setAttribute('aria-expanded', String(!isOpen));
+      a.style.maxHeight = isOpen ? null : a.scrollHeight + 'px';
+    });
+  });
+
+  /* ---- Contact form (mailto, no backend) ---- */
   var form = document.getElementById('contact-form');
   var hint = document.getElementById('form-hint');
   var CONTACT_EMAIL = 'hello@jstlikehome.com'; // <-- change to your real email
 
+  function showHint(msg, type) { if (hint) { hint.textContent = msg; hint.className = 'form-hint ' + (type || ''); } }
+
   if (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-
-      var name = (form.name.value || '').trim();
-      var email = (form.email.value || '').trim();
-      var props = (form.props.value || '').trim();
-      var message = (form.message.value || '').trim();
-
-      if (!name || !email || !message) {
-        showHint('Please fill in your name, email and message.', 'err');
-        return;
-      }
-
-      var subject = 'STR Consulting enquiry from ' + name;
-      var body =
-        'Name: ' + name + '\n' +
-        'Email: ' + email + '\n' +
-        'Number of properties: ' + (props || 'N/A') + '\n\n' +
-        message + '\n';
-
-      var mailto = 'mailto:' + CONTACT_EMAIL +
-        '?subject=' + encodeURIComponent(subject) +
-        '&body=' + encodeURIComponent(body);
-
-      window.location.href = mailto;
+      var get = function (n) { return form[n] ? (form[n].value || '').trim() : ''; };
+      var name = get('name'), email = get('email'), props = get('props'), message = get('message');
+      if (!name || !email || !message) { showHint('Please add your name, email and a short message.', 'err'); return; }
+      var subject = 'STR consulting enquiry — ' + name;
+      var body = 'Name: ' + name + '\nEmail: ' + email + '\nProperties: ' + (props || 'N/A') + '\n\n' + message + '\n';
+      window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
       showHint('Opening your email app… if nothing happens, email ' + CONTACT_EMAIL + ' directly.', 'ok');
       form.reset();
     });
-  }
-
-  function showHint(msg, type) {
-    if (!hint) { return; }
-    hint.textContent = msg;
-    hint.className = 'form-hint ' + (type || '');
   }
 })();
