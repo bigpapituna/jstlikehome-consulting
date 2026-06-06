@@ -104,10 +104,10 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var get = function (n) { return form[n] ? (form[n].value || '').trim() : ''; };
-      var name = get('name'), email = get('email'), props = get('props'), message = get('message');
+      var name = get('name'), email = get('email'), props = get('props'), website = get('website'), message = get('message');
       if (!name || !email || !message) { showHint('Please add your name, email and a short message.', 'err'); return; }
       var subject = 'Vacation rental consulting enquiry — ' + name;
-      var body = 'Name: ' + name + '\nEmail: ' + email + '\nProperties: ' + (props || 'N/A') + '\n\n' + message + '\n';
+      var body = 'Name: ' + name + '\nEmail: ' + email + '\nProperties: ' + (props || 'N/A') + '\nWebsite: ' + (website || 'N/A') + '\n\n' + message + '\n';
       window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
       showHint('Opening your email app… if nothing happens, email ' + CONTACT_EMAIL + ' directly.', 'ok');
       form.reset();
