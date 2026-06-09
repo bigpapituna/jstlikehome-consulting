@@ -116,8 +116,28 @@
     .chartcard,.stat,.phase,.issues li{box-shadow:none}
   }
 </style>
+  <style>
+  /* Detail-level toggle + simple overview */
+  .viewtoggle{display:flex;justify-content:center;gap:4px;max-width:380px;margin:0 auto 12px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px;box-shadow:var(--shadow)}
+  .vt-btn{flex:1;border:none;background:none;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:14px;color:var(--ink-soft);padding:11px 14px;border-radius:999px;cursor:pointer;transition:background .2s,color .2s}
+  .vt-btn.active{background:var(--coral);color:#fff}
+  .vt-hint{text-align:center;color:var(--ink-soft);font-size:13px;margin:0 auto 30px;max-width:540px}
+  body.view-simple #techView{display:none}
+  body.view-tech #simpleView{display:none}
+  .simplecards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px}
+  .scard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow)}
+  .sc-h{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:18px;margin-bottom:6px;color:var(--ink)}
+  .scard p{margin:0;font-size:15px;color:var(--ink-soft);line-height:1.5}
+  .bignums{display:flex;flex-wrap:wrap;gap:14px;margin:16px 0 6px}
+  .bn{flex:1;min-width:130px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow);text-align:center}
+  .bn-n{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:40px;line-height:1;color:var(--coral)}
+  .bn-l{font-size:14px;color:var(--ink-soft);margin-top:6px}
+  .pricebox .was{font-size:15px;color:rgba(255,255,255,.72);margin-bottom:8px}
+  .pricebox .was s{color:#FFC1A0;text-decoration-thickness:2px}
+  @media(max-width:560px){.simplecards{grid-template-columns:1fr}}
+  </style>
 </head>
-<body>
+<body class="view-simple">
 <div class="wrap">
 
   <header class="cover">
@@ -130,6 +150,56 @@
       <span><b>June 2026</b></span>
     </div>
   </header>
+
+  <!-- VIEW TOGGLE -->
+  <div class="viewtoggle" role="tablist" aria-label="Choose how much detail to see">
+    <button class="vt-btn active" data-view="simple" role="tab" aria-selected="true" aria-controls="simpleView">Simple overview</button>
+    <button class="vt-btn" data-view="tech" role="tab" aria-selected="false" aria-controls="techView">Full details</button>
+  </div>
+  <p class="vt-hint">New here? Start with the simple overview. Want the charts and the full step-by-step plan? Switch to Full details.</p>
+
+  <!-- SIMPLE OVERVIEW -->
+  <div id="simpleView">
+    <section>
+      <div class="num">In plain English</div>
+      <h2>The short version</h2>
+      <p class="lead">You've built something good: 23 listings, nice photos, real reviews. The problem is simple. Almost all your bookings come from one app, your calendar is mostly empty, and a few fixable issues are holding you back. My job is to get you booked on more sites, fix what's broken, and price each night well, so you earn more without taking on more risk.</p>
+    </section>
+
+    <section>
+      <h2>What I'd do for you</h2>
+      <div class="simplecards">
+        <div class="scard"><div class="sc-h">Turn your income back on</div><p>Three of your accounts are switched off and earning nothing. Getting them back on is the fastest win.</p></div>
+        <div class="scard"><div class="sc-h">Get you on more sites</div><p>Today almost everything rides on Airbnb. I'll add Booking.com, Expedia and Hopper, so more guests find you and one app can't make or break your month.</p></div>
+        <div class="scard"><div class="sc-h">Price every night well</div><p>Your rates are typed in by hand. I'll use software that raises prices when demand is high and never drops below a minimum you choose.</p></div>
+        <div class="scard"><div class="sc-h">Better tools, half the price</div><p>I'll move you to Hostaway for $30–$35 per listing instead of the usual $65–$75, because I bring it in through my account.</p></div>
+        <div class="scard"><div class="sc-h">Fix the website leaks</div><p>A broken page and a hard-to-find booking button are losing you guests. Quick fixes.</p></div>
+        <div class="scard"><div class="sc-h">Show you the numbers</div><p>One simple dashboard showing bookings and revenue by site, so we can both see what's working.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Why I'm confident</h2>
+      <p>I did the same thing for a client in Puerto Rico, a market a lot like yours. In a few months:</p>
+      <div class="bignums">
+        <div class="bn"><div class="bn-n">+73%</div><div class="bn-l">more revenue</div></div>
+        <div class="bn"><div class="bn-n">2&times;</div><div class="bn-l">more bookings</div></div>
+        <div class="bn"><div class="bn-n">50%</div><div class="bn-l">off your software</div></div>
+      </div>
+      <p>They stopped depending on Airbnb, and that's what let them grow. I expect the same direction for you.</p>
+    </section>
+
+    <section>
+      <h2>What it costs and what's next</h2>
+      <p>The main cost is the software: <strong>$30–$35 per listing each month</strong>, about half what Hostaway charges directly. Beyond that, we'll agree how we work together. Either I take a share of the new revenue I create for you, so I only earn when you do, or a one-time setup fee with a playbook your team can run.</p>
+      <p><strong>The first step is easy:</strong> let's switch your three suspended listings back on this week, then build from there.</p>
+    </section>
+
+    <div class="note" style="text-align:center">Want the detail behind any of this, including the charts and the full step-by-step plan? Tap <b>Full details</b> at the top.</div>
+  </div>
+
+  <!-- FULL / TECHNICAL VIEW -->
+  <div id="techView">
 
   <!-- BIG PICTURE -->
   <section>
@@ -252,9 +322,10 @@
     <p>Hostaway makes all of the above possible. Because I bring it on through my partner account, the pricing works in your favor:</p>
 
     <div class="pricebox">
-      <div class="big">$30–$35 <small>per listing / month</small></div>
+      <div class="was">Hostaway's usual price is <s>$65–$75</s> per listing / month.</div>
+      <div class="big">$30–$35 <small>per listing / month, through me</small></div>
       <span class="save">More than 50% off Hostaway's direct price</span>
-      <p>I onboard it through my account rather than direct. Across your 23 active listings, that's roughly $690–$805/month, and the visibility, automation, and reporting it unlocks more than pay for it.</p>
+      <p>I onboard it through my partner account rather than direct, which is where the savings come from. Across your 23 active listings, that's about $690–$805/month instead of the $1,495–$1,725 you'd pay Hostaway directly, and the visibility, automation, and reporting it unlocks more than pay for it.</p>
     </div>
 
     <h3>What it gives you</h3>
@@ -350,6 +421,8 @@
     <p>The foundation here is strong: good properties, good photos, real reviews. A few fixable things hold the portfolio back: one over-relied-on channel, accounts that need un-sticking, pricing left to guesswork, and tooling that can't keep up. Most of these recommendations lift the <em>whole</em> portfolio at once, and the Puerto Rico results show where this road leads. Let's start by turning the suspended listings back on this week, and build from there.</p>
   </div>
 
+  </div><!-- /techView -->
+
 </div>
 
 <script>
@@ -410,6 +483,27 @@ window.addEventListener('DOMContentLoaded',()=>{
   ch.data.datasets[1].backgroundColor='#15A3B5';
   ch.update();
 });
+</script>
+<script>
+(function(){
+  var body=document.body, btns=document.querySelectorAll('.vt-btn');
+  function setView(v){
+    var simple = v==='simple';
+    body.classList.toggle('view-simple', simple);
+    body.classList.toggle('view-tech', !simple);
+    btns.forEach(function(b){ var on=b.getAttribute('data-view')===v; b.classList.toggle('active',on); b.setAttribute('aria-selected', on?'true':'false'); });
+    if(!simple){
+      // Charts were built while hidden; resize them once the container is visible.
+      setTimeout(function(){
+        ['fernNow','fernTarget','prAug','prMay','prBars'].forEach(function(id){
+          try{ var c=(window.Chart&&Chart.getChart)?Chart.getChart(id):null; if(c) c.resize(); }catch(e){}
+        });
+      },60);
+    }
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  btns.forEach(function(b){ b.addEventListener('click', function(){ setView(b.getAttribute('data-view')); }); });
+})();
 </script>
 </body>
 </html>
