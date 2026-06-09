@@ -155,6 +155,8 @@
     </div>
   </header>
 
+  <div id="langswitch" style="margin:0 auto 14px;width:max-content"></div>
+
   <!-- VIEW TOGGLE -->
   <div class="viewtoggle" role="tablist" aria-label="Choose how much detail to see">
     <button class="vt-btn active" data-view="simple" role="tab" aria-selected="true" aria-controls="simpleView">Simple overview</button>
@@ -542,5 +544,6 @@ window.addEventListener('DOMContentLoaded',()=>{
   btns.forEach(function(b){ b.addEventListener('click', function(){ setView(b.getAttribute('data-view')); }); });
 })();
 </script>
+<script src="/i18n.js"></script>
 </body>
 </html>
