@@ -6,3 +6,7 @@ Thumbs.db
 # Local tooling
 .vercel
 node_modules/
+
+# Secrets / env (password lives in Vercel env vars, never in the repo)
+.env
+.env.*
