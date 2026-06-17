@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Propuesta de colaboración — Caribbean Dream Properties</title>
+<title>Partnership Proposal — Caribbean Dream Properties</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -603,6 +603,7 @@
     var d=lang==='en'?null:DICT[lang];
     items.forEach(function(it){ if(!d){it.n.nodeValue=it.orig;return;} var x=d[it.key]; it.n.nodeValue=(x!=null)?(it.lead+x+it.trail):it.orig; });
     document.documentElement.lang=lang;
+    document.title=(lang==='es')?'Propuesta de colaboración — Caribbean Dream Properties':'Partnership Proposal — Caribbean Dream Properties';
     try{localStorage.setItem(STORE,lang);}catch(e){}
     Array.prototype.forEach.call(document.querySelectorAll('.langbtn'),function(b){ b.classList.toggle('active',b.getAttribute('data-lang')===lang); });
   }
