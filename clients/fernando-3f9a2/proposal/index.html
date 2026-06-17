@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="no-js">
+<html lang="en" class="no-js">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -176,7 +176,7 @@
 <body>
 
 <div class="toprow">
-  <a class="backlink" href="../">&larr; Back to the audit</a>
+  <a class="backlink" href="/clients/fernando-3f9a2/">&larr; Back to the audit</a>
   <div id="langswitch" role="group" aria-label="Language"></div>
 </div>
 
@@ -601,9 +601,9 @@
   }
   var host=document.getElementById('langswitch');
   host.className='langswitch';
-  host.innerHTML=[['es','ES'],['en','EN']].map(function(p){return '<button type="button" class="langbtn" data-lang="'+p[0]+'">'+p[1]+'</button>';}).join('');
+  host.innerHTML=[['en','EN'],['es','ES']].map(function(p){return '<button type="button" class="langbtn" data-lang="'+p[0]+'">'+p[1]+'</button>';}).join('');
   host.addEventListener('click',function(e){var b=e.target.closest('.langbtn'); if(b) apply(b.getAttribute('data-lang'));});
-  var saved='es'; try{saved=localStorage.getItem(STORE)||'es';}catch(e){}
+  var saved='en'; try{saved=localStorage.getItem(STORE)||'en';}catch(e){}
   apply(saved);
 
   // reveal only after translation, so the client never sees an English flash
