@@ -178,7 +178,16 @@ h3 { font-size: 1.34rem; letter-spacing: -0.015em; }
 .hero__grid { display: grid; grid-template-columns: 1.04fr 0.96fr; gap: clamp(28px, 4vw, 56px); align-items: center; }
 .hero__copy { max-width: 36rem; }
 .hero h1 { margin-bottom: 22px; }
-.hero h1 .accent { display: inline; }
+.hero h1 .accent {
+  display: inline;
+  color: var(--coral);
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 16' preserveAspectRatio='none'%3E%3Cpath d='M4 10 C 50 4 92 13 130 8 S 210 5 236 9' fill='none' stroke='%23E63946' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 0.32em;
+  padding-bottom: 0.16em;
+}
 .hero__lede { font-size: clamp(1.06rem, 1.5vw, 1.2rem); color: var(--muted); margin-bottom: 32px; }
 .hero__lede strong { color: var(--ink); font-weight: 600; }
 .hero__actions { display: flex; flex-wrap: wrap; margin-bottom: 16px; }
