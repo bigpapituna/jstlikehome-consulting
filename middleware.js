@@ -1,42 +1,87 @@
-// Vercel Edge Middleware — HTTP Basic Auth for the /clients/ area.
+// Vercel Edge Middleware — password gate for the /clients/ area.
 //
-// Runs on Vercel's edge BEFORE any static file is served, so protected
-// pages (and their HTML) are never sent to the browser unless the visitor
-// supplies the correct password. The password is read from the
-// CLIENT_AREA_PASSWORD environment variable — it is never stored in this
-// repository or exposed to the client.
+// Visitors are sent to a branded login page (/clients/login) where they enter
+// a single password (no username). The password is verified HERE, on the edge,
+// against the CLIENT_AREA_PASSWORD environment variable — it is never shipped
+// to the browser or stored in this repo. On success we set an HttpOnly session
+// cookie; protected pages (and their HTML) are never served without it.
 //
-// Applies to /clients and everything beneath it, so future client pages
-// are protected automatically.
+// Runs before any static file is served, and covers /clients and everything
+// beneath it, so future client pages are protected automatically.
 
 export const config = {
   matcher: ['/clients', '/clients/:path*'],
 };
 
-export default function middleware(request) {
-  const expected = process.env.CLIENT_AREA_PASSWORD;
-  const auth = request.headers.get('authorization');
+const COOKIE = 'cdr_session';
+const LOGIN_PATH = '/clients/login';
+const DEFAULT_NEXT = '/clients/fernando-3f9a2/';
+const SECRET = 'jlh-clients-v1'; // static salt; the real secret is the env password
+const MAX_AGE = 60 * 60 * 24 * 30; // 30 days
 
-  if (expected && auth && auth.startsWith('Basic ')) {
-    try {
-      // Decode "Basic base64(username:password)" and compare only the password.
-      const decoded = atob(auth.slice(6));
-      const password = decoded.slice(decoded.indexOf(':') + 1);
-      if (password === expected) {
-        return; // Authenticated — continue and serve the requested page.
-      }
-    } catch (_) {
-      // fall through to the 401 below
+// Derive a session token from the password. Not the password itself, so the
+// cookie never carries the secret in the clear.
+async function token(password) {
+  const data = new TextEncoder().encode(password + '|' + SECRET);
+  const buf = await crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(buf))
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('');
+}
+
+function isLogin(pathname) {
+  return pathname === LOGIN_PATH || pathname === LOGIN_PATH + '/';
+}
+
+// Only allow internal redirects under /clients/, never back to the login page.
+function safeNext(next) {
+  if (typeof next === 'string' && next.startsWith('/clients/') && !isLogin(next.split('?')[0])) {
+    return next;
+  }
+  return DEFAULT_NEXT;
+}
+
+export default async function middleware(request) {
+  const url = new URL(request.url);
+  const password = process.env.CLIENT_AREA_PASSWORD || '';
+  const expected = await token(password);
+
+  // 1) Login form submission — verify the password here on the edge.
+  if (isLogin(url.pathname) && request.method === 'POST') {
+    const form = await request.formData();
+    const candidate = (form.get('password') || '').toString();
+    const next = safeNext((form.get('next') || '').toString());
+
+    if (password && candidate === password) {
+      return new Response(null, {
+        status: 303,
+        headers: {
+          Location: new URL(next, url).toString(),
+          'Set-Cookie': `${COOKIE}=${expected}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${MAX_AGE}`,
+        },
+      });
     }
+
+    const back = new URL(LOGIN_PATH, url);
+    back.searchParams.set('error', '1');
+    back.searchParams.set('next', next);
+    return new Response(null, { status: 303, headers: { Location: back.toString() } });
   }
 
-  // Not authenticated: ask the browser to show its native sign-in dialog.
-  // The page content is NOT included in this response.
-  return new Response('Authentication required.', {
-    status: 401,
-    headers: {
-      'WWW-Authenticate': 'Basic realm="Protected client area", charset="UTF-8"',
-      'Content-Type': 'text/plain; charset=utf-8',
-    },
-  });
+  // 2) The login page itself is public, so the password can be entered.
+  if (isLogin(url.pathname)) {
+    return;
+  }
+
+  // 3) Everything else under /clients needs a valid session cookie.
+  const cookie = request.headers.get('cookie') || '';
+  const match = cookie.match(/(?:^|;\s*)cdr_session=([^;]+)/);
+  if (password && match && match[1] === expected) {
+    return; // authorized — serve the requested page
+  }
+
+  // 4) Not authorized → send to the login page, remembering the destination.
+  const login = new URL(LOGIN_PATH, url);
+  login.searchParams.set('next', url.pathname + url.search);
+  return new Response(null, { status: 302, headers: { Location: login.toString() } });
 }
