@@ -214,6 +214,20 @@ h3 { font-size: 1.34rem; letter-spacing: -0.015em; }
 .hero__media .float-pill--addr { bottom: 7%; left: 6%; }
 .hero__ring { position: absolute; inset: -6% -4% -6% -4%; border: 1px solid var(--line); border-radius: 50%/46%; z-index: -1; pointer-events: none; }
 
+/* ---- Hero motion (CSS only) ---- */
+@keyframes hero-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes hero-kenburns { from { transform: scale(1); } to { transform: scale(1.055); } }
+.hero__media-img img { animation: hero-kenburns 18s ease-in-out infinite alternate; will-change: transform; }
+.hero__media .float-pill--price { animation: hero-float 5.5s ease-in-out infinite; }
+.hero__media .float-pill--rev { animation: hero-float 6.7s ease-in-out 0.7s infinite; }
+.hero__media .float-pill--addr { animation: hero-float 7.6s ease-in-out 0.3s infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .hero__media-img img,
+  .hero__media .float-pill--price,
+  .hero__media .float-pill--rev,
+  .hero__media .float-pill--addr { animation: none; }
+}
+
 /* ---------- Stat strip ---------- */
 .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
 .stat { padding: 4px 6px; }
