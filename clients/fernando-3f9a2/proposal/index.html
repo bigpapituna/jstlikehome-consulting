@@ -171,9 +171,21 @@
     .options,.opt,.step{break-inside:avoid}
     thead th{background:var(--navy)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   }
+  /* ---- Simple / Full toggle + custom option ---- */
+  .viewtoggle{display:flex;justify-content:center;gap:4px;max-width:360px;margin:22px auto 8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px;box-shadow:var(--shadow)}
+  .vt-btn{flex:1;border:none;background:none;font:inherit;font-weight:700;font-size:13.5px;color:var(--ink-soft);padding:10px 12px;border-radius:999px;cursor:pointer;transition:background .2s,color .2s}
+  .vt-btn.active{background:var(--coral-deep);color:#fff}
+  .vt-hint{text-align:center;color:var(--ink-soft);font-size:13px;margin:0 auto 12px;max-width:520px;padding:0 20px}
+  body.view-simple main{display:none}
+  body.view-full #simpleView{display:none}
+  #simpleView{padding:clamp(30px,5vw,56px) 0;border-bottom:1px solid var(--line)}
+  #simpleView .lede{margin-bottom:24px}
+  .opt--c{border-color:var(--coral);margin-top:6px}
+  .opt--c .opt-head{background:linear-gradient(135deg,var(--coral-deep),#c92f3b)}
+  .opt--c .opt-head .tag{color:#ffe1e1}
 </style>
 </head>
-<body>
+<body class="view-simple">
 
 <div class="toprow">
   <a class="backlink" href="/clients/fernando-3f9a2/">&larr; Back to the audit</a>
@@ -207,6 +219,40 @@
     </div>
   </div>
 </header>
+
+<div class="viewtoggle" role="group" aria-label="View">
+  <button type="button" class="vt-btn" data-view="simple">Simple version</button>
+  <button type="button" class="vt-btn" data-view="full">Full proposal</button>
+</div>
+<p class="vt-hint">New here? Start with the simple version. Want every detail and the original options? Switch to the full proposal.</p>
+
+<section id="simpleView">
+  <div class="wrap col">
+    <span class="secnum">In plain terms</span>
+    <h2>The custom offer, kept simple</h2>
+    <p class="lede">Here is what we agreed, in plain language. I build your new booking channels and run them. You pay a small monthly setup for six months, plus a small commission only on the new bookings I create. If it isn't working by the end of December, you walk away free and keep everything.</p>
+
+    <h3>What you pay</h3>
+    <div class="included">
+      <div class="inc-row"><div class="inc-key">Setup</div><div class="inc-val"><b>$1,500 / month for 6 months</b>, then it stops. This covers the entire build.</div></div>
+      <div class="inc-row"><div class="inc-key">Commission</div><div class="inc-val"><b>3%, on new bookings only.</b> Just what I bring in on Booking.com, Expedia and Hopper. Nothing on your current Airbnb income.</div></div>
+      <div class="inc-row"><div class="inc-key">Software</div><div class="inc-val"><b>Hostaway $35 / listing / month</b>, the tool that runs it all, about half its normal price through me.</div></div>
+    </div>
+
+    <h3>Your protections</h3>
+    <ul class="clean">
+      <li><strong>Walk away free by December 31.</strong> If the new channels aren't live and earning by then, you end it with no fee and keep all the work.</li>
+      <li><strong>No clawback, ever.</strong> The monthly setup pays for the build outright, so you are never stuck owing me for it if you leave.</li>
+      <li><strong>The 3% only touches new money.</strong> It comes out of bookings you aren't getting today, never the 10–20% you already earn.</li>
+    </ul>
+
+    <h3>If it's working</h3>
+    <p>If December's results are there, we continue through January and February at $1,500 per month each, only because you've seen it work. If they're not, we stop, no hard feelings.</p>
+
+    <h3>The first step</h3>
+    <p>Say yes to the custom option, give me access to your listings, and I start within 72 hours, building toward your December to March peak.</p>
+  </div>
+</section>
 
 <main>
 
@@ -356,6 +402,24 @@
     </div>
     <p class="tnote">The choice comes down to how you'd rather share risk. With Option A my pay rises and falls with your results, the upfront is low, and I carry the risk alongside you. With Option B you pay full price for the work and keep every dollar of upside.</p>
 
+    <h3>The custom option we discussed</h3>
+    <div class="opt opt--c">
+      <div class="opt-head">
+        <span class="tag">Option C · Custom</span>
+        <h4>Built around your concerns</h4>
+      </div>
+      <div class="opt-body">
+        <p>The version we talked through, in good faith. Lower commission, a gentler payment spread, a clean exit by December, and no clawback to ever get stuck on.</p>
+        <ul class="mini">
+          <li><strong>Implementation: $1,500 / month for 6 months.</strong> The same build as Option A, spread over six months instead of three to ease your cash flow.</li>
+          <li><strong>Commission: 3% of new-channel revenue.</strong> Only on bookings I create on Booking.com, Expedia and Hopper, never your existing Airbnb income.</li>
+          <li><strong>Walk away free by December 31.</strong> If the channels aren't live and producing by then, you exit with no fee and no clawback, and keep everything built.</li>
+          <li><strong>Two optional months.</strong> If December's results are there, we continue January and February at $1,500 each, paid only once it's proven.</li>
+        </ul>
+        <p class="opt-foot">Best when you want the lowest risk and a partner who only keeps earning by performing.</p>
+      </div>
+    </div>
+
     <div class="callout jade">
       <p><span class="lead">Why staying together matters.</span> The setup gets you live, but the compounding value is the ongoing work. It takes a full season cycle to learn your portfolio's rhythm, and the pricing and campaign tuning that follows is where the largest gains come from. This is built to be a multi-year partnership, not a one-time setup.</p>
     </div>
@@ -392,7 +456,7 @@
     <h2>What I need from you</h2>
     <p>To finalize the per-listing details and get started, I need three things:</p>
     <ul class="clean">
-      <li><strong>Your pick of structure</strong>: Option A or Option B.</li>
+      <li><strong>Your pick of structure</strong>: Option A, Option B, or the custom Option C.</li>
       <li><strong>Your current channel-manager agreement</strong>, so we can confirm opt-out terms and timing before migrating.</li>
       <li><strong>Access to your listings and accounts</strong>, so I can begin the build and optimization.</li>
     </ul>
@@ -406,7 +470,7 @@
     <span class="secnum">08</span>
     <h2>Next steps</h2>
     <div class="steps">
-      <div class="step"><div class="n"></div><p><b>You confirm the structure (A or B)</b> and share the agreement and access above.</p></div>
+      <div class="step"><div class="n"></div><p><b>You confirm the structure (A, B, or C)</b> and share the agreement and access above.</p></div>
       <div class="step"><div class="n"></div><p><b>I send the services agreement to make it official,</b> a short, plain-language document.</p></div>
       <div class="step"><div class="n"></div><p><b>Phase 1 begins within 72 hours of signing.</b> We stabilize first, then build toward the December–March peak.</p></div>
     </div>
@@ -437,6 +501,45 @@
   var DICT={ es:{
     // cover
     "← Back to the audit":"← Volver a la auditoría",
+    "Simple version":"Versión simple",
+    "Full proposal":"Propuesta completa",
+    "New here? Start with the simple version. Want every detail and the original options? Switch to the full proposal.":"¿Es su primera vez? Empiece por la versión simple. ¿Quiere todos los detalles y las opciones originales? Cambie a la propuesta completa.",
+    "In plain terms":"En palabras simples",
+    "The custom offer, kept simple":"La oferta a medida, en simple",
+    "Here is what we agreed, in plain language. I build your new booking channels and run them. You pay a small monthly setup for six months, plus a small commission only on the new bookings I create. If it isn't working by the end of December, you walk away free and keep everything.":"Esto es lo que acordamos, en palabras simples. Yo construyo sus nuevos canales de reserva y los gestiono. Usted paga una pequeña cuota mensual de montaje durante seis meses, más una pequeña comisión solo sobre las nuevas reservas que yo genere. Si para finales de diciembre no está funcionando, se marcha sin coste y se queda con todo.",
+    "What you pay":"Lo que paga",
+    "Setup":"Montaje",
+    "$1,500 / month for 6 months":"$1,500 / mes durante 6 meses",
+    ", then it stops. This covers the entire build.":", y luego se detiene. Esto cubre todo el montaje.",
+    "Commission":"Comisión",
+    "3%, on new bookings only.":"3 %, solo sobre nuevas reservas.",
+    "Just what I bring in on Booking.com, Expedia and Hopper. Nothing on your current Airbnb income.":"Solo lo que yo traigo en Booking.com, Expedia y Hopper. Nada sobre sus ingresos actuales de Airbnb.",
+    "Software":"Software",
+    "Hostaway $35 / listing / month":"Hostaway $35 / anuncio / mes",
+    ", the tool that runs it all, about half its normal price through me.":", la herramienta que lo gestiona todo, a alrededor de la mitad de su precio normal a través de mí.",
+    "Your protections":"Sus protecciones",
+    "Walk away free by December 31.":"Márchese sin coste antes del 31 de diciembre.",
+    "If the new channels aren't live and earning by then, you end it with no fee and keep all the work.":"Si para entonces los nuevos canales no están activos y generando, lo termina sin penalización y se queda con todo el trabajo.",
+    "No clawback, ever.":"Sin recuperación de costes, nunca.",
+    "The monthly setup pays for the build outright, so you are never stuck owing me for it if you leave.":"La cuota mensual paga el montaje por completo, así que nunca queda atrapado debiéndome nada por él si se marcha.",
+    "The 3% only touches new money.":"El 3 % solo toca dinero nuevo.",
+    "It comes out of bookings you aren't getting today, never the 10–20% you already earn.":"Sale de reservas que hoy no tiene, nunca del 10–20 % que usted ya gana.",
+    "If it's working":"Si está funcionando",
+    "If December's results are there, we continue through January and February at $1,500 per month each, only because you've seen it work. If they're not, we stop, no hard feelings.":"Si los resultados de diciembre están ahí, continuamos en enero y febrero a $1,500 por mes cada uno, solo porque ya lo ha visto funcionar. Si no lo están, paramos, sin resentimientos.",
+    "The first step":"El primer paso",
+    "Say yes to the custom option, give me access to your listings, and I start within 72 hours, building toward your December to March peak.":"Diga sí a la opción a medida, deme acceso a sus anuncios y empiezo en un plazo de 72 horas, construyendo hacia su pico de diciembre a marzo.",
+    "The custom option we discussed":"La opción a medida que comentamos",
+    "Option C · Custom":"Opción C · A medida",
+    "Built around your concerns":"Pensada en torno a sus inquietudes",
+    "The version we talked through, in good faith. Lower commission, a gentler payment spread, a clean exit by December, and no clawback to ever get stuck on.":"La versión que hablamos, de buena fe. Comisión más baja, un reparto de pagos más suave, una salida limpia en diciembre y sin recuperación de costes en la que quedar atrapado.",
+    "Implementation: $1,500 / month for 6 months.":"Implementación: $1,500 / mes durante 6 meses.",
+    "The same build as Option A, spread over six months instead of three to ease your cash flow.":"El mismo montaje que la Opción A, repartido en seis meses en lugar de tres para aliviar su flujo de caja.",
+    "Commission: 3% of new-channel revenue.":"Comisión: 3 % de los ingresos de los nuevos canales.",
+    "Only on bookings I create on Booking.com, Expedia and Hopper, never your existing Airbnb income.":"Solo sobre las reservas que yo genere en Booking.com, Expedia y Hopper, nunca sus ingresos actuales de Airbnb.",
+    "If the channels aren't live and producing by then, you exit with no fee and no clawback, and keep everything built.":"Si para entonces los canales no están activos y produciendo, sale sin penalización ni recuperación de costes, y se queda con todo lo construido.",
+    "Two optional months.":"Dos meses opcionales.",
+    "If December's results are there, we continue January and February at $1,500 each, paid only once it's proven.":"Si los resultados de diciembre están ahí, continuamos enero y febrero a $1,500 cada uno, pagados solo una vez demostrado.",
+    "Best when you want the lowest risk and a partner who only keeps earning by performing.":"Mejor cuando quiere el menor riesgo y un socio que solo sigue ganando si rinde.",
     "Partnership Proposal · June 2026":"Propuesta de colaboración · Junio de 2026",
     "A distribution partnership for Caribbean Dream Properties":"Una alianza de distribución para Caribbean Dream Properties",
     "Two clear ways to structure the work. One ties my pay to your results. One keeps it simple and fixed.":"Dos formas claras de estructurar el trabajo. Una vincula mi pago a sus resultados. La otra lo mantiene simple y fijo.",
@@ -567,7 +670,7 @@
     "What I need from you":"Lo que necesito de usted",
     "To finalize the per-listing details and get started, I need three things:":"Para cerrar los detalles por anuncio y empezar, necesito tres cosas:",
     "Your pick of structure":"Su elección de estructura",
-    ": Option A or Option B.":": Opción A u Opción B.",
+    ": Option A, Option B, or the custom Option C.":": Opción A, Opción B o la Opción C a medida.",
     "Your current channel-manager agreement":"Su contrato actual de gestor de canales",
     ", so we can confirm opt-out terms and timing before migrating.":", para confirmar las condiciones de salida y los plazos antes de migrar.",
     "Access to your listings and accounts":"Acceso a sus anuncios y cuentas",
@@ -575,7 +678,7 @@
     "On listing creation: your team (Alondra or internal staff) creates the OTA listings. I optimize them and run the campaigns after that, the same division of labor we discussed.":"Sobre la creación de anuncios: su equipo (Alondra o personal interno) crea los anuncios de OTA. Yo los optimizo y llevo las campañas a partir de ahí, la misma división de tareas que comentamos.",
     // 08
     "Next steps":"Próximos pasos",
-    "You confirm the structure (A or B)":"Usted confirma la estructura (A o B)",
+    "You confirm the structure (A, B, or C)":"Usted confirma la estructura (A, B o C)",
     "and share the agreement and access above.":"y comparte el contrato y los accesos de arriba.",
     "I send the services agreement to make it official,":"Le envío el contrato de servicios para oficializarlo,",
     "a short, plain-language document.":"un documento breve y en lenguaje claro.",
@@ -624,6 +727,21 @@
     setTimeout(showAll,2200);
     window.addEventListener('load',function(){setTimeout(showAll,500);});
   }
+})();
+</script>
+<script>
+(function () {
+  var KEY = 'jlh_proposal_view';
+  var btns = document.querySelectorAll('.vt-btn');
+  function set(v) {
+    document.body.classList.toggle('view-simple', v === 'simple');
+    document.body.classList.toggle('view-full', v === 'full');
+    try { localStorage.setItem(KEY, v); } catch (e) {}
+    Array.prototype.forEach.call(btns, function (b) { b.classList.toggle('active', b.getAttribute('data-view') === v); });
+  }
+  Array.prototype.forEach.call(btns, function (b) { b.addEventListener('click', function () { set(b.getAttribute('data-view')); }); });
+  var saved = 'simple'; try { saved = localStorage.getItem(KEY) || 'simple'; } catch (e) {}
+  set(saved);
 })();
 </script>
 </body>
