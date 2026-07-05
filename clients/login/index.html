@@ -54,7 +54,7 @@
     (function () {
       var q = new URLSearchParams(location.search);
       var next = q.get('next') || '';
-      if (!/^\/clients\//.test(next)) next = '/clients/fernando-3f9a2/';
+      if (next && !/^\/clients\//.test(next)) next = ''; // empty -> password decides the destination
       document.getElementById('next').value = next;
       if (q.get('error')) document.getElementById('err').classList.add('show');
       var p = document.getElementById('password');

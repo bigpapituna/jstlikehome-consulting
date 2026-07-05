@@ -22,6 +22,7 @@
       'Services': 'Services',
       'About': 'À propos',
       'Book a call': 'Réserver un appel',
+      'Client Login': 'Connexion client',
       // --- shared: trust bar ---
       'Preferred partner & power user across the major platforms & pricing tools': 'Partenaire privilégié et utilisateur expert des principales plateformes et outils de tarification',
       '★ Preferred Partner': '★ Partenaire privilégié',
@@ -488,6 +489,7 @@
       'Services': 'Servicios',
       'About': 'Acerca de',
       'Book a call': 'Reservar una llamada',
+      'Client Login': 'Acceso de clientes',
       // --- shared: trust bar ---
       'Preferred partner & power user across the major platforms & pricing tools': 'Socio preferente y usuario experto de las principales plataformas y herramientas de precios',
       '★ Preferred Partner': '★ Socio preferente',
