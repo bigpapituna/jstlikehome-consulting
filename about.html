@@ -138,7 +138,7 @@
         <div class="contact-copy reveal">
           <span class="kicker">Get in touch</span>
           <h2>Let's talk about your portfolio</h2>
-          <p class="lede" style="margin-top:14px">Tell me about your properties and what you want to improve, and I'll reply within one business day.</p>
+          <p class="lede" style="margin-top:14px">Pick a time for a free 30-minute strategy call, or email me and I'll reply within one business day.</p>
           <div class="contact-methods">
             <a class="c-method" href="mailto:roy.y@jstlikehome.com">
               <span class="c-method__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg></span>
@@ -155,19 +155,9 @@
           </div>
         </div>
 
-        <form class="contact-form reveal" data-d="1" id="contact-form" novalidate>
-          <div class="field-row">
-            <div class="field"><label for="name">Name</label><input type="text" id="name" name="name" required autocomplete="name" /></div>
-            <div class="field"><label for="email">Email</label><input type="email" id="email" name="email" required autocomplete="email" /></div>
-          </div>
-          <div class="field-row">
-            <div class="field"><label for="props">Number of properties</label><input type="text" id="props" name="props" placeholder="e.g. 1, 5, 20+" /></div>
-            <div class="field"><label for="website">Website URL (optional)</label><input type="url" id="website" name="website" placeholder="https://…" autocomplete="url" /></div>
-          </div>
-          <div class="field"><label for="message">How can I help?</label><textarea id="message" name="message" required placeholder="Tell me about your listings and goals…"></textarea></div>
-          <button type="submit" class="btn btn--primary btn--block btn--lg">Send message</button>
-          <p class="form-hint" id="form-hint" role="status"></p>
-        </form>
+        <div class="contact-cal reveal" data-d="1" style="border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;box-shadow:var(--shadow)">
+          <div class="calendly-inline-widget" data-url="https://calendly.com/roy-y-jstlikehome/30min?hide_gdpr_banner=1&amp;primary_color=e63946" style="min-width:320px;height:680px;"></div>
+        </div>
       </div>
     </section>
   </main>

@@ -93,24 +93,30 @@
     });
   });
 
-  /* ---- Contact form (mailto, no backend) ---- */
-  var form = document.getElementById('contact-form');
-  var hint = document.getElementById('form-hint');
-  var CONTACT_EMAIL = 'roy.y@jstlikehome.com'; // <-- change to your real email
-
-  function showHint(msg, type) { if (hint) { hint.textContent = msg; hint.className = 'form-hint ' + (type || ''); } }
-
-  if (form) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var get = function (n) { return form[n] ? (form[n].value || '').trim() : ''; };
-      var name = get('name'), email = get('email'), props = get('props'), website = get('website'), message = get('message');
-      if (!name || !email || !message) { showHint('Please add your name, email and a short message.', 'err'); return; }
-      var subject = 'Vacation rental consulting enquiry — ' + name;
-      var body = 'Name: ' + name + '\nEmail: ' + email + '\nProperties: ' + (props || 'N/A') + '\nWebsite: ' + (website || 'N/A') + '\n\n' + message + '\n';
-      window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-      showHint('Opening your email app… if nothing happens, email ' + CONTACT_EMAIL + ' directly.', 'ok');
-      form.reset();
-    });
+  /* ---- Calendly: lazy-load, inline embed where present, popup on booking CTAs ---- */
+  var CAL_URL = 'https://calendly.com/roy-y-jstlikehome/30min?hide_gdpr_banner=1&primary_color=e63946';
+  var calLoading = false, calWaiting = [];
+  function loadCalendly(cb) {
+    if (window.Calendly) { if (cb) cb(); return; }
+    if (cb) calWaiting.push(cb);
+    if (calLoading) return;
+    calLoading = true;
+    var css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = 'https://assets.calendly.com/assets/external/widget.css';
+    document.head.appendChild(css);
+    var js = document.createElement('script');
+    js.src = 'https://assets.calendly.com/assets/external/widget.js';
+    js.onload = function () { calWaiting.forEach(function (f) { f(); }); calWaiting = []; };
+    document.head.appendChild(js);
   }
+  // Inline embed on this page (About) — load so it renders.
+  if (document.querySelector('.calendly-inline-widget')) { loadCalendly(); }
+  // Booking CTAs (all point to #contact) — open the Calendly popup instead of navigating.
+  document.querySelectorAll('a[href$="#contact"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      loadCalendly(function () { window.Calendly.initPopupWidget({ url: CAL_URL }); });
+    });
+  });
 })();
