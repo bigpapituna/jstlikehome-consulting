@@ -93,30 +93,39 @@
     });
   });
 
-  /* ---- Calendly: lazy-load, inline embed where present, popup on booking CTAs ---- */
-  var CAL_URL = 'https://calendly.com/roy-y-jstlikehome/30min?hide_gdpr_banner=1&primary_color=e63946';
-  var calLoading = false, calWaiting = [];
-  function loadCalendly(cb) {
-    if (window.Calendly) { if (cb) cb(); return; }
-    if (cb) calWaiting.push(cb);
-    if (calLoading) return;
-    calLoading = true;
-    var css = document.createElement('link');
-    css.rel = 'stylesheet';
-    css.href = 'https://assets.calendly.com/assets/external/widget.css';
-    document.head.appendChild(css);
-    var js = document.createElement('script');
-    js.src = 'https://assets.calendly.com/assets/external/widget.js';
-    js.onload = function () { calWaiting.forEach(function (f) { f(); }); calWaiting = []; };
-    document.head.appendChild(js);
+  /* ---- Calendly: lazy-load the inline embed where present (About, /book) ---- */
+  if (document.querySelector('.calendly-inline-widget')) {
+    var calCss = document.createElement('link');
+    calCss.rel = 'stylesheet';
+    calCss.href = 'https://assets.calendly.com/assets/external/widget.css';
+    document.head.appendChild(calCss);
+    var calJs = document.createElement('script');
+    calJs.src = 'https://assets.calendly.com/assets/external/widget.js';
+    document.head.appendChild(calJs);
   }
-  // Inline embed on this page (About) — load so it renders.
-  if (document.querySelector('.calendly-inline-widget')) { loadCalendly(); }
-  // Booking CTAs (all point to #contact) — open the Calendly popup instead of navigating.
-  document.querySelectorAll('a[href$="#contact"]').forEach(function (a) {
-    a.addEventListener('click', function (e) {
-      e.preventDefault();
-      loadCalendly(function () { window.Calendly.initPopupWidget({ url: CAL_URL }); });
+
+  /* ---- Sticky mobile booking bar (home) ---- */
+  var bookbar = document.getElementById('bookbar');
+  if (bookbar) {
+    var onBarScroll = function () { bookbar.classList.toggle('show', window.scrollY > 640); };
+    window.addEventListener('scroll', onBarScroll, { passive: true });
+    onBarScroll();
+  }
+
+  /* ---- Anchor nav highlight (home one-pager) ---- */
+  var anchors = document.querySelectorAll('.main-nav a[href^="#"]');
+  if (anchors.length && 'IntersectionObserver' in window) {
+    var byId = {};
+    anchors.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+    var secObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var a = byId[e.target.id];
+        if (a) { a.classList.toggle('on', e.isIntersecting); }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    Object.keys(byId).forEach(function (id) {
+      var s = document.getElementById(id);
+      if (s) { secObs.observe(s); }
     });
-  });
+  }
 })();
