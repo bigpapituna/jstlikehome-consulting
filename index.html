@@ -7,16 +7,16 @@
   <meta name="description" content="Premium vacation rental consulting. 12+ years optimizing Airbnb & short-term rentals worldwide. Dynamic pricing, listing optimization, Hostaway automation and revenue growth. Booking.com Preferred Partner, Ottawa, Canada." />
   <meta name="theme-color" content="#E63946" />
   <meta property="og:title" content="JSTLIKEHOME — Vacation Rental Consulting" />
-  <meta property="og:description" content="Your rental is leaving money on the table. I find it, and get it back. 12+ year STR expert: dynamic pricing, listing optimization & automation." />
+  <meta property="og:description" content="Maximize your vacation rental's ROI with a 12+ year STR expert. Dynamic pricing, listing optimization & automation." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.jstlikehome.com" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 82C35 68 14 55 14 36C14 24 24 16 34 16C42 16 47 21 50 26C53 21 58 16 66 16C76 16 86 24 86 36C86 55 65 68 50 82Z' fill='none' stroke='%23E63946' stroke-width='6' stroke-linejoin='round'/%3E%3Cpath d='M30 52L50 32L70 52L50 72Z' fill='none' stroke='%23E63946' stroke-width='6' stroke-linejoin='round'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Fraunces:ital,opsz,wght@1,9..144,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="grain">
+<body>
 
   <!-- ============ HEADER ============ -->
   <header class="site-header" id="top">
@@ -26,12 +26,11 @@
         <span class="brand__text"><span class="brand__name">JSTLIKEHOME</span><span class="brand__sub">Vacation Rental Consulting</span></span>
       </a>
       <nav class="main-nav" id="main-nav" aria-label="Main">
-        <a href="#leak">The leak</a>
-        <a href="#method">The method</a>
-        <a href="#proof">The proof</a>
-        <a href="#pricing">Pricing</a>
+        <a href="index.html" class="is-active">Home</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
         <a href="/clients/login">Client Login</a>
-        <a href="/book/" class="btn btn--primary btn--sm nav-cta">Book a call</a>
+        <a href="about.html#contact" class="btn btn--primary btn--sm nav-cta">Book a call</a>
         <div id="langswitch" style="margin-left:12px"></div>
       </nav>
       <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span></span></button>
@@ -39,20 +38,43 @@
   </header>
 
   <main>
-    <!-- ============ 00 · HERO ============ -->
-    <section class="lg-hero">
-      <div class="container">
-        <span class="eyebrow reveal">Airbnb &amp; Vacation Rental Consulting</span>
-        <h1 class="reveal">Your rental is leaving money on the table. <br><span class="u-underline">I find it, and get it back.</span></h1>
-        <p class="lede reveal" data-d="1">I'm Roy. Over <strong>12+ years</strong> I've built and run <strong>72 of my own properties</strong>, so I know exactly where rentals lose revenue, and how to win it back with smarter pricing, sharper listings, and automation that scales.</p>
-        <div class="lg-actions reveal" data-d="2">
-          <a href="/book/" class="btn btn--primary btn--lg">Book a free 30-min revenue review</a>
-          <a href="#leak" class="btn btn--ghost btn--lg">See where it leaks</a>
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="container hero__grid">
+        <div class="hero__copy reveal">
+          <span class="eyebrow">Airbnb &amp; Vacation Rental Consulting</span>
+          <h1>Your rental is leaving money on the table. <br><span class="accent">I find it, and get it back.</span></h1>
+          <p class="hero__lede">I'm Roy. Over <strong>12+ years</strong> I've built and run <strong>72 of my own properties</strong>, so I know exactly where rentals lose revenue, and how to win it back with smarter pricing, sharper listings, and automation that scales.</p>
+          <div class="hero__actions">
+            <a href="about.html#contact" class="btn btn--primary btn--lg">Book a complimentary strategy call</a>
+            <a href="services.html" class="btn btn--ghost btn--lg">Explore services</a>
+          </div>
+          <div class="hero__trust">
+            <div class="hero__avatars" aria-hidden="true">
+              <span style="background-image:url('assets/img/host-woman.jpg')"></span>
+              <span style="background-image:url('assets/img/host-man.jpg')"></span>
+              <span style="background-image:url('assets/img/balcony.jpg')"></span>
+            </div>
+            <div><span class="hero__stars">★★★★★</span><br />Trusted by hosts on 5 continents</div>
+          </div>
         </div>
-        <!-- TODO(Roy): confirm or adjust the availability line below -->
-        <p class="lg-avail reveal" data-d="3">Now taking on 3 new portfolios for Q3 2026</p>
 
-        <div class="lg-stats reveal" data-d="2">
+        <div class="hero__media reveal" data-d="2">
+          <div class="hero__ring" aria-hidden="true"></div>
+          <div class="hero__media-img">
+            <img src="assets/img/dining.jpg" alt="A beautifully styled, optimized vacation rental living room" loading="eager" />
+          </div>
+          <div class="float-pill float-pill--price"><span class="dot"></span><span class="float-pill__big">$10M+</span>&nbsp;revenue managed</div>
+          <div class="float-pill float-pill--rev"><span class="dot dot--ink"></span><span class="float-pill__big">+34%</span>&nbsp;avg revenue</div>
+          <div class="float-pill float-pill--address float-pill--addr"><span class="dot"></span><span>Optimizing listings across Canada, USA, Bali, NZ &amp; Europe</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STAT STRIP ============ -->
+    <section class="section--tight">
+      <div class="container">
+        <div class="stats reveal">
           <div class="stat"><div class="stat__num"><span data-count="12">0</span><span class="stat__suffix">+</span></div><div class="stat__label">Years optimizing vacation rentals</div></div>
           <div class="stat"><div class="stat__num"><span data-count="100">0</span><span class="stat__suffix">+</span></div><div class="stat__label">Properties personally built &amp; managed</div></div>
           <div class="stat"><div class="stat__num"><span data-count="300">0</span><span class="stat__suffix">+</span></div><div class="stat__label">Listings optimized worldwide</div></div>
@@ -61,216 +83,176 @@
       </div>
     </section>
 
-    <!-- ============ 01 · THE LEAK ============ -->
-    <section class="lg-sec" id="leak">
+    <!-- ============ TRUST BAR ============ -->
+    <section class="trustbar">
       <div class="container">
-        <div class="lg-head reveal">
-          <span class="lg-index">01</span>
-          <div>
-            <h2>Where the money leaks</h2>
-            <p class="lede">Four quiet leaks drain most rental portfolios. Yours probably has at least two.</p>
-          </div>
+        <p class="trustbar__label">Preferred partner &amp; power user across the major platforms &amp; pricing tools</p>
+        <ul class="trustbar__logos">
+          <li class="has-badge">Airbnb<span class="tb-badge">★ Superhost</span></li>
+          <li class="has-badge">Booking.com<span class="tb-badge">★ Preferred Partner</span></li>
+          <li class="has-badge">VRBO<span class="tb-badge">★ Expert Partner</span></li>
+          <li class="has-badge">Expedia<span class="tb-badge">★ Expert Partner</span></li>
+          <li class="has-badge">Hostaway<span class="tb-badge">★ Premium Partner</span></li>
+          <li class="has-badge">PriceLabs<span class="tb-badge">★ Expert</span></li>
+          <li class="has-badge">Beyond&nbsp;Pricing<span class="tb-badge">★ Expert</span></li>
+          <li class="has-badge">Wheelhouse<span class="tb-badge">★ Expert</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ SERVICES ============ -->
+    <section class="section section--cream" id="services">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="kicker">What I do</span>
+          <h2>Full-service optimization for serious hosts</h2>
+          <p class="lede">From a single listing to a multi-property portfolio, I cover the entire revenue engine: pricing, listings, channels, and automation.</p>
         </div>
-        <div class="lg-rows">
-          <div class="lg-row reveal">
-            <span class="lg-row__i">a</span>
-            <div class="lg-row__t">Prices set by hand</div>
-            <div class="lg-row__b">
-              <p>Static nightly rates miss peak demand and leave slow nights empty.</p>
-              <p class="lg-fix">The fix: dynamic pricing tuned to your market, season and demand</p>
-            </div>
-          </div>
-          <div class="lg-row reveal">
-            <span class="lg-row__i">b</span>
-            <div class="lg-row__t">One channel carries everything</div>
-            <div class="lg-row__b">
-              <p>Most bookings ride on Airbnb alone, capping your reach and concentrating your risk.</p>
-              <p class="lg-fix">The fix: listed, synced and optimized across the major OTAs</p>
-            </div>
-          </div>
-          <div class="lg-row reveal">
-            <span class="lg-row__i">c</span>
-            <div class="lg-row__t">Listings that don't convert</div>
-            <div class="lg-row__b">
-              <p>Titles, photos and settings tuned for neither the algorithm nor the guest.</p>
-              <p class="lg-fix">The fix: rewritten and restructured so more of the people who look, book</p>
-            </div>
-          </div>
-          <div class="lg-row reveal">
-            <span class="lg-row__i">d</span>
-            <div class="lg-row__t">Calendar gaps nobody fills</div>
-            <div class="lg-row__b">
-              <p>Orphan nights and last-minute holes quietly drain the year.</p>
-              <p class="lg-fix">The fix: targeted promotions, smart minimum stays and last-minute pricing</p>
-            </div>
-          </div>
+        <div class="cards">
+          <article class="s-card reveal">
+            <div class="s-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
+            <h3>Dynamic Pricing &amp; Revenue</h3>
+            <p>Data-driven pricing with PriceLabs, Beyond Pricing &amp; Wheelhouse, tuned to market demand, seasonality and competitor ADR to win every night.</p>
+            <a href="services.html#pricing" class="s-card__more">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </article>
+          <article class="s-card reveal" data-d="1">
+            <div class="s-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 1.9 5.8H20l-4.9 3.6 1.9 5.8L12 14.6 7 18.2l1.9-5.8L4 8.8h6.1z"/></svg></div>
+            <h3>Listing Optimization</h3>
+            <p>Titles, descriptions, photo order, amenities and settings tuned for search ranking and conversion across Airbnb, VRBO, Booking.com &amp; Expedia.</p>
+            <a href="services.html#listing" class="s-card__more">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </article>
+          <article class="s-card reveal" data-d="2">
+            <div class="s-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg></div>
+            <h3>Channel &amp; OTA Expansion</h3>
+            <p>Get listed, synced and optimized across all major OTAs, using preferred-partner positioning to expand reach without double bookings.</p>
+            <a href="services.html#channels" class="s-card__more">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </article>
+          <article class="s-card reveal">
+            <div class="s-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/><circle cx="12" cy="12" r="4"/></svg></div>
+            <h3>Hostaway Setup &amp; Automation</h3>
+            <p>Build listings, channel manager, automated guest messaging and documented SOPs so your operation scales with your team.</p>
+            <a href="services.html#automation" class="s-card__more">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </article>
+          <article class="s-card reveal" data-d="1">
+            <div class="s-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M9 16l2 2 4-4"/></svg></div>
+            <h3>Occupancy &amp; Booking-Gap Strategy</h3>
+            <p>Targeted promotions, smart minimum-stay rules and last-minute pricing that fill the gaps in your calendar without sacrificing profit.</p>
+            <a href="services.html#occupancy" class="s-card__more">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </article>
+          <article class="s-card reveal" data-d="2">
+            <div class="s-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg></div>
+            <h3>Audits, Coaching &amp; Training</h3>
+            <p>Full account audits, growth roadmaps and step-by-step documentation to train your team and keep performance climbing long after we start.</p>
+            <a href="services.html#audits" class="s-card__more">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- ============ 02 · THE METHOD ============ -->
-    <section class="lg-sec lg-sec--dark" id="method">
+    <!-- ============ RESULTS BENTO ============ -->
+    <section class="section section--alt" id="results">
       <div class="container">
-        <div class="lg-head reveal">
-          <span class="lg-index">02</span>
-          <div>
-            <h2>The Revenue Recovery Method</h2>
-            <p class="lede">A clear path from audit to optimized revenue</p>
-          </div>
+        <div class="section-head reveal">
+          <span class="kicker">Proven results</span>
+          <h2>Listings transformed into high-performing assets</h2>
+          <p class="lede">Real results from the portfolios I work with.</p>
         </div>
-        <div class="lg-steps">
-          <div class="lg-step reveal">
-            <span class="lg-step__i">i</span>
-            <div><h3>Audit</h3><span class="lg-step__w">Week 1</span></div>
-            <p>I review your listings, pricing, channels and data to find where revenue is leaking.</p>
+        <div class="bento reveal">
+          <div class="bento__item bento__item--photo span-2 row-2">
+            <img src="assets/img/exterior.jpg" alt="Premium vacation rental with pool" loading="lazy" />
+            <div class="bento__badge"><span class="float-pill" style="position:static;box-shadow:none;background:rgba(255,255,255,.95)"><span class="dot"></span><span class="float-pill__big">+41%</span>&nbsp;ADR</span></div>
+            <div class="bento__cap"><h4>Luxury villa · New Zealand</h4><p>Repositioned &amp; repriced for peak-season demand</p></div>
           </div>
-          <div class="lg-step reveal">
-            <span class="lg-step__i">ii</span>
-            <div><h3>Strategy</h3><span class="lg-step__w">Week 2</span></div>
-            <p>A tailored plan for pricing, listing optimization and channel mix, built around your market and goals.</p>
-          </div>
-          <div class="lg-step reveal">
-            <span class="lg-step__i">iii</span>
-            <div><h3>Implementation</h3><span class="lg-step__w">Weeks 3–4</span></div>
-            <p>I set up the tools, rewrite the listings, configure automation and put the strategy live.</p>
-          </div>
-          <div class="lg-step reveal">
-            <span class="lg-step__i">iv</span>
-            <div><h3>Optimization</h3><span class="lg-step__w">Ongoing</span></div>
-            <p>Ongoing monitoring and adjustments to keep occupancy, ADR and revenue trending up.</p>
-          </div>
+          <div class="bento__item bento__item--stat"><div class="b-num">+34%</div><div class="b-label">Average revenue lift in the first 90 days</div></div>
+          <div class="bento__item bento__item--photo"><img src="assets/img/bedroom.jpg" alt="Optimized open-plan rental interior" loading="lazy" /><div class="bento__cap"><h4>City apartment · Canada</h4></div></div>
+          <div class="bento__item bento__item--photo"><img src="assets/img/coastal.jpg" alt="Beachfront rental villa" loading="lazy" /><div class="bento__cap"><h4>Beach villa · Bali</h4></div></div>
+          <div class="bento__item bento__item--ink"><div class="b-num">92%</div><div class="b-label">Occupancy on a previously underbooked calendar</div></div>
         </div>
+      </div>
+    </section>
 
-        <div class="lg-roy reveal">
-          <div>
-            <!-- TODO(Roy): replace with a real photo — swap class to "lg-portrait lg-portrait--photo" and img src -->
-            <div class="lg-portrait"><img src="/assets/img/logo-portal.png" alt="JSTLIKEHOME" /></div>
-            <p class="lg-roy__cap">Roy Younes · Ottawa, Canada · serving worldwide</p>
+    <!-- ============ FEATURE: PRICING ============ -->
+    <section class="section section--cream">
+      <div class="container">
+        <div class="feature feature--rev">
+          <div class="feature__media reveal">
+            <div class="feature__media-img"><img src="assets/img/workspace.jpg" alt="Revenue dashboard with dynamic pricing analytics" loading="lazy" /></div>
+            <div class="float-pill float-pill--a"><span class="dot"></span><span class="float-pill__big">+34%</span>&nbsp;revenue</div>
+            <div class="float-pill float-pill--b float-pill--dark"><span class="dot"></span>PriceLabs · Beyond · Wheelhouse</div>
           </div>
-          <div class="lg-roy__body">
-            <p>I'm a vacation rental consultant based in Ottawa, Canada. I started as an owner-operator, building and managing <strong>72 of my own properties</strong>, before becoming the person other hosts call when they want serious results.</p>
-            <ul class="lg-roy__badges">
-              <li>Airbnb <span>★ Superhost</span></li>
-              <li>Booking.com <span>★ Preferred Partner</span></li>
-              <li>VRBO <span>★ Expert Partner</span></li>
-              <li>Expedia <span>★ Expert Partner</span></li>
-              <li>Hostaway <span>★ Premium Partner</span></li>
-              <li>PriceLabs <span>★ Expert</span></li>
+          <div class="feature__copy reveal" data-d="1">
+            <span class="feature__num">01 · REVENUE MANAGEMENT</span>
+            <h2>Pricing that captures every dollar of demand</h2>
+            <p>I build a custom dynamic-pricing strategy around your market, your property, and the booking windows that convert, then refine it continuously.</p>
+            <ul class="feature__list">
+              <li>Market &amp; competitor ADR analysis, refreshed regularly</li>
+              <li>Seasonality, events &amp; demand-based rate rules</li>
+              <li>Gap-filling, last-minute &amp; orphan-night strategy</li>
+              <li>Minimum-stay tuning to protect profit, not just occupancy</li>
             </ul>
+            <a href="services.html#pricing" class="btn btn--dark" style="margin-top:28px">See how it works</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ============ 03 · THE PROOF ============ -->
-    <section class="lg-sec" id="proof">
+    <!-- ============ PROCESS ============ -->
+    <section class="section section--dark">
       <div class="container">
-        <div class="lg-head reveal">
-          <span class="lg-index">03</span>
-          <div>
-            <h2>What it looks like when the leak stops</h2>
-            <p class="lede">Real results from the portfolios I work with.</p>
-          </div>
+        <div class="section-head center reveal">
+          <span class="kicker">How it works</span>
+          <h2>A clear path from audit to optimized revenue</h2>
         </div>
-        <div class="lg-rows">
-          <div class="lg-row lg-row--proof reveal">
-            <span class="lg-row__i">a</span>
-            <div>
-              <div class="lg-row__t">Luxury villa · New Zealand</div>
-              <p style="color:var(--muted);margin-top:6px">Repositioned &amp; repriced for peak-season demand</p>
-            </div>
-            <div class="lg-proof__num">+41%<small>ADR</small></div>
-          </div>
-          <div class="lg-row lg-row--proof reveal">
-            <span class="lg-row__i">b</span>
-            <div>
-              <div class="lg-row__t">City apartment · Canada</div>
-              <p style="color:var(--muted);margin-top:6px">Occupancy on a previously underbooked calendar</p>
-            </div>
-            <div class="lg-proof__num">92%<small>occupancy</small></div>
-          </div>
-          <div class="lg-row lg-row--proof reveal">
-            <span class="lg-row__i">c</span>
-            <div>
-              <div class="lg-row__t">Beach villa · Bali</div>
-              <p style="color:var(--muted);margin-top:6px">Average revenue lift in the first 90 days</p>
-            </div>
-            <div class="lg-proof__num">+34%<small>revenue</small></div>
-          </div>
+        <div class="process">
+          <div class="process__line" aria-hidden="true"></div>
+          <div class="p-step reveal"><div class="p-step__num">01</div><h3>Audit</h3><p>I review your listings, pricing, channels and data to find where revenue is leaking.</p></div>
+          <div class="p-step reveal" data-d="1"><div class="p-step__num">02</div><h3>Strategy</h3><p>A tailored plan for pricing, listing optimization and channel mix, built around your market and goals.</p></div>
+          <div class="p-step reveal" data-d="2"><div class="p-step__num">03</div><h3>Implementation</h3><p>I set up the tools, rewrite the listings, configure automation and put the strategy live.</p></div>
+          <div class="p-step reveal" data-d="3"><div class="p-step__num">04</div><h3>Optimization</h3><p>Ongoing monitoring and adjustments to keep occupancy, ADR and revenue trending up.</p></div>
         </div>
-        <p class="lg-note">Representative metrics.</p>
       </div>
     </section>
 
-    <!-- ============ 04 · THE PRICE ============ -->
-    <section class="lg-sec lg-sec--sand" id="pricing">
+    <!-- ============ TESTIMONIALS ============ -->
+    <section class="section section--alt">
       <div class="container">
-        <div class="lg-head reveal">
-          <span class="lg-index">04</span>
-          <div>
-            <h2>What it costs</h2>
-            <p class="lede">Premium service, priced for the return you get</p>
-          </div>
+        <div class="section-head center reveal">
+          <span class="kicker">What clients say</span>
+          <h2>Hosts who stopped leaving money on the table</h2>
         </div>
-        <div class="lg-rows">
-          <div class="lg-row lg-row--offer reveal">
-            <span class="lg-row__i">a</span>
-            <div>
-              <div class="lg-row__t">Initial Audit</div>
-              <p class="lg-offer__meta">For hosts who want quick, expert wins to start.</p>
-              <p class="lg-offer__meta">One-time fee · delivered in ~1 week</p>
-            </div>
-            <div class="lg-offer__price">$450–900</div>
+        <div class="quotes">
+          <div class="quote quote--feature reveal">
+            <div class="quote__mark">&ldquo;</div>
+            <p class="quote__text">Roy isn't cheap, and he tells you that up front, but he made it back in the first month. Our revenue is up sharply and I finally understand my own pricing.</p>
+            <div class="quote__by"><span class="quote__av" style="background-image:url('assets/img/host-woman.jpg')"></span><div><div class="quote__name">Sophie L.</div><div class="quote__role">Superhost · Queenstown, NZ</div></div></div>
           </div>
-          <div class="lg-row lg-row--offer reveal">
-            <span class="lg-row__i">b</span>
-            <div>
-              <div class="lg-row__t">Full Optimization<span class="lg-badge">Most popular</span></div>
-              <p class="lg-offer__meta">Done-for-you across pricing, listing &amp; channels.</p>
-              <p class="lg-offer__meta">Per listing · one-time project · ROI in 30–90 days</p>
-            </div>
-            <div class="lg-offer__price">$750–1,500</div>
+          <div class="quote reveal" data-d="1">
+            <div class="quote__mark">&ldquo;</div>
+            <p class="quote__text">We brought Roy in for our 7-listing portfolio. The Hostaway setup and pricing overhaul paid for itself almost immediately. Easily our best consulting spend.</p>
+            <div class="quote__by"><span class="quote__av" style="background-image:url('assets/img/host-man.jpg')"></span><div><div class="quote__name">Marcus T.</div><div class="quote__role">Portfolio Host · Bali</div></div></div>
           </div>
-          <div class="lg-row lg-row--offer reveal">
-            <span class="lg-row__i">c</span>
-            <div>
-              <div class="lg-row__t">Portfolio Partner</div>
-              <p class="lg-offer__meta">Ongoing management for 5+ listings &amp; teams.</p>
-              <p class="lg-offer__meta">Monthly retainer · tailored to your portfolio</p>
-            </div>
-            <div class="lg-offer__price">Custom</div>
-          </div>
-        </div>
-        <p class="lg-fit reveal"><strong>Best fit:</strong> hosts and portfolios of 1–15 listings who want results, not the cheapest quote. <a href="services.html" style="color:var(--coral);font-weight:600">Explore services</a></p>
-
-        <div class="faq" style="margin-top:clamp(36px,5vw,56px);max-width:none">
-          <div class="faq__item reveal">
-            <button class="faq__q" type="button">Why are you more expensive than other consultants?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
-            <div class="faq__a"><div class="faq__a-inner">Because 12+ years of hands-on experience means I diagnose faster, fix smarter and deliver results in less time than most. You pay a premium and make it back many times over.</div></div>
-          </div>
-          <div class="faq__item reveal">
-            <button class="faq__q" type="button">How quickly will I see results?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
-            <div class="faq__a"><div class="faq__a-inner">Pricing and listing changes can lift revenue within days. Most clients see a revenue and occupancy lift within the first 30–90 days, depending on market and season.</div></div>
-          </div>
-          <div class="faq__item reveal">
-            <button class="faq__q" type="button">Do you work with single listings or only portfolios?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
-            <div class="faq__a"><div class="faq__a-inner">Both. The Initial Audit is perfect for a single property, while Full Optimization and Portfolio Partner scale to multi-listing operations and management teams.</div></div>
+          <div class="quote reveal" data-d="2">
+            <div class="quote__mark">&ldquo;</div>
+            <p class="quote__text">Ten years of experience shows. He moved faster than the two consultants we tried before, and the occupancy on our slow season is unrecognizable.</p>
+            <div class="quote__by"><span class="quote__av" style="background-image:url('assets/img/balcony.jpg')"></span><div><div class="quote__name">David &amp; Mara</div><div class="quote__role">Owners · Tuscany, Italy</div></div></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ============ 05 · BOOK ============ -->
-    <section class="lg-sec lg-book" id="book">
+    <!-- ============ CTA ============ -->
+    <section class="section section--cream">
       <div class="container">
-        <span class="lg-index reveal" style="display:block;margin-bottom:10px">05</span>
-        <h2 class="reveal">Book your revenue review</h2>
-        <p class="lede reveal" data-d="1">A free 30-minute call. You leave knowing where your listings leak revenue and what it would take to fix them, whether we work together or not.</p>
-        <div class="lg-actions reveal" data-d="2">
-          <a href="/book/" class="btn btn--primary btn--lg">Book a free 30-min revenue review</a>
-          <a href="mailto:roy.y@jstlikehome.com" class="btn btn--ghost btn--lg">Email Roy</a>
+        <div class="cta-band reveal">
+          <div class="cta-band__inner">
+            <h2>Ready to maximize your rental's revenue?</h2>
+            <p>Let's find the money your listings are leaving on the table. Book a complimentary, no-pressure strategy call.</p>
+            <div class="cta-actions">
+              <a href="about.html#contact" class="btn btn--light btn--lg">Book a complimentary strategy call</a>
+              <a href="mailto:roy.y@jstlikehome.com" class="btn btn--outline-light btn--lg">Email Roy</a>
+            </div>
+          </div>
         </div>
-        <p class="lg-avail reveal" data-d="3">Now taking on 3 new portfolios for Q3 2026</p>
       </div>
     </section>
   </main>
@@ -306,7 +288,7 @@
         </div>
         <div class="footer-col footer-cta">
           <h4>Get started</h4>
-          <a href="/book/" class="btn btn--primary">Book a strategy call</a>
+          <a href="about.html#contact" class="btn btn--primary">Book a strategy call</a>
           <a href="mailto:roy.y@jstlikehome.com" class="btn btn--outline-light">Email Roy</a>
         </div>
       </div>
@@ -316,11 +298,6 @@
       </div>
     </div>
   </footer>
-
-  <!-- Sticky mobile booking bar -->
-  <div class="bookbar" id="bookbar">
-    <a href="/book/" class="btn btn--primary">Book a free 30-min revenue review</a>
-  </div>
 
   <script src="script.js"></script>
   <script src="/i18n.js"></script>

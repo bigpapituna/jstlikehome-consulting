@@ -1,8 +1,8 @@
 /* ============================================================
    JSTLIKEHOME · Short-Term Rental Consulting
-   Design system — "Revenue Ledger" editorial redesign
+   Design system — built on ui-ux-pro-max "Trust & Authority + Premium Sans"
    Palette: Coral #E63946 · warm charcoal · cream/sand neutrals
-   Type: Fraunces (display serif) + DM Sans (body)
+   Type: Bricolage Grotesque (display) + DM Sans (body)
    ============================================================ */
 
 :root {
@@ -39,7 +39,7 @@
   --shadow-coral: 0 16px 34px rgba(230, 57, 70, 0.30);
 
   --maxw: 1200px;
-  --font-display: 'Fraunces', Georgia, serif;
+  --font-display: 'Schibsted Grotesk', 'DM Sans', system-ui, sans-serif;
   --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -66,7 +66,7 @@ button { font-family: inherit; }
 .container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 26px; }
 
 /* ---------- Typography ---------- */
-h1, h2, h3, h4 { font-family: var(--font-display); color: var(--ink); line-height: 1.06; letter-spacing: -0.018em; font-weight: 600; }
+h1, h2, h3, h4 { font-family: var(--font-display); color: var(--ink); line-height: 1.04; letter-spacing: -0.025em; font-weight: 700; }
 h1 { font-size: clamp(2.6rem, 6vw, 4.7rem); }
 h2 { font-size: clamp(2rem, 4.3vw, 3.2rem); }
 h3 { font-size: 1.34rem; letter-spacing: -0.015em; }
@@ -173,8 +173,12 @@ h3 { font-size: 1.34rem; letter-spacing: -0.015em; }
 .float-pill--dark { background: var(--ink); color: #fff; }
 .float-pill--dark .dot { background: var(--coral); }
 
-/* ---------- LEDGER · hand-drawn accent (shared) ---------- */
-.u-underline {
+/* ---------- HERO ---------- */
+.hero { position: relative; padding: clamp(40px, 5vw, 70px) 0 clamp(56px, 7vw, 90px); }
+.hero__grid { display: grid; grid-template-columns: 1.04fr 0.96fr; gap: clamp(28px, 4vw, 56px); align-items: center; }
+.hero__copy { max-width: 36rem; }
+.hero h1 { margin-bottom: 22px; }
+.hero h1 .accent {
   display: inline;
   color: var(--coral);
   -webkit-box-decoration-break: clone; box-decoration-break: clone;
@@ -183,6 +187,45 @@ h3 { font-size: 1.34rem; letter-spacing: -0.015em; }
   background-position: 0 100%;
   background-size: 100% 0.32em;
   padding-bottom: 0.16em;
+}
+.hero__lede { font-size: clamp(1.06rem, 1.5vw, 1.2rem); color: var(--muted); margin-bottom: 32px; }
+.hero__lede strong { color: var(--ink); font-weight: 600; }
+.hero__actions { display: flex; flex-wrap: wrap; margin-bottom: 16px; }
+.hero__actions .btn { margin: 0 14px 14px 0; }
+.hero__trust { display: flex; align-items: center; font-size: 0.9rem; color: var(--muted); }
+.hero__avatars { display: flex; margin-right: 14px; }
+.hero__avatars span {
+  width: 36px; height: 36px; border-radius: 50%; border: 2.5px solid var(--cream);
+  margin-left: -10px; background-size: cover; background-position: center;
+  box-shadow: var(--shadow-sm);
+}
+.hero__avatars span:first-child { margin-left: 0; }
+.hero__stars { color: var(--coral); letter-spacing: 1px; }
+
+/* Hero media (image + pills) */
+.hero__media { position: relative; }
+.hero__media-img {
+  position: relative; aspect-ratio: 4 / 4.3; border-radius: var(--r-xl); overflow: hidden;
+  box-shadow: var(--shadow-lg); background: var(--sand-2);
+}
+.hero__media-img img { width: 100%; height: 100%; object-fit: cover; }
+.hero__media .float-pill--price { top: 8%; left: -6%; }
+.hero__media .float-pill--rev { top: 40%; right: -7%; }
+.hero__media .float-pill--addr { bottom: 7%; left: 6%; }
+.hero__ring { position: absolute; inset: -6% -4% -6% -4%; border: 1px solid var(--line); border-radius: 50%/46%; z-index: -1; pointer-events: none; }
+
+/* ---- Hero motion (CSS only) ---- */
+@keyframes hero-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes hero-kenburns { from { transform: scale(1); } to { transform: scale(1.055); } }
+.hero__media-img img { animation: hero-kenburns 18s ease-in-out infinite alternate; will-change: transform; }
+.hero__media .float-pill--price { animation: hero-float 5.5s ease-in-out infinite; }
+.hero__media .float-pill--rev { animation: hero-float 6.7s ease-in-out 0.7s infinite; }
+.hero__media .float-pill--addr { animation: hero-float 7.6s ease-in-out 0.3s infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .hero__media-img img,
+  .hero__media .float-pill--price,
+  .hero__media .float-pill--rev,
+  .hero__media .float-pill--addr { animation: none; }
 }
 
 /* ---------- Stat strip ---------- */
@@ -438,170 +481,4 @@ h3 { font-size: 1.34rem; letter-spacing: -0.015em; }
   * { scroll-behavior: auto !important; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .btn:hover, .s-card:hover, .price:hover, .stat:hover, .bento__item:hover img { transform: none; }
-}
-
-/* ============================================================
-   REVENUE LEDGER (home + book) — editorial one-pager system
-   ============================================================ */
-
-/* Fraunces is loaded up to 700; keep display weights within range */
-.brand__name, .stat__num, .float-pill__big, .bento__item--stat .b-num,
-.bento__item--ink .b-num, .price__amount, .p-step__num { font-weight: 700; }
-
-/* Paper grain — sits above content, below header/overlays; 2.5% opacity */
-.grain::after {
-  content: ""; position: fixed; inset: -50%; z-index: 90; pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-  opacity: 0.025;
-}
-
-/* ---- Hero ---- */
-.lg-hero { padding: clamp(52px, 8vw, 110px) 0 clamp(40px, 6vw, 72px); }
-.lg-hero h1 {
-  font-size: clamp(2.7rem, 6.6vw, 5.4rem);
-  line-height: 1.02; letter-spacing: -0.022em;
-  max-width: 15.5ch; margin: 0 0 26px;
-}
-.lg-hero .lede { max-width: 44em; margin-bottom: 30px; }
-.lg-hero .lede strong { color: var(--ink); font-weight: 600; }
-.lg-actions { display: flex; flex-wrap: wrap; align-items: center; margin-bottom: 14px; }
-.lg-actions .btn { margin: 0 14px 14px 0; }
-.lg-avail { display: inline-flex; align-items: center; font-size: 0.92rem; color: var(--muted); font-weight: 500; }
-.lg-avail::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: #1f9d55; margin-right: 9px; box-shadow: 0 0 0 4px rgba(31,157,85,.14); }
-
-/* Giant stat row */
-.lg-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0 34px; margin-top: clamp(44px, 6vw, 72px); }
-.lg-stats .stat { border-top: 2px solid var(--ink); padding: 18px 0 0; }
-.lg-stats .stat__num { font-size: clamp(2.6rem, 5vw, 4.2rem); color: var(--ink); }
-.lg-stats .stat__suffix { color: var(--coral); }
-
-/* ---- Section scaffolding ---- */
-.lg-sec { padding: clamp(64px, 9vw, 120px) 0; border-top: 1px solid var(--line); }
-.lg-sec--dark { background: var(--dark); color: #e9e2d8; border-top: 0; }
-.lg-sec--dark h2, .lg-sec--dark h3 { color: #fff; }
-.lg-sec--sand { background: var(--sand); border-top: 0; }
-.lg-head { display: grid; grid-template-columns: minmax(70px, 150px) 1fr; gap: 18px 30px; align-items: start; margin-bottom: clamp(36px, 5vw, 60px); }
-.lg-head .lg-index {
-  font-family: var(--font-display); font-style: italic; font-weight: 400;
-  font-size: clamp(2.6rem, 5vw, 4.4rem); line-height: 0.9; color: var(--coral);
-}
-.lg-head h2 { font-size: clamp(2rem, 4.2vw, 3.1rem); margin-bottom: 12px; }
-.lg-head .lede { max-width: 36em; }
-.lg-sec--dark .lede { color: #b9b0a4; }
-
-/* ---- Ledger rows (leaks / proof / offers) ---- */
-.lg-rows { border-top: 1px solid var(--line); }
-.lg-sec--dark .lg-rows { border-top-color: rgba(255,255,255,.14); }
-.lg-row {
-  display: grid; grid-template-columns: 74px 1.05fr 1.3fr; gap: 14px 34px;
-  padding: clamp(24px, 3.5vw, 38px) 0; border-bottom: 1px solid var(--line); align-items: baseline;
-}
-.lg-sec--dark .lg-row { border-bottom-color: rgba(255,255,255,.14); }
-.lg-row__i { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: 1.15rem; color: var(--muted-2); }
-.lg-row__t { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.25rem, 2.2vw, 1.6rem); letter-spacing: -0.015em; line-height: 1.15; }
-.lg-sec--dark .lg-row__t { color: #fff; }
-.lg-row__b p { color: var(--muted); margin-bottom: 8px; }
-.lg-sec--dark .lg-row__b p { color: #b9b0a4; }
-.lg-fix { font-weight: 600; color: var(--coral); font-size: 0.95rem; }
-.lg-fix::before { content: "→ "; }
-
-/* Proof rows: big number on the right */
-.lg-row--proof { grid-template-columns: 74px 1.5fr auto; align-items: center; }
-.lg-proof__num {
-  font-family: var(--font-display); font-weight: 700; font-size: clamp(2.3rem, 4.6vw, 3.8rem);
-  letter-spacing: -0.03em; color: var(--coral); line-height: 1; text-align: right; white-space: nowrap;
-}
-.lg-proof__num small { display: block; font-family: var(--font-body); font-weight: 600; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
-.lg-note { margin-top: 14px; font-size: 0.85rem; color: var(--muted-2); }
-
-/* Offer rows */
-.lg-row--offer { grid-template-columns: 74px 1.4fr auto; align-items: center; }
-.lg-offer__meta { font-size: 0.88rem; color: var(--muted); margin-top: 6px; }
-.lg-offer__price {
-  font-family: var(--font-display); font-weight: 700; font-size: clamp(1.5rem, 3vw, 2.2rem);
-  letter-spacing: -0.02em; text-align: right; line-height: 1.1; white-space: nowrap;
-}
-.lg-offer__price small { display: block; font-family: var(--font-body); font-weight: 500; font-size: 0.8rem; color: var(--muted); letter-spacing: 0; }
-.lg-badge { display: inline-block; vertical-align: middle; margin-left: 10px; background: var(--coral); color: #fff; font-family: var(--font-body); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; border-radius: var(--pill); transform: translateY(-3px); }
-.lg-fit { margin-top: 22px; padding: 16px 20px; background: var(--coral-50); border-radius: var(--r-sm); font-size: 0.95rem; color: var(--ink-2); }
-.lg-fit strong { color: var(--ink); }
-
-/* ---- Method / Meet Roy ---- */
-.lg-steps { counter-reset: none; display: grid; gap: 0; border-top: 1px solid rgba(255,255,255,.14); }
-.lg-step { display: grid; grid-template-columns: 74px 220px 1fr; gap: 12px 34px; padding: 26px 0; border-bottom: 1px solid rgba(255,255,255,.14); align-items: baseline; }
-.lg-step__i { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: 1.15rem; color: var(--coral); }
-.lg-step h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
-.lg-step__w { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #8d8377; display: block; margin-top: 5px; }
-.lg-step p { color: #b9b0a4; font-size: 0.98rem; }
-
-.lg-roy { display: grid; grid-template-columns: 300px 1fr; gap: clamp(30px, 5vw, 60px); align-items: center; margin-top: clamp(44px, 6vw, 70px); }
-.lg-portrait {
-  aspect-ratio: 4 / 4.8; border-radius: var(--r-lg); overflow: hidden; position: relative;
-  background: radial-gradient(130% 100% at 50% 0%, #2a221d 55%, #38271f 100%);
-  border: 1px solid rgba(255,255,255,.14); display: grid; place-items: center; padding: 18%;
-}
-.lg-portrait img { width: 100%; object-fit: contain; opacity: 0.92; }
-.lg-portrait--photo { padding: 0; }
-.lg-portrait--photo img { width: 100%; height: 100%; object-fit: cover; opacity: 1; }
-.lg-roy__cap { font-size: 0.85rem; color: #8d8377; margin-top: 10px; }
-.lg-roy__body p { color: #d9d2c8; font-size: 1.04rem; margin-bottom: 14px; }
-.lg-roy__body p strong { color: #fff; }
-.lg-roy__badges { display: flex; flex-wrap: wrap; margin-top: 18px; }
-.lg-roy__badges li { font-size: 0.8rem; font-weight: 600; color: #e9e2d8; border: 1px solid rgba(255,255,255,.2); border-radius: var(--pill); padding: 7px 14px; margin: 0 8px 8px 0; }
-.lg-roy__badges li span { color: var(--coral); }
-
-/* ---- Book section ---- */
-.lg-book { text-align: center; }
-.lg-book h2 { font-size: clamp(2.2rem, 5vw, 3.6rem); max-width: 18ch; margin: 0 auto 18px; }
-.lg-book .lede { max-width: 42em; margin: 0 auto 30px; }
-.lg-book .lg-actions { justify-content: center; }
-.lg-book .lg-actions .btn { margin: 0 7px 14px; }
-.lg-book .lg-avail { display: flex; justify-content: center; margin-top: 4px; }
-
-/* ---- Sticky mobile book bar ---- */
-.bookbar {
-  position: fixed; left: 0; right: 0; bottom: 0; z-index: 120; display: none;
-  padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
-  background: rgba(247, 243, 236, 0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-  border-top: 1px solid var(--line);
-  transform: translateY(110%); transition: transform .35s var(--ease);
-}
-.bookbar.show { transform: none; }
-.bookbar .btn { width: 100%; }
-
-/* ---- Anchor nav state ---- */
-.main-nav a.on:not(.btn) { color: var(--coral); }
-
-/* ---- Book page ---- */
-.bookpage { max-width: 880px; margin: 0 auto; padding: 26px 26px 80px; }
-.bookpage__top { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: clamp(30px, 6vw, 54px); }
-.bookpage h1 { font-size: clamp(2.2rem, 5.5vw, 3.6rem); max-width: 16ch; margin-bottom: 14px; }
-.bookpage .lede { margin-bottom: 26px; max-width: 40em; }
-.bookpage__points { display: grid; gap: 12px; margin-bottom: 34px; }
-.bookpage__points li { position: relative; padding-left: 30px; color: var(--ink-2); font-weight: 500; }
-.bookpage__points li::before {
-  content: ""; position: absolute; left: 0; top: 3px; width: 20px; height: 20px; border-radius: 50%;
-  background: var(--coral-50) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E63946' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/12px no-repeat;
-}
-.bookpage__cal { border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; background: #fff; box-shadow: var(--shadow-sm); }
-.bookpage__alt { text-align: center; margin-top: 22px; font-size: 0.95rem; color: var(--muted); }
-.bookpage__alt a { color: var(--coral); font-weight: 600; }
-
-/* ---- Ledger responsive ---- */
-@media (max-width: 1000px) {
-  .lg-stats { grid-template-columns: 1fr 1fr; gap: 26px 26px; }
-  .lg-roy { grid-template-columns: 1fr; }
-  .lg-portrait { max-width: 320px; }
-  .lg-step { grid-template-columns: 60px 1fr; }
-  .lg-step > p, .lg-step .lg-step__b { grid-column: 2; }
-}
-@media (max-width: 720px) {
-  .lg-row, .lg-row--proof, .lg-row--offer { grid-template-columns: 1fr; gap: 8px; }
-  .lg-row__i { display: none; }
-  .lg-proof__num, .lg-offer__price { text-align: left; margin-top: 4px; }
-  .lg-head { grid-template-columns: 1fr; gap: 6px; }
-  .lg-head .lg-index { font-size: 2rem; }
-  .lg-step { grid-template-columns: 1fr; gap: 6px; }
-  .lg-step__i { display: none; }
-  .bookbar { display: block; }
 }

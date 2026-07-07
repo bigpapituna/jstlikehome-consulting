@@ -23,48 +23,6 @@
       'About': 'À propos',
       'Book a call': 'Réserver un appel',
       'Client Login': 'Connexion client',
-
-      // --- home: revenue ledger ---
-      'The leak': 'La fuite',
-      'The method': 'La méthode',
-      'The proof': 'Les preuves',
-      'Book a free 30-min revenue review': 'Réservez un bilan revenus gratuit de 30 min',
-      'See where it leaks': 'Voir où ça fuit',
-      'Now taking on 3 new portfolios for Q3 2026': 'J’accepte 3 nouveaux portefeuilles pour le T3 2026',
-      'Where the money leaks': 'Où l’argent fuit',
-      'Four quiet leaks drain most rental portfolios. Yours probably has at least two.': 'Quatre fuites silencieuses vident la plupart des portefeuilles locatifs. Le vôtre en a sans doute au moins deux.',
-      'Prices set by hand': 'Des prix fixés à la main',
-      'Static nightly rates miss peak demand and leave slow nights empty.': 'Des tarifs fixes ratent les pics de demande et laissent les nuits creuses vides.',
-      'The fix: dynamic pricing tuned to your market, season and demand': 'Le remède : une tarification dynamique réglée sur votre marché, la saison et la demande',
-      'One channel carries everything': 'Un seul canal porte tout',
-      'Most bookings ride on Airbnb alone, capping your reach and concentrating your risk.': 'La plupart des réservations reposent sur Airbnb seul, ce qui plafonne votre portée et concentre votre risque.',
-      'The fix: listed, synced and optimized across the major OTAs': 'Le remède : référencé, synchronisé et optimisé sur les grandes OTA',
-      "Listings that don't convert": 'Des annonces qui ne convertissent pas',
-      'Titles, photos and settings tuned for neither the algorithm nor the guest.': 'Des titres, photos et réglages pensés ni pour l’algorithme ni pour le voyageur.',
-      'The fix: rewritten and restructured so more of the people who look, book': 'Le remède : réécrites et restructurées pour que plus de visiteurs réservent',
-      'Calendar gaps nobody fills': 'Des trous de calendrier que personne ne comble',
-      'Orphan nights and last-minute holes quietly drain the year.': 'Les nuits orphelines et les trous de dernière minute vident l’année en silence.',
-      'The fix: targeted promotions, smart minimum stays and last-minute pricing': 'Le remède : promotions ciblées, séjours minimum intelligents et tarifs de dernière minute',
-      'The Revenue Recovery Method': 'La Méthode de Récupération des Revenus',
-      'Week 1': 'Semaine 1',
-      'Week 2': 'Semaine 2',
-      'Weeks 3–4': 'Semaines 3–4',
-      'Roy Younes · Ottawa, Canada · serving worldwide': 'Roy Younes · Ottawa, Canada · au service du monde entier',
-      'What it looks like when the leak stops': 'Ce que ça donne quand la fuite s’arrête',
-      'Representative metrics.': 'Chiffres représentatifs.',
-      'What it costs': 'Ce que ça coûte',
-      'Best fit:': 'Idéal pour :',
-      'hosts and portfolios of 1–15 listings who want results, not the cheapest quote.': 'les hôtes et portefeuilles de 1 à 15 annonces qui veulent des résultats, pas le devis le moins cher.',
-      'Book your revenue review': 'Réservez votre bilan revenus',
-      'A free 30-minute call. You leave knowing where your listings leak revenue and what it would take to fix them, whether we work together or not.': 'Un appel gratuit de 30 minutes. Vous repartez en sachant où vos annonces perdent des revenus et ce qu’il faudrait pour y remédier, que nous travaillions ensemble ou non.',
-
-      // --- book page ---
-      'Free · 30 minutes · Zoom or phone': 'Gratuit · 30 minutes · Zoom ou téléphone',
-      '← Back to the site': '← Retour au site',
-      'A clear read on where your listings are leaking revenue': 'Une lecture claire des fuites de revenus de vos annonces',
-      'The two or three fixes with the biggest payback for your market': 'Les deux ou trois correctifs les plus rentables pour votre marché',
-      'A straight answer on whether I can help, and what it costs': 'Une réponse franche sur ma capacité à vous aider, et le coût',
-      'Prefer email?': 'Vous préférez l’e-mail ?',
       // --- shared: trust bar ---
       'Preferred partner & power user across the major platforms & pricing tools': 'Partenaire privilégié et utilisateur expert des principales plateformes et outils de tarification',
       '★ Preferred Partner': '★ Partenaire privilégié',
@@ -72,6 +30,8 @@
       '★ Premium Partner': '★ Partenaire Premium',
       '★ Expert': '★ Expert',
       // --- shared: CTA band ---
+      "Ready to maximize your rental's revenue?": 'Prêt à maximiser les revenus de votre location ?',
+      "Let's find the money your listings are leaving on the table. Book a complimentary, no-pressure strategy call.": 'Trouvons l’argent que vos annonces laissent sur la table. Réservez un appel stratégique gratuit, sans engagement.',
       'Book a complimentary strategy call': 'Réserver un appel stratégique gratuit',
       'Email Roy': 'Écrire à Roy',
       'Explore services': 'Découvrir les services',
@@ -99,6 +59,10 @@
       "I've built and run": 'j’ai créé et géré',
       '72 of my own properties': '72 de mes propres logements',
       ', so I know exactly where rentals lose revenue, and how to win it back with smarter pricing, sharper listings, and automation that scales.': ', je sais donc exactement où les locations perdent des revenus, et comment les récupérer grâce à une tarification plus intelligente, des annonces plus percutantes et une automatisation qui passe à l’échelle.',
+      'Trusted by hosts on 5 continents': 'La confiance d’hôtes sur 5 continents',
+      'revenue managed': 'revenus gérés',
+      'avg revenue': 'revenu moyen',
+      'Optimizing listings across Canada, USA, Bali, NZ & Europe': 'Optimisation d’annonces au Canada, aux États-Unis, à Bali, en Nouvelle-Zélande et en Europe',
 
       // --- home: stat labels ---
       'Years optimizing vacation rentals': 'Années d’optimisation de locations',
@@ -107,9 +71,26 @@
       'Continents of active clients': 'Continents de clients actifs',
 
       // --- home: services ---
+      'What I do': 'Ce que je fais',
+      'Full-service optimization for serious hosts': 'Optimisation complète pour les hôtes sérieux',
+      'From a single listing to a multi-property portfolio, I cover the entire revenue engine: pricing, listings, channels, and automation.': 'D’une annonce unique à un portefeuille de plusieurs logements, je couvre tout le moteur de revenus : tarification, annonces, canaux et automatisation.',
+      'Dynamic Pricing & Revenue': 'Tarification dynamique et revenus',
+      'Data-driven pricing with PriceLabs, Beyond Pricing & Wheelhouse, tuned to market demand, seasonality and competitor ADR to win every night.': 'Tarification basée sur les données avec PriceLabs, Beyond Pricing et Wheelhouse, ajustée à la demande du marché, à la saisonnalité et aux tarifs des concurrents pour remporter chaque nuit.',
+      'Learn more': 'En savoir plus',
       'Listing Optimization': 'Optimisation des annonces',
+      'Titles, descriptions, photo order, amenities and settings tuned for search ranking and conversion across Airbnb, VRBO, Booking.com & Expedia.': 'Titres, descriptions, ordre des photos, équipements et réglages optimisés pour le classement et la conversion sur Airbnb, VRBO, Booking.com et Expedia.',
+      'Channel & OTA Expansion': 'Expansion des canaux et OTA',
+      'Get listed, synced and optimized across all major OTAs, using preferred-partner positioning to expand reach without double bookings.': 'Soyez référencé, synchronisé et optimisé sur toutes les grandes OTA, avec un positionnement de partenaire privilégié pour élargir votre portée sans doubles réservations.',
+      'Hostaway Setup & Automation': 'Configuration Hostaway et automatisation',
+      'Build listings, channel manager, automated guest messaging and documented SOPs so your operation scales with your team.': 'Création des annonces, gestionnaire de canaux, messagerie automatisée aux voyageurs et procédures documentées pour que votre activité grandisse avec votre équipe.',
+      'Occupancy & Booking-Gap Strategy': 'Stratégie d’occupation et de créneaux vides',
+      'Targeted promotions, smart minimum-stay rules and last-minute pricing that fill the gaps in your calendar without sacrificing profit.': 'Promotions ciblées, règles de séjour minimum intelligentes et tarifs de dernière minute pour combler les trous de votre calendrier sans sacrifier la rentabilité.',
+      'Audits, Coaching & Training': 'Audits, coaching et formation',
+      'Full account audits, growth roadmaps and step-by-step documentation to train your team and keep performance climbing long after we start.': 'Audits complets du compte, feuilles de route de croissance et documentation pas à pas pour former votre équipe et faire progresser les performances bien après notre démarrage.',
 
       // --- home: results ---
+      'Proven results': 'Résultats prouvés',
+      'Listings transformed into high-performing assets': 'Des annonces transformées en actifs performants',
       'Real results from the portfolios I work with.': 'Des résultats concrets issus des portefeuilles que je gère.',
       'Luxury villa · New Zealand': 'Villa de luxe · Nouvelle-Zélande',
       'Repositioned & repriced for peak-season demand': 'Repositionnée et retarifée pour la haute saison',
@@ -119,12 +100,18 @@
       'Occupancy on a previously underbooked calendar': 'Occupation sur un calendrier auparavant sous-réservé',
 
       // --- home: feature (pricing) ---
+      '01 · REVENUE MANAGEMENT': '01 · GESTION DES REVENUS',
       'Pricing that captures every dollar of demand': 'Une tarification qui capte chaque dollar de demande',
+      'I build a custom dynamic-pricing strategy around your market, your property, and the booking windows that convert, then refine it continuously.': 'Je construis une stratégie de tarification dynamique sur mesure autour de votre marché, de votre logement et des fenêtres de réservation qui convertissent, puis je l’affine en continu.',
       'Market & competitor ADR analysis, refreshed regularly': 'Analyse du marché et des tarifs concurrents, actualisée régulièrement',
+      'Seasonality, events & demand-based rate rules': 'Règles de tarif selon la saison, les événements et la demande',
+      'Gap-filling, last-minute & orphan-night strategy': 'Stratégie de remplissage, de dernière minute et de nuits orphelines',
       'Minimum-stay tuning to protect profit, not just occupancy': 'Réglage du séjour minimum pour protéger la rentabilité, pas seulement l’occupation',
+      'See how it works': 'Voir comment ça marche',
       'revenue': 'revenus',
 
       // --- home: process ---
+      'How it works': 'Comment ça marche',
       'A clear path from audit to optimized revenue': 'Un parcours clair, de l’audit aux revenus optimisés',
       'Audit': 'Audit',
       'I review your listings, pricing, channels and data to find where revenue is leaking.': 'J’examine vos annonces, votre tarification, vos canaux et vos données pour repérer où fuient les revenus.',
@@ -136,6 +123,14 @@
       'Ongoing monitoring and adjustments to keep occupancy, ADR and revenue trending up.': 'Suivi et ajustements continus pour faire progresser l’occupation, l’ADR et les revenus.',
 
       // --- home: testimonials ---
+      'What clients say': 'Ce que disent les clients',
+      'Hosts who stopped leaving money on the table': 'Des hôtes qui ont cessé de laisser de l’argent sur la table',
+      "Roy isn't cheap, and he tells you that up front, but he made it back in the first month. Our revenue is up sharply and I finally understand my own pricing.": 'Roy n’est pas donné, et il le dit d’emblée, mais il s’est remboursé dès le premier mois. Nos revenus ont fortement augmenté et je comprends enfin ma propre tarification.',
+      'Superhost · Queenstown, NZ': 'Superhost · Queenstown, NZ',
+      'We brought Roy in for our 7-listing portfolio. The Hostaway setup and pricing overhaul paid for itself almost immediately. Easily our best consulting spend.': 'Nous avons fait appel à Roy pour notre portefeuille de 7 annonces. La configuration Hostaway et la refonte tarifaire se sont rentabilisées presque aussitôt. Sans conteste notre meilleur investissement en conseil.',
+      'Portfolio Host · Bali': 'Hôte de portefeuille · Bali',
+      'Ten years of experience shows. He moved faster than the two consultants we tried before, and the occupancy on our slow season is unrecognizable.': 'Dix ans d’expérience, ça se voit. Il a avancé plus vite que les deux consultants essayés avant lui, et l’occupation de notre basse saison est méconnaissable.',
+      'Owners · Tuscany, Italy': 'Propriétaires · Toscane, Italie',
 
       // --- services page ---
       'Services & Pricing': 'Services et tarifs',
@@ -263,6 +258,11 @@
       'Within 1 business day': 'Sous 1 jour ouvré',
       'Based in': 'Basé à',
       'Ottawa, Canada · serving worldwide': 'Ottawa, Canada · au service du monde entier',
+      'Name': 'Nom',
+      'Number of properties': 'Nombre de logements',
+      'Website URL (optional)': 'URL du site web (facultatif)',
+      'How can I help?': 'Comment puis-je vous aider ?',
+      'Send message': 'Envoyer le message',
 
       // --- Fernando audit: cover, toggle, simple overview ---
       'Short-Term Rental Consulting': 'Conseil en location courte durée',
@@ -490,48 +490,6 @@
       'About': 'Acerca de',
       'Book a call': 'Reservar una llamada',
       'Client Login': 'Acceso de clientes',
-
-      // --- home: revenue ledger ---
-      'The leak': 'La fuga',
-      'The method': 'El método',
-      'The proof': 'Las pruebas',
-      'Book a free 30-min revenue review': 'Reserve una revisión de ingresos gratis de 30 min',
-      'See where it leaks': 'Ver dónde se fuga',
-      'Now taking on 3 new portfolios for Q3 2026': 'Aceptando 3 nuevos portafolios para el T3 2026',
-      'Where the money leaks': 'Dónde se fuga el dinero',
-      'Four quiet leaks drain most rental portfolios. Yours probably has at least two.': 'Cuatro fugas silenciosas vacían la mayoría de los portafolios de alquiler. El suyo probablemente tiene al menos dos.',
-      'Prices set by hand': 'Precios puestos a mano',
-      'Static nightly rates miss peak demand and leave slow nights empty.': 'Las tarifas fijas por noche pierden los picos de demanda y dejan vacías las noches flojas.',
-      'The fix: dynamic pricing tuned to your market, season and demand': 'La solución: precios dinámicos ajustados a su mercado, la temporada y la demanda',
-      'One channel carries everything': 'Un solo canal lo carga todo',
-      'Most bookings ride on Airbnb alone, capping your reach and concentrating your risk.': 'La mayoría de las reservas dependen solo de Airbnb, lo que limita su alcance y concentra su riesgo.',
-      'The fix: listed, synced and optimized across the major OTAs': 'La solución: publicado, sincronizado y optimizado en las grandes OTA',
-      "Listings that don't convert": 'Anuncios que no convierten',
-      'Titles, photos and settings tuned for neither the algorithm nor the guest.': 'Títulos, fotos y ajustes pensados ni para el algoritmo ni para el huésped.',
-      'The fix: rewritten and restructured so more of the people who look, book': 'La solución: reescritos y reestructurados para que más de los que miran, reserven',
-      'Calendar gaps nobody fills': 'Huecos de calendario que nadie llena',
-      'Orphan nights and last-minute holes quietly drain the year.': 'Las noches sueltas y los huecos de última hora vacían el año en silencio.',
-      'The fix: targeted promotions, smart minimum stays and last-minute pricing': 'La solución: promociones dirigidas, estancias mínimas inteligentes y precios de última hora',
-      'The Revenue Recovery Method': 'El Método de Recuperación de Ingresos',
-      'Week 1': 'Semana 1',
-      'Week 2': 'Semana 2',
-      'Weeks 3–4': 'Semanas 3–4',
-      'Roy Younes · Ottawa, Canada · serving worldwide': 'Roy Younes · Ottawa, Canadá · al servicio de todo el mundo',
-      'What it looks like when the leak stops': 'Cómo se ve cuando la fuga se detiene',
-      'Representative metrics.': 'Métricas representativas.',
-      'What it costs': 'Lo que cuesta',
-      'Best fit:': 'Ideal para:',
-      'hosts and portfolios of 1–15 listings who want results, not the cheapest quote.': 'anfitriones y portafolios de 1 a 15 anuncios que quieren resultados, no el presupuesto más barato.',
-      'Book your revenue review': 'Reserve su revisión de ingresos',
-      'A free 30-minute call. You leave knowing where your listings leak revenue and what it would take to fix them, whether we work together or not.': 'Una llamada gratuita de 30 minutos. Se va sabiendo dónde pierden ingresos sus anuncios y qué haría falta para arreglarlo, trabajemos juntos o no.',
-
-      // --- book page ---
-      'Free · 30 minutes · Zoom or phone': 'Gratis · 30 minutos · Zoom o teléfono',
-      '← Back to the site': '← Volver al sitio',
-      'A clear read on where your listings are leaking revenue': 'Una lectura clara de dónde pierden ingresos sus anuncios',
-      'The two or three fixes with the biggest payback for your market': 'Los dos o tres arreglos con mayor retorno para su mercado',
-      'A straight answer on whether I can help, and what it costs': 'Una respuesta directa sobre si puedo ayudarle, y lo que cuesta',
-      'Prefer email?': '¿Prefiere el correo?',
       // --- shared: trust bar ---
       'Preferred partner & power user across the major platforms & pricing tools': 'Socio preferente y usuario experto de las principales plataformas y herramientas de precios',
       '★ Preferred Partner': '★ Socio preferente',
@@ -539,6 +497,8 @@
       '★ Premium Partner': '★ Socio Premium',
       '★ Expert': '★ Experto',
       // --- shared: CTA band ---
+      "Ready to maximize your rental's revenue?": '¿Listo para maximizar los ingresos de su alquiler?',
+      "Let's find the money your listings are leaving on the table. Book a complimentary, no-pressure strategy call.": 'Encontremos el dinero que sus anuncios están dejando sobre la mesa. Reserve una llamada estratégica gratuita y sin compromiso.',
       'Book a complimentary strategy call': 'Reserve una llamada estratégica gratuita',
       'Email Roy': 'Escribir a Roy',
       'Explore services': 'Explorar servicios',
@@ -566,6 +526,10 @@
       "I've built and run": 'he creado y gestionado',
       '72 of my own properties': '72 propiedades propias',
       ', so I know exactly where rentals lose revenue, and how to win it back with smarter pricing, sharper listings, and automation that scales.': ', así que sé exactamente dónde los alquileres pierden ingresos, y cómo recuperarlos con precios más inteligentes, anuncios más afilados y automatización que escala.',
+      'Trusted by hosts on 5 continents': 'La confianza de anfitriones en 5 continentes',
+      'revenue managed': 'ingresos gestionados',
+      'avg revenue': 'ingreso medio',
+      'Optimizing listings across Canada, USA, Bali, NZ & Europe': 'Optimizando anuncios en Canadá, EE. UU., Bali, Nueva Zelanda y Europa',
 
       // --- home: stat labels ---
       'Years optimizing vacation rentals': 'Años optimizando alquileres vacacionales',
@@ -574,9 +538,26 @@
       'Continents of active clients': 'Continentes con clientes activos',
 
       // --- home: services ---
+      'What I do': 'Lo que hago',
+      'Full-service optimization for serious hosts': 'Optimización integral para anfitriones serios',
+      'From a single listing to a multi-property portfolio, I cover the entire revenue engine: pricing, listings, channels, and automation.': 'Desde un solo anuncio hasta un portafolio de varias propiedades, cubro todo el motor de ingresos: precios, anuncios, canales y automatización.',
+      'Dynamic Pricing & Revenue': 'Precios dinámicos e ingresos',
+      'Data-driven pricing with PriceLabs, Beyond Pricing & Wheelhouse, tuned to market demand, seasonality and competitor ADR to win every night.': 'Precios basados en datos con PriceLabs, Beyond Pricing y Wheelhouse, ajustados a la demanda del mercado, la estacionalidad y las tarifas de la competencia para ganar cada noche.',
+      'Learn more': 'Saber más',
       'Listing Optimization': 'Optimización de anuncios',
+      'Titles, descriptions, photo order, amenities and settings tuned for search ranking and conversion across Airbnb, VRBO, Booking.com & Expedia.': 'Títulos, descripciones, orden de fotos, servicios y ajustes optimizados para el posicionamiento y la conversión en Airbnb, VRBO, Booking.com y Expedia.',
+      'Channel & OTA Expansion': 'Expansión de canales y OTA',
+      'Get listed, synced and optimized across all major OTAs, using preferred-partner positioning to expand reach without double bookings.': 'Publíquese, sincronícese y optimícese en todas las grandes OTA, con posicionamiento de socio preferente para ampliar el alcance sin dobles reservas.',
+      'Hostaway Setup & Automation': 'Configuración de Hostaway y automatización',
+      'Build listings, channel manager, automated guest messaging and documented SOPs so your operation scales with your team.': 'Creación de anuncios, gestor de canales, mensajería automatizada a huéspedes y procedimientos documentados para que su operación crezca con su equipo.',
+      'Occupancy & Booking-Gap Strategy': 'Estrategia de ocupación y huecos',
+      'Targeted promotions, smart minimum-stay rules and last-minute pricing that fill the gaps in your calendar without sacrificing profit.': 'Promociones dirigidas, reglas inteligentes de estancia mínima y precios de última hora que llenan los huecos de su calendario sin sacrificar el beneficio.',
+      'Audits, Coaching & Training': 'Auditorías, coaching y formación',
+      'Full account audits, growth roadmaps and step-by-step documentation to train your team and keep performance climbing long after we start.': 'Auditorías completas de la cuenta, hojas de ruta de crecimiento y documentación paso a paso para formar a su equipo y mantener el rendimiento en alza mucho después de empezar.',
 
       // --- home: results ---
+      'Proven results': 'Resultados comprobados',
+      'Listings transformed into high-performing assets': 'Anuncios transformados en activos de alto rendimiento',
       'Real results from the portfolios I work with.': 'Resultados reales de los portafolios que gestiono.',
       'Luxury villa · New Zealand': 'Villa de lujo · Nueva Zelanda',
       'Repositioned & repriced for peak-season demand': 'Reposicionada y re-tarifada para la temporada alta',
@@ -586,12 +567,18 @@
       'Occupancy on a previously underbooked calendar': 'Ocupación en un calendario antes infrautilizado',
 
       // --- home: feature (pricing) ---
+      '01 · REVENUE MANAGEMENT': '01 · GESTIÓN DE INGRESOS',
       'Pricing that captures every dollar of demand': 'Precios que capturan cada dólar de demanda',
+      'I build a custom dynamic-pricing strategy around your market, your property, and the booking windows that convert, then refine it continuously.': 'Creo una estrategia de precios dinámicos a medida en torno a su mercado, su propiedad y las ventanas de reserva que convierten, y luego la refino de forma continua.',
       'Market & competitor ADR analysis, refreshed regularly': 'Análisis del mercado y de las tarifas de la competencia, actualizado con frecuencia',
+      'Seasonality, events & demand-based rate rules': 'Reglas de tarifa según temporada, eventos y demanda',
+      'Gap-filling, last-minute & orphan-night strategy': 'Estrategia de relleno, última hora y noches huérfanas',
       'Minimum-stay tuning to protect profit, not just occupancy': 'Ajuste de estancia mínima para proteger el beneficio, no solo la ocupación',
+      'See how it works': 'Ver cómo funciona',
       'revenue': 'ingresos',
 
       // --- home: process ---
+      'How it works': 'Cómo funciona',
       'A clear path from audit to optimized revenue': 'Un camino claro, de la auditoría a los ingresos optimizados',
       'Audit': 'Auditoría',
       'I review your listings, pricing, channels and data to find where revenue is leaking.': 'Reviso sus anuncios, precios, canales y datos para encontrar por dónde se escapan los ingresos.',
@@ -603,6 +590,14 @@
       'Ongoing monitoring and adjustments to keep occupancy, ADR and revenue trending up.': 'Seguimiento y ajustes continuos para que la ocupación, el ADR y los ingresos sigan subiendo.',
 
       // --- home: testimonials ---
+      'What clients say': 'Lo que dicen los clientes',
+      'Hosts who stopped leaving money on the table': 'Anfitriones que dejaron de perder dinero sobre la mesa',
+      "Roy isn't cheap, and he tells you that up front, but he made it back in the first month. Our revenue is up sharply and I finally understand my own pricing.": 'Roy no es barato, y lo dice de entrada, pero se pagó solo el primer mes. Nuestros ingresos subieron con fuerza y por fin entiendo mis propios precios.',
+      'Superhost · Queenstown, NZ': 'Superhost · Queenstown, NZ',
+      'We brought Roy in for our 7-listing portfolio. The Hostaway setup and pricing overhaul paid for itself almost immediately. Easily our best consulting spend.': 'Trajimos a Roy para nuestro portafolio de 7 anuncios. La configuración de Hostaway y la renovación de precios se pagaron casi de inmediato. Sin duda, nuestra mejor inversión en consultoría.',
+      'Portfolio Host · Bali': 'Anfitrión de portafolio · Bali',
+      'Ten years of experience shows. He moved faster than the two consultants we tried before, and the occupancy on our slow season is unrecognizable.': 'Diez años de experiencia se notan. Avanzó más rápido que los dos consultores que probamos antes, y la ocupación de nuestra temporada baja es irreconocible.',
+      'Owners · Tuscany, Italy': 'Propietarios · Toscana, Italia',
 
       // --- services page ---
       'Services & Pricing': 'Servicios y precios',
@@ -730,6 +725,11 @@
       'Within 1 business day': 'En 1 día hábil',
       'Based in': 'Con sede en',
       'Ottawa, Canada · serving worldwide': 'Ottawa, Canadá · al servicio de todo el mundo',
+      'Name': 'Nombre',
+      'Number of properties': 'Número de propiedades',
+      'Website URL (optional)': 'URL del sitio web (opcional)',
+      'How can I help?': '¿Cómo puedo ayudarle?',
+      'Send message': 'Enviar mensaje',
 
       // --- Fernando audit: cover, toggle, simple overview ---
       'Short-Term Rental Consulting': 'Consultoría de alquiler de corta estancia',
