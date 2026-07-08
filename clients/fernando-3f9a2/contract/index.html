@@ -271,10 +271,11 @@
 <script>
 (function(){
   'use strict';
-  var SIGN_URL=''; // TODO(Roy): e-signature envelope link goes here
+  var SIGN_URL=''; // TODO(Roy): paste the PandaDoc signing link here to activate the button
   if(SIGN_URL){
     var b=document.getElementById('signbtn');
-    b.href=SIGN_URL; b.style.display='inline-block';
+    b.href=SIGN_URL; b.target='_blank'; b.rel='noopener noreferrer';
+    b.style.display='inline-block';
     document.getElementById('signpending').style.display='none';
   }
 
