@@ -1,6 +1,19 @@
 {
  "tasks": [
   {
+   "id": "tmrmi3jzs",
+   "title": "Review payment processing options.",
+   "desc": "Roy will review payment processing options and make recommendations to see what might be the best fit to automate payments through HostAway and the OTAs.",
+   "assignee": "Roy",
+   "due": "2026-07-22",
+   "eta": "",
+   "status": "open",
+   "created": "2026-07-15 19:56",
+   "created_by": "Roy",
+   "completed_at": "",
+   "completed_by": ""
+  },
+  {
    "id": "tmrlqfacx",
    "title": "Create Expedia listings",
    "desc": "Expedia only has one listing so far. Create all the remaining listings on Expedia so I can sync it with Hostaway.",
