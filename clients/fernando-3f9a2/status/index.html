@@ -2,37 +2,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>JSTLIKEHOME · Project Status</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  /* Palette matches Fernando's portal (Fraunces + Plus Jakarta Sans, cream + coral). */
   :root{
-    --bg:#F7F6F3; --surface:#FFFFFF; --surface-2:#F1F3F1;
-    --ink:#1A2723; --muted:#64726C; --border:#E2E7E3;
-    --accent:#0F6E5C; --accent-ink:#0B5142;
-    --done:#1E874B; --active:#0F6E5C; --sched:#A6791F; --pend:#8A968F;
-    --ring:rgba(15,110,92,.4);
-    --fh:Georgia,"Times New Roman",ui-serif,serif;
-    --fb:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-    --fm:ui-monospace,"Cascadia Code","SF Mono",Menlo,monospace;
-  }
-  @media (prefers-color-scheme:dark){:root{
-    --bg:#0E1512; --surface:#15201C; --surface-2:#1B2823;
-    --ink:#E9EFEB; --muted:#93A29B; --border:#263630;
-    --accent:#3FB39A; --accent-ink:#7FD8C6;
-    --done:#46C079; --active:#3FB39A; --sched:#D8AE4E; --pend:#7C8A83;
-    --ring:rgba(63,179,154,.45);
-  }}
-  :root[data-theme="dark"]{
-    --bg:#0E1512; --surface:#15201C; --surface-2:#1B2823;
-    --ink:#E9EFEB; --muted:#93A29B; --border:#263630;
-    --accent:#3FB39A; --accent-ink:#7FD8C6;
-    --done:#46C079; --active:#3FB39A; --sched:#D8AE4E; --pend:#7C8A83;
-    --ring:rgba(63,179,154,.45);
-  }
-  :root[data-theme="light"]{
-    --bg:#F7F6F3; --surface:#FFFFFF; --surface-2:#F1F3F1;
-    --ink:#1A2723; --muted:#64726C; --border:#E2E7E3;
-    --accent:#0F6E5C; --accent-ink:#0B5142;
-    --done:#1E874B; --active:#0F6E5C; --sched:#A6791F; --pend:#8A968F;
-    --ring:rgba(15,110,92,.4);
+    --bg:#FBF8F3; --surface:#FFFFFF; --surface-2:#F3EEE6;
+    --ink:#211d18; --muted:#5d564c; --border:#e7e0d5;
+    --accent:#F0625E; --accent-ink:#d14b47;
+    --done:#1f8a5b; --active:#F0625E; --sched:#C98A2E; --pend:#b3a89a;
+    --ring:rgba(240,98,94,.35);
+    --fh:'Fraunces',Georgia,ui-serif,serif;
+    --fb:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+    --fm:'Plus Jakarta Sans',system-ui,sans-serif;
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--fb);line-height:1.55;-webkit-text-size-adjust:100%}
@@ -53,7 +36,7 @@
 
   .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:24px}
   .stat{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px 16px 14px}
-  .stat .k{font-family:var(--fm);font-size:30px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--accent);line-height:1}
+  .stat .k{font-family:var(--fh);font-size:34px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--accent);line-height:1;letter-spacing:-.01em}
   .stat .k small{font-size:16px;color:var(--muted)}
   .stat .l{font-size:12.5px;color:var(--muted);margin-top:6px}
   .bar{height:5px;border-radius:999px;background:var(--surface-2);margin-top:10px;overflow:hidden}
@@ -109,6 +92,28 @@
   .foot b{color:var(--ink)}
   @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
+
+<!-- ══ shared portal nav (identical snippet on every portal page) ══ -->
+<nav class="pnav"><div class="pnav-in">
+  <a class="pn-brand" href="/clients/fernando-3f9a2/">JST<b>LIKE</b>HOME</a>
+  <div class="pnav-links">
+    <a href="/clients/fernando-3f9a2/" data-pn="home">Home</a>
+    <a href="/clients/fernando-3f9a2/status/" data-pn="status">Status</a>
+    <a href="/clients/fernando-3f9a2/proposal/" data-pn="proposal">Proposal</a>
+    <a href="/clients/fernando-3f9a2/contract/" data-pn="contract">Contract</a>
+  </div>
+</div></nav>
+<style>
+.pnav{position:sticky;top:0;z-index:50;background:rgba(251,248,243,.9);-webkit-backdrop-filter:saturate(1.3) blur(8px);backdrop-filter:saturate(1.3) blur(8px);border-bottom:1px solid #e7e0d5;font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif}
+.pnav-in{max-width:880px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.pnav .pn-brand{font-weight:800;font-size:14px;letter-spacing:.02em;color:#211d18;text-decoration:none;margin-right:auto}
+.pnav .pn-brand b{color:#F0625E}
+.pnav-links{display:flex;gap:4px;flex-wrap:wrap}
+.pnav-links a{font-size:13px;font-weight:600;color:#6c6258;text-decoration:none;padding:6px 12px;border-radius:999px;transition:background .15s,color .15s}
+.pnav-links a:hover{color:#211d18;background:#F3EEE6}
+.pnav-links a.active{color:#fff;background:#F0625E}
+</style>
+<script>(function(){var p=location.pathname.replace(/index\.html$/,'').replace(/\/$/,'');document.querySelectorAll('.pnav-links a[data-pn]').forEach(function(a){var h=a.getAttribute('href').replace(/\/$/,'');if(h===p||(a.getAttribute('data-pn')==='home'&&/fernando-3f9a2$/.test(p)))a.classList.add('active');});})();</script>
 
 <div class="wrap">
   <div class="top">
