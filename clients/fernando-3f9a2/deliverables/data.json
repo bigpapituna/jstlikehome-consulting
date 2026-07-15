@@ -1,6 +1,19 @@
 {
  "tasks": [
   {
+   "id": "tmrlqei23",
+   "title": "Update listings on Hostaway",
+   "desc": "Make sure all the fields in Hostaway are correct for each listing after I've imported them from Airbnb. This will help better push information to the OTAs.",
+   "assignee": "Alondra",
+   "due": "",
+   "eta": "",
+   "status": "open",
+   "created": "2026-07-15 07:01",
+   "created_by": "Roy",
+   "completed_at": "",
+   "completed_by": ""
+  },
+  {
    "id": "tmrlqc0ul",
    "title": "Create Booking.com account",
    "desc": "Make sure to add all your legal business information as will need a legal identity ID from Booking.com to connect to Hostaway",
