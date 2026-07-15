@@ -102,6 +102,9 @@
   .task-when{font-family:var(--fm);font-size:11.5px;color:var(--muted);white-space:nowrap;text-align:right}
   .task-sub{grid-column:1/-1;font-family:var(--fm);font-size:11.5px;color:var(--muted)}
   .task-sub b{color:var(--ink);font-weight:600}
+  .task-cta{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-family:var(--fm);font-size:13px;font-weight:700;
+    text-decoration:none;color:#fff;background:var(--accent);padding:9px 16px;border-radius:999px}
+  .task-cta:hover{background:var(--accent-ink)}
   .foot{margin-top:40px;border-top:1px solid var(--border);padding-top:16px;color:var(--muted);font-size:13.5px}
   .foot b{color:var(--ink)}
   @media (prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -155,6 +158,7 @@
     <h2 id="t-tasks"></h2>
     <p class="sub" id="t-tasks-sub"></p>
     <div class="chan" id="tasklist"></div>
+    <a class="task-cta" id="t-tasks-cta" href="/clients/fernando-3f9a2/deliverables/"></a>
   </div>
 
   <h2 id="t-units"></h2>
@@ -613,7 +617,7 @@ const LABELS = {
     chanCnt:(n,t)=>`<b>${n}</b> / ${t} units`,
     roadmap:"Services roadmap", roadmapSub:"Everything else we're doing — tap a step for details.",
     tasks:"Deliverables", tasksSub:"Specific to-dos your team is working on right now — updated live.",
-    taskFor:"For", taskTarget:"Target", taskEta:"Est.", taskDone:"Done", taskDoneN:n=>`+ ${n} completed`,
+    taskFor:"For", taskTarget:"Target", taskEta:"Est.", taskDone:"Done", taskDoneN:n=>`+ ${n} completed`, taskCta:"Open the tasks page →",
     units:"Your 23 units", unitsSub:"Migration and content review, unit by unit. Details discussed on our biweekly calls.",
     stats:{migrated:"Units migrated", audited:"Content reviewed", channels:"Channels live", phase:"Phases complete"},
     st:{done:"Done", active:"In progress", scheduled:"Scheduled", pending:"Pending"},
@@ -633,7 +637,7 @@ const LABELS = {
     chanCnt:(n,t)=>`<b>${n}</b> / ${t} unidades`,
     roadmap:"Hoja de ruta de servicios", roadmapSub:"Todo lo demás que estamos haciendo — toca un paso para ver los detalles.",
     tasks:"Entregables", tasksSub:"Tareas concretas en las que tu equipo está trabajando ahora — se actualiza en vivo.",
-    taskFor:"Para", taskTarget:"Objetivo", taskEta:"Est.", taskDone:"Hecha", taskDoneN:n=>`+ ${n} completadas`,
+    taskFor:"Para", taskTarget:"Objetivo", taskEta:"Est.", taskDone:"Hecha", taskDoneN:n=>`+ ${n} completadas`, taskCta:"Ver la página de tareas →",
     units:"Tus 23 unidades", unitsSub:"Migración y revisión de contenido, unidad por unidad. Los detalles se tratan en nuestras llamadas quincenales.",
     stats:{migrated:"Unidades migradas", audited:"Contenido revisado", channels:"Canales activos", phase:"Fases completadas"},
     st:{done:"Completado", active:"En progreso", scheduled:"Programado", pending:"Pendiente"},
@@ -751,6 +755,7 @@ function renderTasks(L){
   wrap.style.display="";
   document.getElementById("t-tasks").textContent = L.tasks;
   document.getElementById("t-tasks-sub").textContent = L.tasksSub;
+  document.getElementById("t-tasks-cta").textContent = L.taskCta;
   const rows = open.map(t=>{
     const when = t.eta ? `${L.taskEta} ${esc(t.eta)}` : (t.due ? `${L.taskTarget} ${esc(t.due)}` : "");
     return `<div class="task-row">

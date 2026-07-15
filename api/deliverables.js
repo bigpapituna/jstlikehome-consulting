@@ -61,9 +61,24 @@ async function ghPut(data, sha, message) {
 
 const clean = (s, n) => String(s == null ? '' : s).trim().slice(0, n);
 const isDate = (s) => s === '' || /^\d{4}-\d{2}-\d{2}$/.test(s);
+const WEEK = 7 * 24 * 60 * 60 * 1000;
+
+// Drop archived (deleted) tasks older than 7 days. Runs on every read and write
+// — no cron needed. Unparseable timestamps are kept, never silently dropped.
+function purge(data) {
+  const arch = data.archive || (data.archive = []);
+  const cutoff = Date.now() - WEEK;
+  data.archive = arch.filter((t) => {
+    const ts = Date.parse((t.deleted_at || '').replace(' ', 'T'));
+    return isNaN(ts) || ts >= cutoff;
+  });
+  return data;
+}
 
 function mutate(data, body) {
   const tasks = data.tasks || (data.tasks = []);
+  purge(data);
+  const arch = data.archive;
   const by = clean(body.by, 40) || 'someone';
   const now = new Date().toISOString().slice(0, 16).replace('T', ' ');
   if (body.action === 'add') {
@@ -76,10 +91,20 @@ function mutate(data, body) {
       status: 'open', created: now, created_by: by, completed_at: '', completed_by: '' });
     return null;
   }
+  if (body.action === 'restore') {
+    const i = arch.findIndex((x) => x.id === body.id);
+    if (i < 0) return 'not in archive';
+    const t = arch.splice(i, 1)[0];
+    delete t.deleted_at; delete t.deleted_by;
+    tasks.unshift(t);
+    return null;
+  }
   if (body.action === 'delete') {
     const i = tasks.findIndex((x) => x.id === body.id);
     if (i < 0) return 'task not found';
-    tasks.splice(i, 1);
+    const t = tasks.splice(i, 1)[0];
+    t.deleted_at = now; t.deleted_by = by;
+    arch.unshift(t);
     return null;
   }
   const t = tasks.find((x) => x.id === body.id);
@@ -91,6 +116,16 @@ function mutate(data, body) {
     if (!isDate(eta)) return 'eta must be YYYY-MM-DD';
     t.eta = eta; t.eta_by = by; return null;
   }
+  if (body.action === 'edit') {
+    const title = clean(body.title, 140);
+    if (!title) return 'title required';
+    const due = clean(body.due, 10);
+    if (!isDate(due)) return 'due must be YYYY-MM-DD';
+    t.title = title; t.desc = clean(body.desc, 500);
+    t.assignee = clean(body.assignee, 40) || t.assignee || 'Alondra';
+    t.due = due;
+    return null;
+  }
   return 'unknown action';
 }
 
@@ -100,7 +135,8 @@ export default async function handler(req, res) {
   try {
     if (req.method === 'GET') {
       const { data } = await ghGet();
-      return res.status(200).json({ ok: true, tasks: data.tasks || [] });
+      purge(data);
+      return res.status(200).json({ ok: true, tasks: data.tasks || [], archive: data.archive || [] });
     }
     if (req.method === 'POST') {
       const body = typeof req.body === 'object' && req.body ? req.body : JSON.parse(req.body || '{}');
@@ -109,7 +145,7 @@ export default async function handler(req, res) {
         const err = mutate(data, body);
         if (err) return res.status(400).json({ ok: false, error: err });
         const msg = `Deliverables: ${body.action} by ${clean(body.by, 40) || 'portal'}`;
-        if (await ghPut(data, sha, msg)) return res.status(200).json({ ok: true, tasks: data.tasks });
+        if (await ghPut(data, sha, msg)) return res.status(200).json({ ok: true, tasks: data.tasks, archive: data.archive });
       }
       return res.status(409).json({ ok: false, error: 'busy — try again' });
     }

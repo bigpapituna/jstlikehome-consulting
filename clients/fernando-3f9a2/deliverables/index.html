@@ -1,5 +1,5 @@
-<!-- Fernando portal — shared deliverables list (Alondra's tasks). Data lives in
-     data.json in this folder; reads/writes go through /api/deliverables. -->
+<!-- Fernando portal — shared deliverables board. Data lives in data.json in this
+     folder; reads/writes go through /api/deliverables. Grouped by assignee. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
@@ -16,42 +16,76 @@
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--fb);line-height:1.55}
-  .wrap{max-width:820px;margin:0 auto;padding:26px 18px 72px}
+  .wrap{max-width:980px;margin:0 auto;padding:26px 18px 72px}
   .brand{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700}
   h1{font-family:var(--fh);font-weight:600;font-size:clamp(26px,6.5vw,36px);margin:8px 0 6px;line-height:1.08}
   .sub{color:var(--muted);font-size:14px;margin:0 0 4px}
-  .who{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:16px 0 22px;font-size:13px;color:var(--muted)}
+  .who{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:16px 0 18px;font-size:13px;color:var(--muted)}
   .who select{font:inherit;font-size:13px;padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--ink)}
   .langtoggle{float:right;border:1px solid var(--border);background:var(--surface);color:var(--ink);
     font-size:12px;font-weight:600;padding:8px 12px;border-radius:999px;cursor:pointer}
   h2{font-family:var(--fh);font-weight:600;font-size:19px;margin:26px 0 10px}
-  .task{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start}
+
+  /* ── board: one column per person ── */
+  .board{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:6px 0 6px}
+  @media(max-width:760px){.board{grid-template-columns:1fr}}
+  .col{background:var(--surface-2);border:1px solid var(--border);border-radius:16px;padding:12px 12px 8px;min-width:0}
+  .col-h{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:2px 4px 10px}
+  .col-name{font-family:var(--fh);font-weight:600;font-size:16.5px}
+  .col-n{font-size:11.5px;color:var(--muted);white-space:nowrap}
+  .col-empty{color:var(--muted);font-size:12.5px;padding:6px 4px 10px}
+
+  .task{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:11px 12px;margin-bottom:9px;display:flex;gap:10px;align-items:flex-start}
   .task.done{opacity:.62}
-  .tick{flex:0 0 auto;width:26px;height:26px;border-radius:50%;border:2px solid var(--border);background:var(--surface);cursor:pointer;font-size:14px;line-height:1;color:#fff}
+  .tick{flex:0 0 auto;width:24px;height:24px;border-radius:50%;border:2px solid var(--border);background:var(--surface);cursor:pointer;font-size:13px;line-height:1;color:#fff;padding:0}
   .task.done .tick{background:var(--done);border-color:var(--done)}
   .tbody{flex:1;min-width:0}
-  .tt{font-weight:700;font-size:15px}
+  .tt{font-weight:700;font-size:14px;word-break:break-word}
   .task.done .tt{text-decoration:line-through}
-  .td{color:var(--muted);font-size:13px;margin-top:2px}
-  .tmeta{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;font-size:12px;color:var(--muted);align-items:center}
+  .td{color:var(--muted);font-size:12.5px;margin-top:2px;word-break:break-word}
+  .tmeta{display:flex;gap:5px 12px;flex-wrap:wrap;margin-top:7px;font-size:11.5px;color:var(--muted);align-items:center}
   .tmeta b{color:var(--ink)}
-  .tmeta input[type=date]{font:inherit;font-size:12px;padding:3px 7px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--ink)}
-  .etabtn,.reopen{font:inherit;font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--ink);cursor:pointer}
-  .etabtn:hover,.reopen:hover{border-color:var(--accent)}
+  .tmeta.acts{gap:6px}
+  .tmeta input[type=date]{font:inherit;font-size:11.5px;padding:3px 6px;border-radius:7px;border:1px solid var(--border);background:var(--surface);color:var(--ink)}
+  .minibtn{font:inherit;font-size:11px;font-weight:600;padding:3px 9px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--ink);cursor:pointer}
+  .minibtn:hover{border-color:var(--accent)}
+  .minibtn.del{color:var(--muted)}
+  .minibtn.del:hover{border-color:var(--accent-ink);color:var(--accent-ink)}
   .late{color:var(--accent-ink);font-weight:700}
-  .addcard{background:var(--surface);border:1.5px dashed var(--border);border-radius:14px;padding:16px;margin-top:6px}
+  .col details{margin:2px 0 8px}
+  .col details>summary{cursor:pointer;font-size:11.5px;color:var(--muted);padding:4px 4px;list-style:none}
+  .col details>summary::-webkit-details-marker{display:none}
+  .col details>summary:before{content:"▸ ";}
+  .col details[open]>summary:before{content:"▾ ";}
+
+  /* ── inline edit form ── */
+  .task.editing{display:block}
+  .edit input[type=text],.edit textarea{width:100%;font:inherit;font-size:13px;padding:7px 9px;border-radius:9px;border:1px solid var(--border);background:var(--bg);color:var(--ink);margin-bottom:7px}
+  .edit textarea{min-height:44px;resize:vertical}
+  .edit .erow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .edit select,.edit input[type=date]{font:inherit;font-size:12px;padding:5px 8px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--ink)}
+  .edit .save{background:var(--accent);color:#fff;border:0;font-weight:700;padding:6px 14px;border-radius:999px;cursor:pointer;margin-left:auto}
+
+  .addcard{background:var(--surface);border:1.5px dashed var(--border);border-radius:16px;padding:16px;margin-top:14px}
   .addcard input[type=text],.addcard textarea{width:100%;font:inherit;font-size:14px;padding:9px 11px;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--ink);margin-bottom:8px}
-  .addcard textarea{min-height:56px;resize:vertical}
+  .addcard textarea{min-height:52px;resize:vertical}
   .addrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
   .addrow label{font-size:12px;color:var(--muted)}
-  .addrow input[type=date]{font:inherit;font-size:13px;padding:6px 9px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--ink)}
   .addrow select{font:inherit;font-size:13px;padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--ink)}
-  .delbtn{font:inherit;font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer}
-  .delbtn:hover{border-color:var(--accent-ink);color:var(--accent-ink)}
+  .addrow input[type=date]{font:inherit;font-size:13px;padding:6px 9px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--ink)}
   .addbtn{font:inherit;font-size:13.5px;font-weight:700;padding:9px 18px;border-radius:999px;border:0;background:var(--accent);color:#fff;cursor:pointer;margin-left:auto}
   .addbtn:disabled{opacity:.6}
+
+  .arch{margin-top:22px;border:1px solid var(--border);border-radius:14px;background:var(--surface);padding:4px 16px}
+  .arch>summary{cursor:pointer;font-family:var(--fh);font-weight:600;font-size:15px;padding:12px 0;list-style:none}
+  .arch>summary::-webkit-details-marker{display:none}
+  .arch>summary:before{content:"▸ ";color:var(--muted)}
+  .arch[open]>summary:before{content:"▾ ";}
+  .arow{display:flex;gap:10px;align-items:center;padding:9px 0;border-top:1px dashed var(--border);font-size:13px}
+  .arow .an{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis}
+  .arow .am{color:var(--muted);font-size:11.5px;white-space:nowrap}
+
   .note{color:var(--muted);font-size:12.5px;margin-top:20px}
-  .empty{color:var(--muted);font-size:14px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px}
   .err{background:#fdecec;border:1px solid #f3b8b6;color:#9c3532;border-radius:12px;padding:12px 14px;font-size:13.5px;margin:14px 0;display:none}
 </style>
 
@@ -89,8 +123,7 @@
 
   <div class="err" id="err"></div>
 
-  <h2 id="t-open"></h2>
-  <div id="openList"></div>
+  <div class="board" id="board"></div>
 
   <div class="addcard">
     <h2 id="t-add" style="margin-top:0"></h2>
@@ -104,37 +137,45 @@
     </div>
   </div>
 
-  <h2 id="t-done"></h2>
-  <div id="doneList"></div>
+  <details class="arch" id="archWrap" style="display:none">
+    <summary id="t-arch"></summary>
+    <div id="archList"></div>
+  </details>
 
   <p class="note" id="t-note"></p>
 </div>
 
 <script>
+const PEOPLE = ["Alondra", "Fernando", "Roy"];
 const L10N = {
-  en: { title:"Deliverables", sub:"Shared task list — everyone sees the same board, live.",
-    who:"I am:", open:"To do", add:"Add a task", addBtn:"Add task",
+  en: { title:"Deliverables", sub:"Shared task board — each person's tasks in their own column, live.",
+    who:"I am:", add:"Add a task", addBtn:"Add task",
     titlePh:"What needs to be done?", descPh:"Any details (optional)",
-    assign:"Assign to:", due:"Target date", done:"Completed", toggle:"ES",
-    eta:"Estimated completion", etaSave:"Save date", markDone:"Mark as done ✓", reopen:"Reopen",
-    del:"Delete", confirmDel:"Delete this task? This can't be undone.",
-    by:"by", forWhom:"For", added:"Added", on:"on", target:"Target", completed:"Done", late:"past target",
-    emptyOpen:"Nothing pending — all caught up. 🎉", emptyDone:"Nothing completed yet.",
-    note:"Tap the circle to mark a task complete. Set “estimated completion” so everyone knows when to expect it. Changes save instantly for everyone.",
-    errLoad:"Couldn't load the list — check your connection and refresh." },
-  es: { title:"Entregables", sub:"Lista de tareas compartida — todos ven el mismo tablero, en vivo.",
-    who:"Yo soy:", open:"Pendientes", add:"Agregar una tarea", addBtn:"Agregar",
+    assign:"Assign to:", due:"Target date", toggle:"ES",
+    open:"open", doneN:n=>`${n} completed`, colEmpty:"No tasks.",
+    etaLabel:"ETA", edit:"Edit", save:"Save", cancel:"Cancel", markDone:"Mark done ✓", reopen:"Reopen",
+    del:"Delete", confirmDel:"Move this task to Recently deleted? You can restore it for 7 days.",
+    by:"by", target:"Target", completed:"Done", late:"past target", added:"Added", on:"on",
+    arch:"Recently deleted", archHint:n=>`${n} item${n===1?"":"s"} · recoverable for 7 days`, restore:"Restore",
+    deletedBy:"deleted by",
+    note:"Tap the circle to complete a task. Use Edit to change any details. Deleted tasks stay recoverable for 7 days. Changes save instantly for everyone.",
+    errLoad:"Couldn't load the board — check your connection and refresh." },
+  es: { title:"Entregables", sub:"Tablero de tareas compartido — las tareas de cada persona en su propia columna, en vivo.",
+    who:"Yo soy:", add:"Agregar una tarea", addBtn:"Agregar",
     titlePh:"¿Qué hay que hacer?", descPh:"Detalles (opcional)",
-    assign:"Asignar a:", due:"Fecha objetivo", done:"Completadas", toggle:"EN",
-    eta:"Fecha estimada", etaSave:"Guardar fecha", markDone:"Marcar como hecha ✓", reopen:"Reabrir",
-    del:"Eliminar", confirmDel:"¿Eliminar esta tarea? No se puede deshacer.",
-    by:"por", forWhom:"Para", added:"Creada", on:"el", target:"Objetivo", completed:"Hecha", late:"fuera de plazo",
-    emptyOpen:"Nada pendiente — todo al día. 🎉", emptyDone:"Aún no hay tareas completadas.",
-    note:"Toca el círculo para marcar una tarea como hecha. Pon la “fecha estimada” para que todos sepan cuándo esperarla. Los cambios se guardan al instante para todos.",
-    errLoad:"No se pudo cargar la lista — revisa tu conexión y recarga." }
+    assign:"Asignar a:", due:"Fecha objetivo", toggle:"EN",
+    open:"abiertas", doneN:n=>`${n} completadas`, colEmpty:"Sin tareas.",
+    etaLabel:"Est.", edit:"Editar", save:"Guardar", cancel:"Cancelar", markDone:"Completar ✓", reopen:"Reabrir",
+    del:"Eliminar", confirmDel:"¿Mover esta tarea a Eliminadas recientemente? Puedes restaurarla por 7 días.",
+    by:"por", target:"Objetivo", completed:"Hecha", late:"fuera de plazo", added:"Creada", on:"el",
+    arch:"Eliminadas recientemente", archHint:n=>`${n} elemento${n===1?"":"s"} · recuperable por 7 días`, restore:"Restaurar",
+    deletedBy:"eliminada por",
+    note:"Toca el círculo para completar una tarea. Usa Editar para cambiar cualquier detalle. Las tareas eliminadas se pueden restaurar por 7 días. Los cambios se guardan al instante para todos.",
+    errLoad:"No se pudo cargar el tablero — revisa tu conexión y recarga." }
 };
 let lang = localStorage.getItem("jlh.lang") || "en";
-let TASKS = [];
+let TASKS = [], ARCHIVE = [];
+const editing = new Set();          // task ids currently in inline-edit mode
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s==null?"":s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const who = () => $("whoSel").value;
@@ -149,28 +190,55 @@ function api(method, body) {
 }
 function fail(msg){ const e=$("err"); e.textContent=msg; e.style.display="block"; }
 function okpanel(){ $("err").style.display="none"; }
+function post(body){ return api("POST", body).then(d => { if (d.ok){ TASKS=d.tasks||[]; ARCHIVE=d.archive||ARCHIVE; okpanel(); render(); } else fail(d.error); return d; }); }
 
-function taskRow(t, L) {
+const nameOpts = (sel) => PEOPLE.map(n => `<option${n===sel?" selected":""}>${n}</option>`).join("");
+
+function editForm(t, L) {
+  return `<div class="task editing"><div class="tbody edit" data-editid="${esc(t.id)}">
+    <input type="text" class="ef-title" maxlength="140" value="${esc(t.title)}">
+    <textarea class="ef-desc" maxlength="500" placeholder="${L.descPh}">${esc(t.desc||"")}</textarea>
+    <div class="erow">
+      <select class="ef-assignee">${nameOpts(t.assignee||"Alondra")}</select>
+      <input type="date" class="ef-due" value="${esc(t.due||"")}">
+      <button class="minibtn" data-cancel="${esc(t.id)}">${L.cancel}</button>
+      <button class="save" data-saveedit="${esc(t.id)}">${L.save}</button>
+    </div></div></div>`;
+}
+
+function taskCard(t, L) {
+  if (editing.has(t.id)) return editForm(t, L);
   const today = new Date().toISOString().slice(0,10);
   const open = t.status !== "done";
   const late = open && t.due && t.due < today;
   const meta = [];
-  meta.push(`<span>${L.forWhom}: <b>${esc(t.assignee||"Alondra")}</b></span>`);
   if (t.due) meta.push(`<span>${L.target}: <b>${esc(t.due)}</b>${late?` <span class="late">· ${L.late}</span>`:""}</span>`);
-  if (open) meta.push(`<span>${L.eta}: <input type="date" value="${esc(t.eta||"")}" data-eta="${esc(t.id)}">
-     <button class="etabtn" data-etasave="${esc(t.id)}">${L.etaSave}</button></span>`);
-  else meta.push(`<span>${L.completed}: <b>${esc((t.completed_at||"").slice(0,10))}</b> ${L.by} <b>${esc(t.completed_by||"?")}</b></span>`);
+  if (!open) meta.push(`<span>${L.completed}: <b>${esc((t.completed_at||"").slice(0,10))}</b></span>`);
   meta.push(`<span>${L.added} ${L.by} <b>${esc(t.created_by||"?")}</b>${t.created?` ${L.on} ${esc(t.created.slice(0,10))}`:""}</span>`);
-  const actions = [];
-  if (!open) actions.push(`<button class="reopen" data-reopen="${esc(t.id)}">${L.reopen}</button>`);
-  actions.push(`<button class="delbtn" data-del="${esc(t.id)}">${L.del}</button>`);
+  const acts = [];
+  if (open) acts.push(`<label>${L.etaLabel} <input type="date" value="${esc(t.eta||"")}" data-etainput="${esc(t.id)}"></label>`);
+  acts.push(`<button class="minibtn" data-edit="${esc(t.id)}">${L.edit}</button>`);
+  if (!open) acts.push(`<button class="minibtn" data-reopen="${esc(t.id)}">${L.reopen}</button>`);
+  acts.push(`<button class="minibtn del" data-del="${esc(t.id)}">${L.del}</button>`);
   return `<div class="task ${open?"":"done"}">
     <button class="tick" data-tick="${esc(t.id)}" title="${open?L.markDone:L.reopen}">${open?"":"✓"}</button>
     <div class="tbody"><div class="tt">${esc(t.title)}</div>
       ${t.desc?`<div class="td">${esc(t.desc)}</div>`:""}
       <div class="tmeta">${meta.join("")}</div>
-      <div class="tmeta">${actions.join("")}</div>
+      <div class="tmeta acts">${acts.join("")}</div>
     </div></div>`;
+}
+
+function column(name, L) {
+  const mine = TASKS.filter(t => (t.assignee||"Alondra") === name);
+  const open = mine.filter(t => t.status !== "done");
+  const done = mine.filter(t => t.status === "done");
+  let body = open.map(t => taskCard(t, L)).join("");
+  if (!open.length && !done.length) body += `<div class="col-empty">${L.colEmpty}</div>`;
+  if (done.length) body += `<details><summary>${L.doneN(done.length)}</summary>${done.map(t => taskCard(t, L)).join("")}</details>`;
+  return `<div class="col">
+    <div class="col-h"><span class="col-name">${esc(name)}</span><span class="col-n">${open.length} ${L.open}</span></div>
+    ${body}</div>`;
 }
 
 function render() {
@@ -178,51 +246,62 @@ function render() {
   document.documentElement.lang = lang;
   $("langbtn").textContent = L.toggle;
   $("t-title").textContent = L.title; $("t-sub").textContent = L.sub;
-  $("t-who").textContent = L.who; $("t-open").textContent = L.open;
+  $("t-who").textContent = L.who;
   $("t-add").textContent = L.add; $("addBtn").textContent = L.addBtn;
   $("addTitle").placeholder = L.titlePh; $("addDesc").placeholder = L.descPh;
-  $("t-assign").textContent = L.assign;
-  $("t-due").textContent = L.due + ":"; $("t-done").textContent = L.done;
+  $("t-assign").textContent = L.assign; $("t-due").textContent = L.due + ":";
   $("t-note").textContent = L.note;
-  const open = TASKS.filter(t => t.status !== "done");
-  const done = TASKS.filter(t => t.status === "done");
-  $("openList").innerHTML = open.length ? open.map(t => taskRow(t, L)).join("") : `<div class="empty">${L.emptyOpen}</div>`;
-  $("doneList").innerHTML = done.length ? done.map(t => taskRow(t, L)).join("") : `<div class="empty">${L.emptyDone}</div>`;
+  $("board").innerHTML = PEOPLE.map(n => column(n, L)).join("");
+  // archive
+  const aw = $("archWrap");
+  if (ARCHIVE.length) {
+    aw.style.display = "";
+    $("t-arch").innerHTML = `${L.arch} <span style="font-weight:400;color:var(--muted);font-size:12px">— ${L.archHint(ARCHIVE.length)}</span>`;
+    $("archList").innerHTML = ARCHIVE.map(t => `<div class="arow">
+      <span class="an"><b>${esc(t.title)}</b> <span class="am">· ${L.deletedBy} ${esc(t.deleted_by||"?")} ${esc((t.deleted_at||"").slice(0,10))}</span></span>
+      <button class="minibtn" data-restore="${esc(t.id)}">${L.restore}</button></div>`).join("");
+  } else { aw.style.display = "none"; }
 }
 
+// event delegation for all task/archive actions
 document.addEventListener("click", (e) => {
-  const t = e.target;
-  const tick = t.getAttribute && t.getAttribute("data-tick");
-  const reopen = t.getAttribute && t.getAttribute("data-reopen");
-  const del = t.getAttribute && t.getAttribute("data-del");
-  const etasave = t.getAttribute && t.getAttribute("data-etasave");
-  if (tick) {
-    const task = TASKS.find(x => x.id === tick);
-    const action = task && task.status === "done" ? "reopen" : "complete";
-    api("POST", {action, id: tick, by: who()}).then(d => { if (d.ok) { TASKS = d.tasks; render(); } else fail(d.error); });
-  } else if (reopen) {
-    api("POST", {action:"reopen", id: reopen, by: who()}).then(d => { if (d.ok) { TASKS = d.tasks; render(); } else fail(d.error); });
-  } else if (del) {
-    if (!confirm(L10N[lang].confirmDel)) return;
-    api("POST", {action:"delete", id: del, by: who()}).then(d => { if (d.ok) { TASKS = d.tasks; render(); } else fail(d.error); });
-  } else if (etasave) {
-    const inp = document.querySelector(`input[data-eta="${etasave}"]`);
-    api("POST", {action:"eta", id: etasave, eta: (inp && inp.value) || "", by: who()}).then(d => { if (d.ok) { TASKS = d.tasks; render(); } else fail(d.error); });
+  const g = (k) => e.target.getAttribute && e.target.getAttribute(k);
+  const tick=g("data-tick"), reopen=g("data-reopen"), del=g("data-del"),
+        edit=g("data-edit"), cancel=g("data-cancel"), saveedit=g("data-saveedit"), restore=g("data-restore");
+  if (tick) { const t=TASKS.find(x=>x.id===tick); post({action: t&&t.status==="done"?"reopen":"complete", id: tick, by: who()}); }
+  else if (reopen) post({action:"reopen", id: reopen, by: who()});
+  else if (del) { if (confirm(L10N[lang].confirmDel)) post({action:"delete", id: del, by: who()}); }
+  else if (restore) post({action:"restore", id: restore, by: who()});
+  else if (edit) { editing.add(edit); render(); }
+  else if (cancel) { editing.delete(cancel); render(); }
+  else if (saveedit) {
+    const box = document.querySelector(`[data-editid="${saveedit}"]`); if (!box) return;
+    const title = box.querySelector(".ef-title").value.trim();
+    if (!title) { box.querySelector(".ef-title").focus(); return; }
+    editing.delete(saveedit);
+    post({action:"edit", id: saveedit, title, desc: box.querySelector(".ef-desc").value.trim(),
+      assignee: box.querySelector(".ef-assignee").value, due: box.querySelector(".ef-due").value || "", by: who()});
   }
 });
+// ETA date input saves on change (no button)
+document.addEventListener("change", (e) => {
+  const id = e.target.getAttribute && e.target.getAttribute("data-etainput");
+  if (id) post({action:"eta", id, eta: e.target.value || "", by: who()});
+});
+
 $("addBtn").addEventListener("click", () => {
   const title = $("addTitle").value.trim();
   if (!title) { $("addTitle").focus(); return; }
   $("addBtn").disabled = true;
-  api("POST", {action:"add", title, desc: $("addDesc").value.trim(), assignee: $("addAssignee").value, due: $("addDue").value || "", by: who()})
-    .then(d => { if (d.ok) { TASKS = d.tasks; $("addTitle").value=""; $("addDesc").value=""; $("addDue").value=""; render(); } else fail(d.error); })
+  post({action:"add", title, desc: $("addDesc").value.trim(), assignee: $("addAssignee").value, due: $("addDue").value || "", by: who()})
+    .then(d => { if (d.ok) { $("addTitle").value=""; $("addDesc").value=""; $("addDue").value=""; } })
     .catch(() => fail(L10N[lang].errLoad))
     .then(() => { $("addBtn").disabled = false; });
 });
 $("langbtn").addEventListener("click", () => { lang = lang === "es" ? "en" : "es"; localStorage.setItem("jlh.lang", lang); render(); });
 
 render();
-api("GET").then(d => { if (d.ok) { TASKS = d.tasks; okpanel(); render(); } else fail(d.error || L10N[lang].errLoad); })
+api("GET").then(d => { if (d.ok) { TASKS=d.tasks||[]; ARCHIVE=d.archive||[]; okpanel(); render(); } else fail(d.error || L10N[lang].errLoad); })
   .catch(() => fail(L10N[lang].errLoad));
-setInterval(() => { api("GET").then(d => { if (d.ok) { TASKS = d.tasks; render(); } }).catch(()=>{}); }, 60000);
+setInterval(() => { if (editing.size) return; api("GET").then(d => { if (d.ok) { TASKS=d.tasks||[]; ARCHIVE=d.archive||[]; render(); } }).catch(()=>{}); }, 60000);
 </script>
