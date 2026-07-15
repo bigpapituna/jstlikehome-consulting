@@ -6,11 +6,11 @@
    "desc": "This is just a demo so the board isn't empty. Anyone can complete or re-open me.",
    "due": "",
    "eta": "",
-   "status": "open",
+   "status": "done",
    "created": "2026-07-15 02:17",
    "created_by": "Roy",
-   "completed_at": "",
-   "completed_by": ""
+   "completed_at": "2026-07-15 06:35",
+   "completed_by": "Lark"
   }
  ]
 }
