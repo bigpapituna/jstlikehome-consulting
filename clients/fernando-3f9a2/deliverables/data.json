@@ -33,12 +33,13 @@
    "desc": "Make sure all the fields in Hostaway are correct for each listing after I've imported them from Airbnb. This will help better push information to the OTAs.",
    "assignee": "Alondra",
    "due": "",
-   "eta": "",
+   "eta": "2026-07-16",
    "status": "open",
    "created": "2026-07-15 07:01",
    "created_by": "Roy",
    "completed_at": "",
-   "completed_by": ""
+   "completed_by": "",
+   "eta_by": "Alondra"
   },
   {
    "id": "tmrlqc0ul",
