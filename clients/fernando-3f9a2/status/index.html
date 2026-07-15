@@ -93,6 +93,15 @@
   .unit .row span:first-child{font-family:var(--fm);font-size:10.5px;letter-spacing:.03em;text-transform:uppercase}
   .unit .row.ch{flex-direction:column;align-items:flex-start;gap:6px}
 
+  /* ── deliverables: live shared task list (same data as the Tasks page) ── */
+  .task-row{display:grid;grid-template-columns:1fr auto;gap:3px 14px;align-items:baseline;padding:12px 0;border-top:1px solid var(--surface-2)}
+  .task-row:first-child{border-top:0}
+  .task-row.done{opacity:.6}
+  .task-name{font-weight:600;font-size:14.5px}
+  .task-row.done .task-name{text-decoration:line-through}
+  .task-when{font-family:var(--fm);font-size:11.5px;color:var(--muted);white-space:nowrap;text-align:right}
+  .task-sub{grid-column:1/-1;font-family:var(--fm);font-size:11.5px;color:var(--muted)}
+  .task-sub b{color:var(--ink);font-weight:600}
   .foot{margin-top:40px;border-top:1px solid var(--border);padding-top:16px;color:var(--muted);font-size:13.5px}
   .foot b{color:var(--ink)}
   @media (prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -141,6 +150,12 @@
   <h2 id="t-roadmap"></h2>
   <p class="sub" id="t-roadmap-sub"></p>
   <ol class="phases" id="phases"></ol>
+
+  <div id="tasks-wrap" style="display:none">
+    <h2 id="t-tasks"></h2>
+    <p class="sub" id="t-tasks-sub"></p>
+    <div class="chan" id="tasklist"></div>
+  </div>
 
   <h2 id="t-units"></h2>
   <p class="sub" id="t-units-sub"></p>
@@ -597,6 +612,8 @@ const LABELS = {
     chanState:{done:"Live", active:"In progress", scheduled:"Coming up"},
     chanCnt:(n,t)=>`<b>${n}</b> / ${t} units`,
     roadmap:"Services roadmap", roadmapSub:"Everything else we're doing — tap a step for details.",
+    tasks:"Deliverables", tasksSub:"Specific to-dos your team is working on right now — updated live.",
+    taskFor:"For", taskTarget:"Target", taskEta:"Est.", taskDone:"Done", taskDoneN:n=>`+ ${n} completed`,
     units:"Your 23 units", unitsSub:"Migration and content review, unit by unit. Details discussed on our biweekly calls.",
     stats:{migrated:"Units migrated", audited:"Content reviewed", channels:"Channels live", phase:"Phases complete"},
     st:{done:"Done", active:"In progress", scheduled:"Scheduled", pending:"Pending"},
@@ -615,6 +632,8 @@ const LABELS = {
     chanState:{done:"Activo", active:"En progreso", scheduled:"Próximamente"},
     chanCnt:(n,t)=>`<b>${n}</b> / ${t} unidades`,
     roadmap:"Hoja de ruta de servicios", roadmapSub:"Todo lo demás que estamos haciendo — toca un paso para ver los detalles.",
+    tasks:"Entregables", tasksSub:"Tareas concretas en las que tu equipo está trabajando ahora — se actualiza en vivo.",
+    taskFor:"Para", taskTarget:"Objetivo", taskEta:"Est.", taskDone:"Hecha", taskDoneN:n=>`+ ${n} completadas`,
     units:"Tus 23 unidades", unitsSub:"Migración y revisión de contenido, unidad por unidad. Los detalles se tratan en nuestras llamadas quincenales.",
     stats:{migrated:"Unidades migradas", audited:"Contenido revisado", channels:"Canales activos", phase:"Fases completadas"},
     st:{done:"Completado", active:"En progreso", scheduled:"Programado", pending:"Pendiente"},
@@ -636,8 +655,9 @@ const CHANNELS = [
   {key:"expedia", name:"Expedia"}
 ];
 const openPhases = new Set(); // which roadmap steps the user has expanded (survives lang toggle)
+let DELIV = null; // deliverables fetched live from /api/deliverables (null = not loaded yet)
 
-let lang = "es"; // client-first default; flip to "en" here if you'd rather it open in English
+let lang = "en"; // default English; toggle to ES with the button
 
 function pct(n,d){ return d ? Math.round(100*n/d) : 0; }
 
@@ -715,8 +735,36 @@ function render(){
       }).join("")}</span></div>
       <div class="row"><span>${L.audL}</span><span class="pill ${u.audit==="done"?"done":u.audit==="progress"?"active":"pending"}">${L.aud[u.audit]}</span></div>
     </div>`).join("");
+
+  renderTasks(L);
+}
+
+// Live deliverables — read-only mirror of the Tasks page. Section hides itself
+// if the list is empty or the fetch fails, so the client never sees a blank card.
+function esc(s){ return String(s==null?"":s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c])); }
+function renderTasks(L){
+  const wrap = document.getElementById("tasks-wrap");
+  if(!DELIV || !DELIV.length){ wrap.style.display="none"; return; }
+  const open = DELIV.filter(t=>t.status!=="done");
+  const doneN = DELIV.length - open.length;
+  if(!open.length && !doneN){ wrap.style.display="none"; return; }
+  wrap.style.display="";
+  document.getElementById("t-tasks").textContent = L.tasks;
+  document.getElementById("t-tasks-sub").textContent = L.tasksSub;
+  const rows = open.map(t=>{
+    const when = t.eta ? `${L.taskEta} ${esc(t.eta)}` : (t.due ? `${L.taskTarget} ${esc(t.due)}` : "");
+    return `<div class="task-row">
+      <div class="task-name">${esc(t.title)}</div>
+      <div class="task-when">${when}</div>
+      <div class="task-sub">${L.taskFor} <b>${esc(t.assignee||"Alondra")}</b></div>
+    </div>`;
+  }).join("");
+  document.getElementById("tasklist").innerHTML =
+    rows + (doneN ? `<div class="task-row done"><div class="task-name">${L.taskDoneN(doneN)}</div><div class="task-when"></div></div>` : "");
 }
 
 document.getElementById("langbtn").addEventListener("click", ()=>{ lang = lang==="es"?"en":"es"; render(); });
 render();
+fetch("/api/deliverables",{headers:{Accept:"application/json"}})
+  .then(r=>r.ok?r.json():null).then(d=>{ if(d&&d.ok){ DELIV=d.tasks||[]; render(); } }).catch(()=>{});
 </script>

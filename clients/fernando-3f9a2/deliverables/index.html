@@ -45,6 +45,9 @@
   .addrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
   .addrow label{font-size:12px;color:var(--muted)}
   .addrow input[type=date]{font:inherit;font-size:13px;padding:6px 9px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--ink)}
+  .addrow select{font:inherit;font-size:13px;padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--ink)}
+  .delbtn{font:inherit;font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer}
+  .delbtn:hover{border-color:var(--accent-ink);color:var(--accent-ink)}
   .addbtn{font:inherit;font-size:13.5px;font-weight:700;padding:9px 18px;border-radius:999px;border:0;background:var(--accent);color:#fff;cursor:pointer;margin-left:auto}
   .addbtn:disabled{opacity:.6}
   .note{color:var(--muted);font-size:12.5px;margin-top:20px}
@@ -94,6 +97,8 @@
     <input type="text" id="addTitle" maxlength="140">
     <textarea id="addDesc" maxlength="500"></textarea>
     <div class="addrow">
+      <label id="t-assign"></label>
+      <select id="addAssignee"><option>Alondra</option><option>Fernando</option><option>Roy</option></select>
       <label id="t-due"></label><input type="date" id="addDue">
       <button class="addbtn" id="addBtn"></button>
     </div>
@@ -110,23 +115,25 @@ const L10N = {
   en: { title:"Deliverables", sub:"Shared task list — everyone sees the same board, live.",
     who:"I am:", open:"To do", add:"Add a task", addBtn:"Add task",
     titlePh:"What needs to be done?", descPh:"Any details (optional)",
-    due:"Target date", done:"Completed", toggle:"ES",
+    assign:"Assign to:", due:"Target date", done:"Completed", toggle:"ES",
     eta:"Estimated completion", etaSave:"Save date", markDone:"Mark as done ✓", reopen:"Reopen",
-    by:"by", added:"added", target:"Target", completed:"Done", late:"past target",
+    del:"Delete", confirmDel:"Delete this task? This can't be undone.",
+    by:"by", forWhom:"For", added:"Added", on:"on", target:"Target", completed:"Done", late:"past target",
     emptyOpen:"Nothing pending — all caught up. 🎉", emptyDone:"Nothing completed yet.",
     note:"Tap the circle to mark a task complete. Set “estimated completion” so everyone knows when to expect it. Changes save instantly for everyone.",
     errLoad:"Couldn't load the list — check your connection and refresh." },
   es: { title:"Entregables", sub:"Lista de tareas compartida — todos ven el mismo tablero, en vivo.",
     who:"Yo soy:", open:"Pendientes", add:"Agregar una tarea", addBtn:"Agregar",
     titlePh:"¿Qué hay que hacer?", descPh:"Detalles (opcional)",
-    due:"Fecha objetivo", done:"Completadas", toggle:"EN",
+    assign:"Asignar a:", due:"Fecha objetivo", done:"Completadas", toggle:"EN",
     eta:"Fecha estimada", etaSave:"Guardar fecha", markDone:"Marcar como hecha ✓", reopen:"Reabrir",
-    by:"por", added:"agregada", target:"Objetivo", completed:"Hecha", late:"fuera de plazo",
+    del:"Eliminar", confirmDel:"¿Eliminar esta tarea? No se puede deshacer.",
+    by:"por", forWhom:"Para", added:"Creada", on:"el", target:"Objetivo", completed:"Hecha", late:"fuera de plazo",
     emptyOpen:"Nada pendiente — todo al día. 🎉", emptyDone:"Aún no hay tareas completadas.",
     note:"Toca el círculo para marcar una tarea como hecha. Pon la “fecha estimada” para que todos sepan cuándo esperarla. Los cambios se guardan al instante para todos.",
     errLoad:"No se pudo cargar la lista — revisa tu conexión y recarga." }
 };
-let lang = localStorage.getItem("jlh.lang") || "es";
+let lang = localStorage.getItem("jlh.lang") || "en";
 let TASKS = [];
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s==null?"":s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -148,17 +155,21 @@ function taskRow(t, L) {
   const open = t.status !== "done";
   const late = open && t.due && t.due < today;
   const meta = [];
+  meta.push(`<span>${L.forWhom}: <b>${esc(t.assignee||"Alondra")}</b></span>`);
   if (t.due) meta.push(`<span>${L.target}: <b>${esc(t.due)}</b>${late?` <span class="late">· ${L.late}</span>`:""}</span>`);
   if (open) meta.push(`<span>${L.eta}: <input type="date" value="${esc(t.eta||"")}" data-eta="${esc(t.id)}">
      <button class="etabtn" data-etasave="${esc(t.id)}">${L.etaSave}</button></span>`);
   else meta.push(`<span>${L.completed}: <b>${esc((t.completed_at||"").slice(0,10))}</b> ${L.by} <b>${esc(t.completed_by||"?")}</b></span>`);
-  meta.push(`<span>${L.added} ${L.by} ${esc(t.created_by||"?")}</span>`);
+  meta.push(`<span>${L.added} ${L.by} <b>${esc(t.created_by||"?")}</b>${t.created?` ${L.on} ${esc(t.created.slice(0,10))}`:""}</span>`);
+  const actions = [];
+  if (!open) actions.push(`<button class="reopen" data-reopen="${esc(t.id)}">${L.reopen}</button>`);
+  actions.push(`<button class="delbtn" data-del="${esc(t.id)}">${L.del}</button>`);
   return `<div class="task ${open?"":"done"}">
     <button class="tick" data-tick="${esc(t.id)}" title="${open?L.markDone:L.reopen}">${open?"":"✓"}</button>
     <div class="tbody"><div class="tt">${esc(t.title)}</div>
       ${t.desc?`<div class="td">${esc(t.desc)}</div>`:""}
       <div class="tmeta">${meta.join("")}</div>
-      ${open?"":`<div class="tmeta"><button class="reopen" data-reopen="${esc(t.id)}">${L.reopen}</button></div>`}
+      <div class="tmeta">${actions.join("")}</div>
     </div></div>`;
 }
 
@@ -170,6 +181,7 @@ function render() {
   $("t-who").textContent = L.who; $("t-open").textContent = L.open;
   $("t-add").textContent = L.add; $("addBtn").textContent = L.addBtn;
   $("addTitle").placeholder = L.titlePh; $("addDesc").placeholder = L.descPh;
+  $("t-assign").textContent = L.assign;
   $("t-due").textContent = L.due + ":"; $("t-done").textContent = L.done;
   $("t-note").textContent = L.note;
   const open = TASKS.filter(t => t.status !== "done");
@@ -182,6 +194,7 @@ document.addEventListener("click", (e) => {
   const t = e.target;
   const tick = t.getAttribute && t.getAttribute("data-tick");
   const reopen = t.getAttribute && t.getAttribute("data-reopen");
+  const del = t.getAttribute && t.getAttribute("data-del");
   const etasave = t.getAttribute && t.getAttribute("data-etasave");
   if (tick) {
     const task = TASKS.find(x => x.id === tick);
@@ -189,6 +202,9 @@ document.addEventListener("click", (e) => {
     api("POST", {action, id: tick, by: who()}).then(d => { if (d.ok) { TASKS = d.tasks; render(); } else fail(d.error); });
   } else if (reopen) {
     api("POST", {action:"reopen", id: reopen, by: who()}).then(d => { if (d.ok) { TASKS = d.tasks; render(); } else fail(d.error); });
+  } else if (del) {
+    if (!confirm(L10N[lang].confirmDel)) return;
+    api("POST", {action:"delete", id: del, by: who()}).then(d => { if (d.ok) { TASKS = d.tasks; render(); } else fail(d.error); });
   } else if (etasave) {
     const inp = document.querySelector(`input[data-eta="${etasave}"]`);
     api("POST", {action:"eta", id: etasave, eta: (inp && inp.value) || "", by: who()}).then(d => { if (d.ok) { TASKS = d.tasks; render(); } else fail(d.error); });
@@ -198,7 +214,7 @@ $("addBtn").addEventListener("click", () => {
   const title = $("addTitle").value.trim();
   if (!title) { $("addTitle").focus(); return; }
   $("addBtn").disabled = true;
-  api("POST", {action:"add", title, desc: $("addDesc").value.trim(), due: $("addDue").value || "", by: who()})
+  api("POST", {action:"add", title, desc: $("addDesc").value.trim(), assignee: $("addAssignee").value, due: $("addDue").value || "", by: who()})
     .then(d => { if (d.ok) { TASKS = d.tasks; $("addTitle").value=""; $("addDesc").value=""; $("addDue").value=""; render(); } else fail(d.error); })
     .catch(() => fail(L10N[lang].errLoad))
     .then(() => { $("addBtn").disabled = false; });

@@ -71,8 +71,15 @@ function mutate(data, body) {
     if (!title) return 'title required';
     if (tasks.length >= 200) return 'too many tasks';
     tasks.unshift({ id: 't' + Date.now().toString(36), title, desc: clean(body.desc, 500),
+      assignee: clean(body.assignee, 40) || 'Alondra',
       due: isDate(clean(body.due, 10)) ? clean(body.due, 10) : '', eta: '',
       status: 'open', created: now, created_by: by, completed_at: '', completed_by: '' });
+    return null;
+  }
+  if (body.action === 'delete') {
+    const i = tasks.findIndex((x) => x.id === body.id);
+    if (i < 0) return 'task not found';
+    tasks.splice(i, 1);
     return null;
   }
   const t = tasks.find((x) => x.id === body.id);
