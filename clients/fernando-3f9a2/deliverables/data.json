@@ -1,8 +1,21 @@
 {
  "tasks": [
   {
+   "id": "tmrlqc0ul",
+   "title": "Create Booking.com account",
+   "desc": "Make sure to add all your legal business information as will need a legal identity ID from Booking.com to connect to Hostaway",
+   "assignee": "Alondra",
+   "due": "",
+   "eta": "",
+   "status": "open",
+   "created": "2026-07-15 06:59",
+   "created_by": "Roy",
+   "completed_at": "",
+   "completed_by": ""
+  },
+  {
    "id": "t19f646c94ea",
-   "title": "\ud83e\uddea Test task \u2014 tap the circle to mark me done",
+   "title": "🧪 Test task — tap the circle to mark me done",
    "desc": "This is just a demo so the board isn't empty. Anyone can complete or re-open me.",
    "due": "",
    "eta": "",
