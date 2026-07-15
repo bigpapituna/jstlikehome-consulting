@@ -1,6 +1,19 @@
 {
  "tasks": [
   {
+   "id": "t19f649ede1b",
+   "title": "ARCH-TEST edited",
+   "desc": "now with desc",
+   "assignee": "Roy",
+   "due": "2026-09-15",
+   "eta": "",
+   "status": "open",
+   "created": "2026-07-15 03:12",
+   "created_by": "Roy",
+   "completed_at": "",
+   "completed_by": ""
+  },
+  {
    "id": "tmrlqfacx",
    "title": "Create Expedia listings",
    "desc": "Expedia only has one listing so far. Create all the remaining listings on Expedia so I can sync it with Hostaway.",
@@ -40,21 +53,5 @@
    "completed_by": ""
   }
  ],
- "archive": [
-  {
-   "id": "t19f649ede1b",
-   "title": "ARCH-TEST edited",
-   "desc": "now with desc",
-   "assignee": "Roy",
-   "due": "2026-09-15",
-   "eta": "",
-   "status": "open",
-   "created": "2026-07-15 03:12",
-   "created_by": "Roy",
-   "completed_at": "",
-   "completed_by": "",
-   "deleted_at": "2026-07-15 03:12",
-   "deleted_by": "Roy"
-  }
- ]
+ "archive": []
 }
