@@ -198,8 +198,9 @@ const DATA = {
       "pid": "vrbo-migration",
       "kind": "channel",
       "key": "vrbo",
-      "when": "Jul 2026",
-      "status": "scheduled",
+      "manual": true,
+      "when": "Connected via iCal",
+      "status": "active",
       "en": {
         "title": "Migrate VRBO listings",
         "desc": "Bring your VRBO presence into Hostaway so both major channels run from one calendar with no double bookings."
@@ -209,7 +210,7 @@ const DATA = {
         "desc": "Incorporar tu presencia en VRBO a Hostaway para que los dos canales principales funcionen desde un solo calendario, sin dobles reservas."
       },
       "progress": {
-        "done": 0,
+        "done": 14,
         "total": 23
       }
     },
@@ -245,7 +246,7 @@ const DATA = {
       "pid": "launch-bookingcom",
       "kind": "channel",
       "key": "bookingcom",
-      "when": "Aug 2026",
+      "when": "Aug–Sep 2026",
       "status": "scheduled",
       "en": {
         "title": "Launch Booking.com",
@@ -264,7 +265,7 @@ const DATA = {
       "pid": "launch-expedia",
       "kind": "channel",
       "key": "expedia",
-      "when": "Aug 2026",
+      "when": "Sep 2026",
       "status": "active",
       "en": {
         "title": "Launch Expedia",
@@ -282,7 +283,7 @@ const DATA = {
     {
       "pid": "launch-hopper",
       "kind": "channel",
-      "when": "Aug 2026",
+      "when": "Sep 2026",
       "status": "scheduled",
       "en": {
         "title": "Launch Hopper",
@@ -296,7 +297,7 @@ const DATA = {
     {
       "pid": "dynamic-pricing",
       "kind": "core",
-      "when": "Aug 2026",
+      "when": "Sep 2026",
       "status": "scheduled",
       "en": {
         "title": "Dynamic pricing",
@@ -651,10 +652,12 @@ const LABELS = {
   }
 };
 
-// per-OTA columns (must match the generator's CHANNEL_KEYS) — names are brands, same in both languages
+// per-unit channel chips — only channels Hostaway reports per listing. VRBO is
+// omitted here on purpose: it's connected via iCal (calendar sync) which Hostaway
+// doesn't expose per-listing, so its status lives in the Channels card (a manual
+// count Roy maintains), not in these per-unit chips.
 const CHANNELS = [
   {key:"airbnb", name:"Airbnb"},
-  {key:"vrbo", name:"VRBO"},
   {key:"bookingcom", name:"Booking.com"},
   {key:"expedia", name:"Expedia"}
 ];
