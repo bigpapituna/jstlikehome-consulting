@@ -1,19 +1,6 @@
 {
  "tasks": [
   {
-   "id": "t19f6487d9d2",
-   "title": "Temp \u2014 verify assignee+delete",
-   "desc": "",
-   "assignee": "Fernando",
-   "due": "2026-08-01",
-   "eta": "",
-   "status": "open",
-   "created": "2026-07-15 02:47",
-   "created_by": "Roy",
-   "completed_at": "",
-   "completed_by": ""
-  },
-  {
    "id": "t19f646c94ea",
    "title": "\ud83e\uddea Test task \u2014 tap the circle to mark me done",
    "desc": "This is just a demo so the board isn't empty. Anyone can complete or re-open me.",
