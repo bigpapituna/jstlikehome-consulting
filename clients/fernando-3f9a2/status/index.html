@@ -379,7 +379,7 @@ const DATA = {
       "migration": "verified",
       "channels": {
         "airbnb": "live",
-        "vrbo": "pending",
+        "vrbo": "synced",
         "bookingcom": "pending",
         "expedia": "live"
       },
@@ -412,7 +412,7 @@ const DATA = {
       "migration": "verified",
       "channels": {
         "airbnb": "live",
-        "vrbo": "pending",
+        "vrbo": "synced",
         "bookingcom": "pending",
         "expedia": "pending"
       },
@@ -423,7 +423,7 @@ const DATA = {
       "migration": "verified",
       "channels": {
         "airbnb": "live",
-        "vrbo": "pending",
+        "vrbo": "synced",
         "bookingcom": "pending",
         "expedia": "pending"
       },
@@ -434,7 +434,7 @@ const DATA = {
       "migration": "verified",
       "channels": {
         "airbnb": "live",
-        "vrbo": "pending",
+        "vrbo": "synced",
         "bookingcom": "pending",
         "expedia": "pending"
       },
@@ -445,7 +445,7 @@ const DATA = {
       "migration": "verified",
       "channels": {
         "airbnb": "live",
-        "vrbo": "pending",
+        "vrbo": "synced",
         "bookingcom": "pending",
         "expedia": "pending"
       },
@@ -456,7 +456,7 @@ const DATA = {
       "migration": "verified",
       "channels": {
         "airbnb": "live",
-        "vrbo": "pending",
+        "vrbo": "synced",
         "bookingcom": "pending",
         "expedia": "pending"
       },
@@ -467,7 +467,7 @@ const DATA = {
       "migration": "verified",
       "channels": {
         "airbnb": "live",
-        "vrbo": "pending",
+        "vrbo": "synced",
         "bookingcom": "pending",
         "expedia": "pending"
       },
@@ -478,7 +478,7 @@ const DATA = {
       "migration": "verified",
       "channels": {
         "airbnb": "live",
-        "vrbo": "pending",
+        "vrbo": "synced",
         "bookingcom": "pending",
         "expedia": "pending"
       },
@@ -489,7 +489,7 @@ const DATA = {
       "migration": "verified",
       "channels": {
         "airbnb": "live",
-        "vrbo": "pending",
+        "vrbo": "synced",
         "bookingcom": "pending",
         "expedia": "pending"
       },
@@ -500,7 +500,7 @@ const DATA = {
       "migration": "verified",
       "channels": {
         "airbnb": "live",
-        "vrbo": "pending",
+        "vrbo": "synced",
         "bookingcom": "pending",
         "expedia": "pending"
       },
@@ -522,7 +522,7 @@ const DATA = {
       "migration": "verified",
       "channels": {
         "airbnb": "live",
-        "vrbo": "pending",
+        "vrbo": "synced",
         "bookingcom": "pending",
         "expedia": "pending"
       },
@@ -533,7 +533,7 @@ const DATA = {
       "migration": "verified",
       "channels": {
         "airbnb": "live",
-        "vrbo": "pending",
+        "vrbo": "synced",
         "bookingcom": "pending",
         "expedia": "pending"
       },
@@ -544,7 +544,7 @@ const DATA = {
       "migration": "verified",
       "channels": {
         "airbnb": "live",
-        "vrbo": "pending",
+        "vrbo": "synced",
         "bookingcom": "pending",
         "expedia": "pending"
       },
@@ -555,7 +555,7 @@ const DATA = {
       "migration": "verified",
       "channels": {
         "airbnb": "live",
-        "vrbo": "pending",
+        "vrbo": "synced",
         "bookingcom": "pending",
         "expedia": "pending"
       },
@@ -652,12 +652,11 @@ const LABELS = {
   }
 };
 
-// per-unit channel chips — only channels Hostaway reports per listing. VRBO is
-// omitted here on purpose: it's connected via iCal (calendar sync) which Hostaway
-// doesn't expose per-listing, so its status lives in the Channels card (a manual
-// count Roy maintains), not in these per-unit chips.
+// per-unit channel chips. VRBO is iCal-managed (Hostaway doesn't report it per
+// listing), so its per-unit "synced" state comes from the operator's synced list.
 const CHANNELS = [
   {key:"airbnb", name:"Airbnb"},
+  {key:"vrbo", name:"VRBO / iCal"},
   {key:"bookingcom", name:"Booking.com"},
   {key:"expedia", name:"Expedia"}
 ];
@@ -737,7 +736,8 @@ function render(){
   document.getElementById("units").innerHTML = U.map(u=>`
     <div class="unit"><div class="n">${u.name}</div>
       <div class="row ch"><span>${L.chanL}</span><span class="chips">${CHANNELS.map(c=>{
-        const live = (u.channels||{})[c.key]==="live";
+        const st = (u.channels||{})[c.key];
+        const live = st==="live" || st==="synced";
         return `<span class="chip ${live?"live":""}" title="${c.name}: ${live?L.chLive:L.chPend}">${live?"✓ ":""}${c.name}</span>`;
       }).join("")}</span></div>
       <div class="row"><span>${L.audL}</span><span class="pill ${u.audit==="done"?"done":u.audit==="progress"?"active":"pending"}">${L.aud[u.audit]}</span></div>

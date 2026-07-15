@@ -140,11 +140,14 @@ export default async function handler(req, res) {
     }
     if (req.method === 'POST') {
       const body = typeof req.body === 'object' && req.body ? req.body : JSON.parse(req.body || '{}');
+      // Vercel geolocates the request — stamp the country onto the commit so the
+      // Hermes watcher can flag actions from outside the team's countries.
+      const country = String(req.headers['x-vercel-ip-country'] || '').toUpperCase().replace(/[^A-Z]/g, '').slice(0, 2);
       for (let attempt = 0; attempt < 3; attempt++) {
         const { sha, data } = await ghGet();
         const err = mutate(data, body);
         if (err) return res.status(400).json({ ok: false, error: err });
-        const msg = `Deliverables: ${body.action} by ${clean(body.by, 40) || 'portal'}`;
+        const msg = `Deliverables: ${body.action} by ${clean(body.by, 40) || 'portal'}${country ? ' @' + country : ''}`;
         if (await ghPut(data, sha, msg)) return res.status(200).json({ ok: true, tasks: data.tasks, archive: data.archive });
       }
       return res.status(409).json({ ok: false, error: 'busy — try again' });
