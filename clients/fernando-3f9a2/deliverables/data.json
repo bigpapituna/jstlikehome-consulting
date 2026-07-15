@@ -1,6 +1,19 @@
 {
  "tasks": [
   {
+   "id": "tmrlqfacx",
+   "title": "Create Expedia listings",
+   "desc": "Expedia only has one listing so far. Create all the remaining listings on Expedia so I can sync it with Hostaway.",
+   "assignee": "Alondra",
+   "due": "",
+   "eta": "",
+   "status": "open",
+   "created": "2026-07-15 07:01",
+   "created_by": "Roy",
+   "completed_at": "",
+   "completed_by": ""
+  },
+  {
    "id": "tmrlqei23",
    "title": "Update listings on Hostaway",
    "desc": "Make sure all the fields in Hostaway are correct for each listing after I've imported them from Airbnb. This will help better push information to the OTAs.",
