@@ -173,6 +173,7 @@
 const DATA = {
   "updated": "2026-07-15",
   "client": "Caribbean Dream Properties",
+  "expected": 23,
   "channelsTotal": 5,
   "phases": [
     {
@@ -560,50 +561,6 @@ const DATA = {
         "expedia": "pending"
       },
       "audit": "pending"
-    },
-    {
-      "name": "Unit 20",
-      "migration": "pending",
-      "channels": {
-        "airbnb": "pending",
-        "vrbo": "pending",
-        "bookingcom": "pending",
-        "expedia": "pending"
-      },
-      "audit": "pending"
-    },
-    {
-      "name": "Unit 21",
-      "migration": "pending",
-      "channels": {
-        "airbnb": "pending",
-        "vrbo": "pending",
-        "bookingcom": "pending",
-        "expedia": "pending"
-      },
-      "audit": "pending"
-    },
-    {
-      "name": "Unit 22",
-      "migration": "pending",
-      "channels": {
-        "airbnb": "pending",
-        "vrbo": "pending",
-        "bookingcom": "pending",
-        "expedia": "pending"
-      },
-      "audit": "pending"
-    },
-    {
-      "name": "Unit 23",
-      "migration": "pending",
-      "channels": {
-        "airbnb": "pending",
-        "vrbo": "pending",
-        "bookingcom": "pending",
-        "expedia": "pending"
-      },
-      "audit": "pending"
     }
   ]
 };
@@ -619,7 +576,7 @@ const LABELS = {
     roadmap:"Services roadmap", roadmapSub:"Everything else we're doing — tap a step for details.",
     tasks:"Deliverables", tasksSub:"Specific to-dos your team is working on right now — updated live.",
     taskFor:"For", taskTarget:"Target", taskEta:"Est.", taskDone:"Done", taskDoneN:n=>`+ ${n} completed`, taskCta:"Open the tasks page →",
-    units:"Your 23 units", unitsSub:"Migration and content review, unit by unit. Details discussed on our biweekly calls.",
+    units:"Your units", unitsSub:"Migration and content review, unit by unit. Details discussed on our biweekly calls.",
     stats:{migrated:"Units migrated", audited:"Content reviewed", channels:"Channels live", phase:"Phases complete"},
     st:{done:"Done", active:"In progress", scheduled:"Scheduled", pending:"Pending"},
     mig:{verified:"Migrated", connected:"Connecting", pending:"Queued"},
@@ -639,7 +596,7 @@ const LABELS = {
     roadmap:"Hoja de ruta de servicios", roadmapSub:"Todo lo demás que estamos haciendo — toca un paso para ver los detalles.",
     tasks:"Entregables", tasksSub:"Tareas concretas en las que tu equipo está trabajando ahora — se actualiza en vivo.",
     taskFor:"Para", taskTarget:"Objetivo", taskEta:"Est.", taskDone:"Hecha", taskDoneN:n=>`+ ${n} completadas`, taskCta:"Ver la página de tareas →",
-    units:"Tus 23 unidades", unitsSub:"Migración y revisión de contenido, unidad por unidad. Los detalles se tratan en nuestras llamadas quincenales.",
+    units:"Tus unidades", unitsSub:"Migración y revisión de contenido, unidad por unidad. Los detalles se tratan en nuestras llamadas quincenales.",
     stats:{migrated:"Unidades migradas", audited:"Contenido revisado", channels:"Canales activos", phase:"Fases completadas"},
     st:{done:"Completado", active:"En progreso", scheduled:"Programado", pending:"Pendiente"},
     mig:{verified:"Migrada", connected:"Conectando", pending:"En cola"},
@@ -688,9 +645,10 @@ function render(){
 
   const stat = (k,total,label)=>`<div class="stat"><div class="k">${k}${total!=null?`<small>/${total}</small>`:""}</div>
     <div class="l">${label}</div><div class="bar"><i style="width:${pct(k,total??k)}%"></i></div></div>`;
+  const target = DATA.expected || DATA.listings.length;   // contracted unit count (23)
   document.getElementById("stats").innerHTML =
-    stat(migrated, DATA.listings.length, L.stats.migrated) +
-    stat(audited, DATA.listings.length, L.stats.audited) +
+    stat(migrated, target, L.stats.migrated) +
+    stat(audited, target, L.stats.audited) +
     stat(channelsLive, DATA.channelsTotal, L.stats.channels) +
     stat(phasesDone, P.length, L.stats.phase);
 
