@@ -19,12 +19,13 @@
    "desc": "Expedia only has one listing so far. Create all the remaining listings on Expedia so I can sync it with Hostaway.",
    "assignee": "Alondra",
    "due": "",
-   "eta": "",
+   "eta": "2026-07-17",
    "status": "open",
    "created": "2026-07-15 07:01",
    "created_by": "Roy",
    "completed_at": "",
-   "completed_by": ""
+   "completed_by": "",
+   "eta_by": "Alondra"
   },
   {
    "id": "tmrlqei23",
