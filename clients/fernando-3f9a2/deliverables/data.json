@@ -12,18 +12,6 @@
    "created_by": "Roy",
    "completed_at": "",
    "completed_by": ""
-  },
-  {
-   "id": "t19f646c94ea",
-   "title": "🧪 Test task — tap the circle to mark me done",
-   "desc": "This is just a demo so the board isn't empty. Anyone can complete or re-open me.",
-   "due": "",
-   "eta": "",
-   "status": "open",
-   "created": "2026-07-15 02:17",
-   "created_by": "Roy",
-   "completed_at": "",
-   "completed_by": ""
   }
  ]
 }
