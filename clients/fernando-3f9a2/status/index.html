@@ -623,13 +623,18 @@ let DELIV = null; // deliverables fetched live from /api/deliverables (null = no
 let lang = "en"; // default English; toggle to ES with the button
 
 function pct(n,d){ return d ? Math.round(100*n/d) : 0; }
+// A channel is "live" once it's actually operating — more than a single pilot
+// listing (or fully migrated). So Airbnb (19) & VRBO (14) read Live; Expedia (1)
+// stays In progress until a 2nd listing lands. Change CHAN_LIVE_MIN to retune.
+const CHAN_LIVE_MIN = 2;
+function chLive(p){ return p.kind==="channel" && (p.status==="done" || ((p.progress?p.progress.done:0) >= CHAN_LIVE_MIN)); }
 
 function render(){
   const L = LABELS[lang];
   const P = DATA.phases, U = DATA.listings;
   const migrated = U.filter(u=>u.migration==="verified").length;
   const audited  = U.filter(u=>u.audit==="done").length;
-  const channelsLive = P.filter(p=>p.kind==="channel" && p.status==="done").length;
+  const channelsLive = P.filter(chLive).length;
   const phasesDone = P.filter(p=>p.status==="done").length;
 
   document.documentElement.lang = lang;
@@ -661,8 +666,10 @@ function render(){
     const done = p.progress ? p.progress.done : 0;
     const total = p.progress ? p.progress.total : U.length;
     const w = p.progress ? pct(done,total) : 0;
-    return `<div class="chan-row ${p.status}">
-      <div class="chan-name">${t.title}<small>${p.when||""} · ${L.chanState[p.status]||L.st[p.status]}</small></div>
+    const live = chLive(p);
+    const label = live ? L.chanState.done : (L.chanState[p.status]||L.st[p.status]);
+    return `<div class="chan-row ${live?"done":p.status}">
+      <div class="chan-name">${t.title}<small>${p.when||""} · ${label}</small></div>
       <div class="chan-bar"><i style="width:${w}%"></i></div>
       <div class="chan-cnt">${p.progress?L.chanCnt(done,total):"—"}</div>
     </div>`;
