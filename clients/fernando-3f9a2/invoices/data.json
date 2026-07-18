@@ -1,3 +1,13 @@
 {
- "invoices": []
+ "invoices": [
+  {
+   "number": "JSTL-FP-2026-0001",
+   "month": "2026-07",
+   "total": 2200.0,
+   "currency": "USD",
+   "issued": "2026-07-18",
+   "status": "outstanding",
+   "paid_at": ""
+  }
+ ]
 }
