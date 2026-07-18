@@ -27,6 +27,7 @@
   .chip{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 10px;border-radius:999px;white-space:nowrap}
   .chip.paid{color:var(--done);background:color-mix(in srgb,var(--done) 14%,transparent)}
   .chip.outstanding{color:var(--accent-ink);background:color-mix(in srgb,var(--accent) 14%,transparent)}
+  a.pdf{font-size:12px;font-weight:700;color:var(--accent-ink);cursor:pointer;white-space:nowrap;grid-column:1/-1;justify-self:end}
   .empty{color:var(--muted);font-size:14px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px}
   .note{color:var(--muted);font-size:12.5px;margin-top:18px}
   .err{background:#fdecec;border:1px solid #f3b8b6;color:#9c3532;border-radius:12px;padding:12px 14px;font-size:13.5px;margin:14px 0;display:none}
@@ -89,8 +90,19 @@ function render(){
       <div class="n">${esc(v.number)}<small>${L.issued} ${esc(v.issued||"")}${v.status==="paid"&&v.paid_at?` \u00b7 ${L.paidOn} ${esc(v.paid_at)}`:""}</small></div>
       <div class="amt">${money(v.total, v.currency)}</div>
       <span class="chip ${esc(v.status)}">${v.status==="paid"?L.paid:L.outstanding}</span>
+      ${v.pdf?`<a class="pdf" data-mon="${esc(v.month)}">\u2b07 PDF</a>`:""}
     </div>`).join("") : `<div class="empty">${L10N[lang].empty}</div>`;
 }
+document.addEventListener("click", e => {
+  const m = e.target.getAttribute && e.target.getAttribute("data-mon");
+  if (!m || !e.target.classList.contains("pdf")) return;
+  fetch("/api/invoice-pdf?month="+encodeURIComponent(m)).then(r=>{
+    if(!r.ok) throw 0; return r.blob();
+  }).then(b=>{
+    const a=document.createElement("a"); a.href=URL.createObjectURL(b);
+    a.download="invoice-"+m+".pdf"; document.body.appendChild(a); a.click(); a.remove();
+  }).catch(()=>{ const el=$("err"); el.textContent=L10N[lang].errLoad; el.style.display="block"; });
+});
 $("langbtn").addEventListener("click", () => { lang = lang==="es"?"en":"es"; localStorage.setItem("jlh.lang", lang); render(); });
 render();
 fetch("/api/invoices").then(r=>r.json()).then(d=>{
