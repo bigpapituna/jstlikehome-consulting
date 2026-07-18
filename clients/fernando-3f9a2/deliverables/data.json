@@ -1,6 +1,19 @@
 {
  "tasks": [
   {
+   "id": "tmrqk5t45",
+   "title": "Try to have invoices cancelled - Booking.com",
+   "desc": "",
+   "assignee": "Roy",
+   "due": "2026-07-27",
+   "eta": "",
+   "status": "open",
+   "created": "2026-07-18 16:05",
+   "created_by": "Roy",
+   "completed_at": "",
+   "completed_by": ""
+  },
+  {
    "id": "tmrqjivxx",
    "title": "Complete Know Your Partner (KYP) - Booking.com",
    "desc": "Complete Know Your Partner (KYP) for every single listing to make sure your account is valid.",
