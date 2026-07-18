@@ -7,7 +7,8 @@
    "currency": "USD",
    "issued": "2026-07-18",
    "status": "outstanding",
-   "paid_at": ""
+   "paid_at": "",
+   "pdf": "files/invoice-2026-07.pdf"
   }
  ]
 }
