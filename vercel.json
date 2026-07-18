@@ -1,4 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- ':(exclude)clients/fernando-3f9a2/deliverables/data.json' ':(exclude)clients/fernando-3f9a2/invoices/data.json'"
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- ':(exclude)clients/fernando-3f9a2/deliverables/data.json' ':(exclude)clients/fernando-3f9a2/invoices/data.json'",
+  "//": "data-only commits (deliverables/invoices data.json) skip builds; touch this file to force a deploy"
 }
