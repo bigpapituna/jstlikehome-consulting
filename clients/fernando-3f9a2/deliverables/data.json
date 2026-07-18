@@ -6,12 +6,13 @@
    "desc": "Complete Know Your Partner (KYP) for every single listing to make sure your account is valid.",
    "assignee": "Alondra",
    "due": "2026-07-20",
-   "eta": "",
+   "eta": "2026-07-20",
    "status": "open",
    "created": "2026-07-18 15:47",
    "created_by": "Roy",
    "completed_at": "",
-   "completed_by": ""
+   "completed_by": "",
+   "eta_by": "Roy"
   },
   {
    "id": "tmrmi3jzs",
