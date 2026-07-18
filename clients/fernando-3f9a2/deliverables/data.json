@@ -1,6 +1,19 @@
 {
  "tasks": [
   {
+   "id": "tmrqjivxx",
+   "title": "Complete Know Your Partner (KYP) - Booking.com",
+   "desc": "Complete Know Your Partner (KYP) for every single listing to make sure your account is valid.",
+   "assignee": "Alondra",
+   "due": "2026-07-20",
+   "eta": "",
+   "status": "open",
+   "created": "2026-07-18 15:47",
+   "created_by": "Roy",
+   "completed_at": "",
+   "completed_by": ""
+  },
+  {
    "id": "tmrmi3jzs",
    "title": "Review payment processing options.",
    "desc": "Roy will review payment processing options and make recommendations to see what might be the best fit to automate payments through HostAway and the OTAs.",
