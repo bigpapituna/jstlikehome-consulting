@@ -711,7 +711,7 @@ function render(){
   }));
 
   document.getElementById("units").innerHTML = U.map(u=>`
-    <div class="unit"><div class="n">${u.name}</div>
+    <div class="unit"><div class="n">${esc(u.name)}</div>
       <div class="row ch"><span>${L.chanL}</span><span class="chips">${CHANNELS.map(c=>{
         const st = (u.channels||{})[c.key];
         const live = st==="live" || st==="synced";

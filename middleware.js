@@ -96,7 +96,18 @@ export default async function middleware(request) {
   const m = cookie.match(/(?:^|;\s*)cdr_session=([^;]+)/);
   if (m) {
     for (const pw of Object.keys(map)) {
-      if (m[1] === (await token(pw))) return; // authorized — serve the requested page
+      if (m[1] === (await token(pw))) {
+        // Bind the session to ITS OWN client area — a valid password for client
+        // A must not read client B's pages. Serve only paths under this
+        // password's landing prefix (plus the shared /clients root).
+        const home = map[pw] || DEFAULT_NEXT;
+        if (url.pathname === '/clients' || url.pathname === '/clients/' ||
+            url.pathname === home || url.pathname.startsWith(home)) {
+          return; // authorized for their own area
+        }
+        // authenticated but wrong tenant → bounce to their own home
+        return new Response(null, { status: 302, headers: { Location: new URL(home, url).toString() } });
+      }
     }
   }
 

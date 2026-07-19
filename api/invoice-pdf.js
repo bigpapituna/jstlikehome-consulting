@@ -4,13 +4,14 @@
 const REPO = process.env.GITHUB_REPO || 'bigpapituna/jstlikehome-consulting';
 const SECRET = 'jlh-clients-v1'; // must match middleware.js
 
-function passwords() {
+function passwordMap() {
   let map = {};
   try { if (process.env.CLIENT_PASSWORDS) map = JSON.parse(process.env.CLIENT_PASSWORDS); } catch (e) {}
   const legacy = process.env.CLIENT_AREA_PASSWORD;
   if (legacy) map[legacy] = map[legacy] || '/clients/fernando-3f9a2/';
-  return Object.keys(map);
+  return map;
 }
+const OWNER = '/clients/fernando-3f9a2/';   // this endpoint only serves Fernando
 
 async function token(pw) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw + '|' + SECRET));
@@ -21,8 +22,11 @@ async function authorized(req) {
   const cookie = req.headers.cookie || '';
   const m = cookie.match(/(?:^|;\s*)cdr_session=([^;]+)/);
   if (!m) return false;
-  for (const pw of passwords()) {
-    if (m[1] === (await token(pw))) return true;
+  const map = passwordMap();
+  for (const pw of Object.keys(map)) {
+    // authorize only when this password's own client area is Fernando's — a
+    // different client's valid session must NOT read/write Fernando's data
+    if (m[1] === (await token(pw))) return (map[pw] || OWNER) === OWNER;
   }
   return false;
 }
