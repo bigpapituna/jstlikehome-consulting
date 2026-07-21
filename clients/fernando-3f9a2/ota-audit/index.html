@@ -16,27 +16,7 @@
     --fb:'DM Sans',system-ui,-apple-system,sans-serif;
     --fm:ui-monospace,'Cascadia Code','SF Mono',Menlo,monospace;
   }
-  @media (prefers-color-scheme:dark){:root{
-    --bg:#1a1512; --surface:#221b17; --surface-2:#2b221d;
-    --ink:#F3EDE4; --muted:#a89c8e; --border:#3a2f28;
-    --accent:#F0616C; --accent-ink:#F58B93;
-    --ok:#4FBF7E; --fix:#D8AE4E; --crit:#F0616C;
-    --ring:rgba(240,97,108,.4);
-  }}
-  :root[data-theme="dark"]{
-    --bg:#1a1512; --surface:#221b17; --surface-2:#2b221d;
-    --ink:#F3EDE4; --muted:#a89c8e; --border:#3a2f28;
-    --accent:#F0616C; --accent-ink:#F58B93;
-    --ok:#4FBF7E; --fix:#D8AE4E; --crit:#F0616C;
-    --ring:rgba(240,97,108,.4);
-  }
-  :root[data-theme="light"]{
-    --bg:#F7F3EC; --surface:#FFFFFF; --surface-2:#EFE8DD;
-    --ink:#17120F; --muted:#6c6258; --border:#E6DDCF;
-    --accent:#E63946; --accent-ink:#c5293a;
-    --ok:#1E874B; --fix:#A6791F; --crit:#E63946;
-    --ring:rgba(230,57,70,.35);
-  }
+  /* Light-only by design: matches the proposal, contract and status pages. */
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--fb);line-height:1.55;-webkit-text-size-adjust:100%}
   .wrap{max-width:880px;margin:0 auto;padding:26px 18px 72px}
@@ -53,13 +33,15 @@
   .langtoggle:hover{border-color:var(--accent)}
   .langtoggle:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
 
-  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:26px;border-bottom:1px solid var(--border);padding-bottom:0}
-  .tab{border:none;background:none;color:var(--muted);font-family:var(--fh);font-weight:700;font-size:15px;
-    padding:10px 16px 12px;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px;letter-spacing:-.01em}
-  .tab:hover{color:var(--ink)}
-  .tab.active{color:var(--ink);border-bottom-color:var(--accent)}
-  .tab .cnt{font-family:var(--fm);font-size:10.5px;font-weight:600;color:var(--muted);margin-left:6px}
-  .tab:focus-visible{outline:2px solid var(--ring);outline-offset:2px;border-radius:6px}
+  .tabs{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+  .tab{border:1px solid var(--border);background:var(--surface);color:var(--ink);font-family:var(--fb);font-weight:700;font-size:14px;
+    padding:11px 22px;cursor:pointer;border-radius:999px;letter-spacing:-.01em;
+    box-shadow:0 1px 2px rgba(33,29,24,.04),0 8px 24px rgba(33,29,24,.06)}
+  .tab:hover{border-color:var(--accent)}
+  .tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+  .tab .cnt{font-family:var(--fm);font-size:10.5px;font-weight:600;opacity:.75;margin-left:6px}
+  .tab.active .cnt{color:#fff}
+  .tab:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
 
   .sub{color:var(--muted);font-size:13.5px;margin:16px 0 0}
 
