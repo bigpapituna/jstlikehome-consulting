@@ -1,0 +1,541 @@
+<!-- Fernando Peña — OTA Listing Audit report. One tab per OTA; sections live in DATA.sections. JSTLIKEHOME brand tokens from styles.css. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>JSTLIKEHOME · OTA Listing Audit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F7F3EC; --surface:#FFFFFF; --surface-2:#EFE8DD;
+    --ink:#17120F; --muted:#6c6258; --border:#E6DDCF;
+    --accent:#E63946; --accent-ink:#c5293a;
+    --ok:#1E874B; --fix:#A6791F; --crit:#E63946;
+    --ring:rgba(230,57,70,.35);
+    --fh:'Schibsted Grotesk','DM Sans',system-ui,sans-serif;
+    --fb:'DM Sans',system-ui,-apple-system,sans-serif;
+    --fm:ui-monospace,'Cascadia Code','SF Mono',Menlo,monospace;
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --bg:#1a1512; --surface:#221b17; --surface-2:#2b221d;
+    --ink:#F3EDE4; --muted:#a89c8e; --border:#3a2f28;
+    --accent:#F0616C; --accent-ink:#F58B93;
+    --ok:#4FBF7E; --fix:#D8AE4E; --crit:#F0616C;
+    --ring:rgba(240,97,108,.4);
+  }}
+  :root[data-theme="dark"]{
+    --bg:#1a1512; --surface:#221b17; --surface-2:#2b221d;
+    --ink:#F3EDE4; --muted:#a89c8e; --border:#3a2f28;
+    --accent:#F0616C; --accent-ink:#F58B93;
+    --ok:#4FBF7E; --fix:#D8AE4E; --crit:#F0616C;
+    --ring:rgba(240,97,108,.4);
+  }
+  :root[data-theme="light"]{
+    --bg:#F7F3EC; --surface:#FFFFFF; --surface-2:#EFE8DD;
+    --ink:#17120F; --muted:#6c6258; --border:#E6DDCF;
+    --accent:#E63946; --accent-ink:#c5293a;
+    --ok:#1E874B; --fix:#A6791F; --crit:#E63946;
+    --ring:rgba(230,57,70,.35);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--fb);line-height:1.55;-webkit-text-size-adjust:100%}
+  .wrap{max-width:880px;margin:0 auto;padding:26px 18px 72px}
+  a{color:var(--accent-ink)}
+
+  .top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+  .brand{font-family:var(--fh);font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+  h1{font-family:var(--fh);font-weight:700;font-size:clamp(27px,6.5vw,38px);line-height:1.05;margin:8px 0 6px;letter-spacing:-.025em;text-wrap:balance}
+  .clientline{color:var(--muted);font-size:14.5px;margin:0}
+  .clientline b{color:var(--ink);font-weight:600}
+  .updated{font-family:var(--fm);font-size:11.5px;color:var(--muted);margin-top:6px}
+  .langtoggle{border:1px solid var(--border);background:var(--surface);color:var(--ink);
+    font-family:var(--fb);font-size:12.5px;font-weight:700;letter-spacing:.06em;padding:8px 14px;border-radius:999px;cursor:pointer}
+  .langtoggle:hover{border-color:var(--accent)}
+  .langtoggle:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
+
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:26px;border-bottom:1px solid var(--border);padding-bottom:0}
+  .tab{border:none;background:none;color:var(--muted);font-family:var(--fh);font-weight:700;font-size:15px;
+    padding:10px 16px 12px;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px;letter-spacing:-.01em}
+  .tab:hover{color:var(--ink)}
+  .tab.active{color:var(--ink);border-bottom-color:var(--accent)}
+  .tab .cnt{font-family:var(--fm);font-size:10.5px;font-weight:600;color:var(--muted);margin-left:6px}
+  .tab:focus-visible{outline:2px solid var(--ring);outline-offset:2px;border-radius:6px}
+
+  .sub{color:var(--muted);font-size:13.5px;margin:16px 0 0}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:16px}
+  .stat{background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:14px 16px;box-shadow:0 4px 14px rgba(23,18,15,.06)}
+  .stat .k{font-family:var(--fh);font-size:30px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--ink);line-height:1;letter-spacing:-.03em}
+  .stat .k small{font-size:15px;color:var(--muted);font-weight:600}
+  .stat .l{font-size:12.5px;color:var(--muted);margin-top:6px}
+  .stat.crit .k{color:var(--accent)}
+
+  .panel{background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:18px 20px;margin-top:14px;box-shadow:0 4px 14px rgba(23,18,15,.06)}
+  .panel h3{font-family:var(--fh);font-size:16.5px;font-weight:700;margin:0 0 8px;letter-spacing:-.01em}
+  .panel ul{margin:0;padding-left:20px;font-size:14px}
+  .panel li{margin:6px 0}
+  .panel li b{color:var(--accent-ink)}
+
+  .pill{font-family:var(--fb);font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+    padding:3px 10px;border-radius:999px;display:inline-block;line-height:1.6}
+  .pill.ok{color:var(--ok);background:color-mix(in srgb,var(--ok) 13%,transparent)}
+  .pill.fix{color:var(--fix);background:color-mix(in srgb,var(--fix) 15%,transparent)}
+  .pill.crit{color:var(--crit);background:color-mix(in srgb,var(--crit) 13%,transparent)}
+
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:20px;margin-top:14px;box-shadow:0 4px 14px rgba(23,18,15,.06)}
+  .card.crit{border-left:4px solid var(--crit)}
+  .card.needs{border-left:4px solid var(--fix)}
+  .card.good{border-left:4px solid var(--ok)}
+  .card-h{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
+  .card-h .n{font-family:var(--fh);font-weight:700;font-size:18px;letter-spacing:-.015em}
+  .card-h .meta{font-family:var(--fm);font-size:11px;color:var(--muted);margin-top:2px}
+  .facts{display:flex;gap:14px;flex-wrap:wrap;margin:10px 0 2px;font-size:12.5px;color:var(--muted)}
+  .facts b{color:var(--ink);font-variant-numeric:tabular-nums}
+  .checks{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+  .chk{font-family:var(--fb);font-size:10.5px;font-weight:600;letter-spacing:.02em;padding:3px 9px;border-radius:999px;border:1px solid var(--border);color:var(--muted)}
+  .chk.ok{border-color:color-mix(in srgb,var(--ok) 45%,transparent);color:var(--ok)}
+  .chk.fix{border-color:color-mix(in srgb,var(--fix) 55%,transparent);color:var(--fix)}
+  .chk.crit{border-color:color-mix(in srgb,var(--crit) 55%,transparent);color:var(--crit);font-weight:700}
+  .fnd,.rec{margin:8px 0 0;padding-left:20px;font-size:13.5px}
+  .fnd li,.rec li{margin:5px 0}
+  .lbl{font-family:var(--fb);font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:14px}
+  .rec li::marker{color:var(--accent)}
+  .fnd li::marker{color:var(--muted)}
+
+  .foot{margin-top:40px;border-top:1px solid var(--border);padding-top:16px;color:var(--muted);font-size:13.5px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <div class="top">
+    <div>
+      <div class="brand">JSTLIKEHOME</div>
+      <h1 id="t-title"></h1>
+      <p class="clientline" id="t-client"></p>
+      <div class="updated" id="t-updated"></div>
+    </div>
+    <button class="langtoggle" id="langbtn" type="button"></button>
+  </div>
+
+  <div class="tabs" id="tabs" role="tablist"></div>
+  <div id="report"></div>
+
+  <p class="foot" id="foot"></p>
+</div>
+
+<script>
+const L10N = {
+  en: {
+    title:"OTA Listing Audit", client:c=>`Prepared for <b>${c}</b> · channel-by-channel review of every live listing`,
+    updated:d=>`Audited ${d}`, toggle:"ES",
+    stats:{audited:"Listings audited", crit:"Critical issues", clean:"In good shape", noreviews:"With zero reviews"},
+    sum:"What we found, in short", pri:"Top priorities",
+    findings:"Findings", recs:"Recommendations",
+    status:{good:"Good shape", needs:"Needs work", crit:"Critical"},
+    checks:{title:"Title",desc:"Description",photos:"Photos",amen:"Amenities",map:"Map/Address",safety:"Safety info",policies:"Policies",rev:"Reviews",sync:"Hostaway sync"},
+    facts:{photos:"Photos",rating:"Rating",reviews:"Reviews"},
+    foot:`Questions? Reach Roy at <a href="mailto:roy.y@jstlikehome.com">roy.y@jstlikehome.com</a>. Roy applies each fix once in Hostaway and re-publishes it to every channel.`
+  },
+  es: {
+    title:"Auditoría de Anuncios OTA", client:c=>`Preparado para <b>${c}</b> · revisión canal por canal de cada anuncio activo`,
+    updated:d=>`Auditado ${d}`, toggle:"EN",
+    stats:{audited:"Anuncios auditados", crit:"Problemas críticos", clean:"En buen estado", noreviews:"Sin reseñas"},
+    sum:"Lo que encontramos, en resumen", pri:"Prioridades principales",
+    findings:"Hallazgos", recs:"Recomendaciones",
+    status:{good:"Buen estado", needs:"Requiere trabajo", crit:"Crítico"},
+    checks:{title:"Título",desc:"Descripción",photos:"Fotos",amen:"Servicios",map:"Mapa/Dirección",safety:"Seguridad",policies:"Políticas",rev:"Reseñas",sync:"Sincronización"},
+    facts:{photos:"Fotos",rating:"Calificación",reviews:"Reseñas"},
+    foot:`¿Preguntas? Escribe a Roy: <a href="mailto:roy.y@jstlikehome.com">roy.y@jstlikehome.com</a>. Roy aplica cada corrección una vez en Hostaway y la republica en todos los canales.`
+  }
+};
+
+const DATA = {
+  updated: "2026-07-21",
+  client: "Caribbean Dream Properties",
+  sections: [
+  {
+    channel: "VRBO",
+    tabnote: "",
+    sub: {en:"We reviewed 20 active listings: guest-facing content, data accuracy, and sync with the central Hostaway system.",
+          es:"Revisamos 20 anuncios activos: contenido visible al huésped, exactitud de datos y sincronización con el sistema central Hostaway."},
+    summary: {
+      en: [
+        "<b>Strong foundations.</b> Photo coverage averages about 55 per listing, and three listings carry reviews: Villa Casamare (10/10, top-10% badge), Victorian U1 (9.0, 41 reviews) and the Sosúa Penthouse (9.8, 16 reviews). All three are connected and syncing.",
+        "<b>The #1 growth blocker: 14 of 20 listings have zero reviews.</b> A review request at every checkout closes this gap faster than new bookings alone.",
+        "<b>The 5 newest listings share one defect</b> (Casa Playa, Tortuga C17, La Cana H5, Villa WindSong, Hacienda A40): near-empty amenity tags. A pool villa without the “Pool” tag never appears in pool-filtered searches. The same five lack guest capacity and area data. One structured fix in Hostaway repairs all of them.",
+        "<b>7 listings show generic titles</b> (“Beachfront Condo with Pool”) instead of the optimized Hostaway titles: no property name, no location keyword, weaker search performance.",
+        "<b>Data errors that mislead guests:</b> one listing advertises 3 bedrooms and has 6; one shows its location as “Unknown”; two state contradictory guest counts."
+      ],
+      es: [
+        "<b>Bases sólidas.</b> La cobertura fotográfica promedia unas 55 fotos por anuncio, y tres anuncios tienen reseñas: Villa Casamare (10/10, insignia top 10%), Victorian U1 (9.0, 41 reseñas) y el Penthouse de Sosúa (9.8, 16 reseñas). Los tres están conectados y sincronizando.",
+        "<b>El principal freno al crecimiento: 14 de 20 anuncios no tienen reseñas.</b> Pedir una reseña en cada salida cierra esta brecha más rápido que las reservas nuevas por sí solas.",
+        "<b>Los 5 anuncios más nuevos comparten un defecto</b> (Casa Playa, Tortuga C17, La Cana H5, Villa WindSong, Hacienda A40): etiquetas de servicios casi vacías. Una villa con piscina sin la etiqueta “Piscina” no aparece en búsquedas filtradas por piscina. A los mismos cinco les faltan capacidad de huéspedes y datos de zona. Una corrección estructurada en Hostaway los repara todos.",
+        "<b>7 anuncios muestran títulos genéricos</b> (“Beachfront Condo with Pool”) en lugar de los títulos optimizados de Hostaway: sin nombre de propiedad, sin palabra clave de ubicación, peor rendimiento en búsquedas.",
+        "<b>Errores de datos que confunden al huésped:</b> un anuncio anuncia 3 habitaciones y tiene 6; otro muestra su ubicación como “Desconocida”; dos declaran capacidades contradictorias."
+      ],
+      priorities: {
+        en: [
+          "Fix the Juanillo 25 title (it says 3BR; the villa has 6).",
+          "Repair Sea Winds 1305: “Unknown” map address, 15 photos, wrong guest count.",
+          "Complete amenity mapping and guest capacity for the 5 newest listings in Hostaway, then re-publish.",
+          "Standardize titles from Hostaway: property name + key feature + location.",
+          "Start the review-request routine at every checkout."
+        ],
+        es: [
+          "Corregir el título de Juanillo 25 (dice 3 habitaciones; la villa tiene 6).",
+          "Reparar Sea Winds 1305: dirección “Desconocida” en el mapa, 15 fotos, capacidad errónea.",
+          "Completar etiquetas de servicios y capacidad en los 5 anuncios más nuevos en Hostaway y republicar.",
+          "Estandarizar los títulos desde Hostaway: nombre + característica clave + ubicación.",
+          "Iniciar la rutina de solicitud de reseñas en cada salida."
+        ]
+      }
+    },
+    listings: [
+      {name:"Juanillo 25", id:"Vrbo 4768592", status:"crit", facts:{photos:"45+", rating:"", reviews:0},
+       checks:{title:"crit",desc:"ok",photos:"ok",amen:"ok",map:"ok",rev:"fix",sync:"fix"},
+       f:{en:["The title says “Spacious 3BR”. The villa has 6 bedrooms, 7 bathrooms and sleeps 14.","Guests searching for large villas never see it, and guests who click expect a smaller home.","Zero reviews."],
+          es:["El título dice “Spacious 3BR”. La villa tiene 6 habitaciones, 7 baños y capacidad para 14.","Los huéspedes que buscan villas grandes no la ven, y los que hacen clic esperan una casa más pequeña.","Sin reseñas."]},
+       r:{en:["Correct the title from Hostaway, e.g. “Juanillo 25 | 6BR Beachfront Villa, Cap Cana”.","Confirm the re-publish overwrote the Vrbo title.","Add to the review-request routine."],
+          es:["Corregir el título desde Hostaway, p. ej. “Juanillo 25 | Villa 6BR frente al mar, Cap Cana”.","Confirmar que la republicación sobrescribió el título en Vrbo.","Incluir en la rutina de solicitud de reseñas."]}},
+      {name:"Sea Winds 1305", id:"Vrbo 4657052", status:"crit", facts:{photos:"15+", rating:"", reviews:0},
+       checks:{title:"fix",desc:"fix",photos:"crit",amen:"ok",map:"crit",rev:"fix",sync:"fix"},
+       f:{en:["The map shows guests “Unknown, Puerto Plata”. The address was never completed.","15 photos, the weakest gallery in the account (the others have 30 to 110).","The header says sleeps 6; the description says “comfortably fits 4”.","Generic title (“Oceanview Condo with Pool”) instead of the Hostaway one."],
+          es:["El mapa muestra “Unknown, Puerto Plata” a los huéspedes. La dirección nunca se completó.","15 fotos, la galería más débil de la cuenta (las demás tienen de 30 a 110).","El encabezado dice capacidad 6; la descripción dice “cómodamente 4”.","Título genérico (“Oceanview Condo with Pool”) en lugar del de Hostaway."]},
+       r:{en:["Complete the full address in Hostaway and re-publish; guests see this bug.","Upload 30+ photos: interior, views, complex amenities.","Pick 4 or 6 guests and set it everywhere.","Push the optimized Hostaway title."],
+          es:["Completar la dirección en Hostaway y republicar; los huéspedes ven este error.","Subir 30+ fotos: interior, vistas, amenidades del complejo.","Elegir 4 o 6 huéspedes y fijarlo en todas partes.","Publicar el título optimizado de Hostaway."]}},
+      {name:"Casa Playa", id:"Vrbo 5394526", status:"crit", facts:{photos:"110+", rating:"", reviews:0},
+       checks:{title:"fix",desc:"crit",photos:"ok",amen:"crit",map:"fix",rev:"fix",sync:"fix"},
+       f:{en:["Two short paragraphs describe an 11-bedroom estate.","No guest capacity shown; amenity tags lack Pool and Kitchen.","The page has no nearby-places data.","The name drifts between “Casa Playa” and “Casa de Playa”.","The 110+ photo gallery, the best in the account, carries the listing on its own."],
+          es:["Dos párrafos cortos describen una finca de 11 habitaciones.","No se muestra capacidad; faltan las etiquetas de Piscina y Cocina.","La página no tiene datos de lugares cercanos.","El nombre varía entre “Casa Playa” y “Casa de Playa”.","La galería de 110+ fotos, la mejor de la cuenta, sostiene sola el anuncio."]},
+       r:{en:["Write the full structured description in Hostaway: living areas, bedrooms, staff, services.","Complete amenity mapping and guest capacity; re-publish.","Pick one name and keep it.","The account's best photos sit on its worst data, so this fix pays back first."],
+          es:["Redactar la descripción completa y estructurada en Hostaway: áreas, habitaciones, personal, servicios.","Completar el mapeo de servicios y la capacidad; republicar.","Elegir un solo nombre y mantenerlo.","Las mejores fotos de la cuenta están sobre sus peores datos, así que esta corrección rinde primero."]}},
+      {name:"Villa Blanca", id:"Vrbo 3004984", status:"needs", facts:{photos:"46+", rating:"", reviews:0},
+       checks:{title:"fix",desc:"fix",photos:"ok",amen:"ok",map:"ok",rev:"fix",sync:"fix"},
+       f:{en:["The header says sleeps 13; the description says sleeps 8.","Bed data is malformed: “1 Twin, 1 King and 4 Queen” all listed under Bedroom 1.","Generic title (“Beachfront Villa with Private Pool”) with no name or location key."],
+          es:["El encabezado dice capacidad 13; la descripción dice 8.","Los datos de camas están mal formados: “1 Twin, 1 King y 4 Queen” aparecen todos en la Habitación 1.","Título genérico (“Beachfront Villa with Private Pool”) sin nombre ni ubicación."]},
+       r:{en:["Rebuild the bedroom configuration in Hostaway, room by room.","Set one true guest capacity.","Push the Hostaway title with “Villa Blanca” and “Cabarete”."],
+          es:["Reconstruir la configuración de habitaciones en Hostaway, cuarto por cuarto.","Definir una única capacidad real.","Publicar el título de Hostaway con “Villa Blanca” y “Cabarete”."]}},
+      {name:"Victorian U1", id:"Vrbo 2936208", status:"needs", facts:{photos:"48+", rating:"9.0", reviews:41},
+       checks:{title:"fix",desc:"ok",photos:"ok",amen:"ok",map:"ok",rev:"ok",sync:"fix"},
+       f:{en:["The guest-facing title reads “Beachfront Condo with Pool”, not the optimized Hostaway headline.","The rest holds up: 41 external reviews at 9.0, good photos, good description."],
+          es:["El título visible dice “Beachfront Condo with Pool”, no el titular optimizado de Hostaway.","El resto se sostiene: 41 reseñas externas con 9.0, buenas fotos, buena descripción."]},
+       r:{en:["Push the Hostaway title. Keep the listing itself; the 41 reviews do not transfer.","Nothing else to change."],
+          es:["Publicar el título de Hostaway. Conservar el anuncio; las 41 reseñas no se transfieren.","Nada más que cambiar."]}},
+      {name:"Cayuco 33", id:"Vrbo 4768590", status:"needs", facts:{photos:"70+", rating:"10", reviews:1},
+       checks:{title:"fix",desc:"ok",photos:"ok",amen:"ok",map:"ok",rev:"ok",sync:"fix"},
+       f:{en:["The title reads “Staffed Luxury Villa with Pool”: no “Cayuco”, no “Cap Cana”, and it differs from Hostaway.","The content holds up otherwise; 1 review at 10/10."],
+          es:["El título dice “Staffed Luxury Villa with Pool”: sin “Cayuco”, sin “Cap Cana”, y difiere de Hostaway.","El resto del contenido se sostiene; 1 reseña de 10/10."]},
+       r:{en:["Push the Hostaway title with the property name and Cap Cana.","Add to the review-request routine."],
+          es:["Publicar el título de Hostaway con el nombre y Cap Cana.","Incluir en la rutina de reseñas."]}},
+      {name:"Caleton 16", id:"Vrbo 4768588", status:"needs", facts:{photos:"49+", rating:"", reviews:0},
+       checks:{title:"fix",desc:"ok",photos:"ok",amen:"fix",map:"ok",rev:"fix",sync:"fix"},
+       f:{en:["The title differs from the Hostaway headline.","The header shows “6+ bathrooms”; the description lists 4 en-suites. Verify the real count.","The description claims “direct beach access”; the beach club is a 4-minute walk. Guests write reviews about gaps like this."],
+          es:["El título difiere del titular de Hostaway.","El encabezado muestra “6+ baños”; la descripción lista 4 en-suite. Verificar el número real.","La descripción dice “acceso directo a la playa”; el club de playa está a 4 minutos a pie. Los huéspedes escriben reseñas sobre brechas así."]},
+       r:{en:["Set the real bathroom count.","Change the claim to “4-minute walk to Caleton Beach Club”.","Push the Hostaway title."],
+          es:["Fijar el número real de baños.","Cambiar el texto a “a 4 minutos del Caleton Beach Club”.","Publicar el título de Hostaway."]}},
+      {name:"Sotogrande", id:"Vrbo 4954203", status:"needs", facts:{photos:"38+", rating:"", reviews:0},
+       checks:{title:"ok",desc:"fix",photos:"ok",amen:"fix",map:"ok",rev:"fix",sync:"ok"},
+       f:{en:["The description is one thin paragraph.","Amenity tags lack Pool and Kitchen while the title promises “Pool + Beach”.","Bathroom data shows a stray “Bathroom 2” on a 1-bath unit."],
+          es:["La descripción es un solo párrafo escaso.","Faltan las etiquetas de Piscina y Cocina mientras el título promete “Pool + Beach”.","Los datos de baños muestran un “Baño 2” suelto en una unidad de 1 baño."]},
+       r:{en:["Expand the description: spaces, amenities, resort access.","Complete amenity tags; fix the bathroom record.","Pair with professional photos of the shared amenities."],
+          es:["Ampliar la descripción: espacios, servicios, acceso al resort.","Completar etiquetas; corregir el registro de baños.","Acompañar con fotos profesionales de las amenidades compartidas."]}},
+      {name:"Portal Del Mar 201", id:"Vrbo 4912427", status:"needs", facts:{photos:"31+", rating:"10", reviews:2},
+       checks:{title:"ok",desc:"ok",photos:"ok",amen:"fix",map:"ok",rev:"ok",sync:"ok"},
+       f:{en:["The description opens with “beachfront paradise”; the beach is a 2-minute walk.","The amenity highlight reads “Near El Choco National Park” instead of beach and pool tags.","The rest is healthy: 10/10 from 2 reviews, syncing."],
+          es:["La descripción abre con “paraíso frente al mar”; la playa está a 2 minutos a pie.","El destacado muestra “Cerca de El Choco” en vez de etiquetas de playa y piscina.","El resto está sano: 10/10 con 2 reseñas, sincronizando."]},
+       r:{en:["Change the wording to “steps from Cabarete Beach”.","Complete beach and pool amenity tags so the right highlights surface."],
+          es:["Cambiar el texto a “a pasos de Playa Cabarete”.","Completar etiquetas de playa y piscina para que aparezcan los destacados correctos."]}},
+      {name:"Stylish 3BR Penthouse (La Puntilla)", id:"Vrbo 1411078", status:"needs", facts:{photos:"29+", rating:"9.8", reviews:16},
+       checks:{title:"ok",desc:"ok",photos:"fix",amen:"ok",map:"ok",rev:"ok",sync:"ok"},
+       f:{en:["Confirmed: this is the Hostaway penthouse. The title syncs; only Vrbo's internal record name (“La Puntilla”) differs.","16 reviews at 9.8, one of the account's most valuable assets.","29 photos, below the account average."],
+          es:["Confirmado: este es el penthouse de Hostaway. El título sincroniza; solo difiere el nombre interno de Vrbo (“La Puntilla”).","16 reseñas con 9.8, uno de los activos más valiosos de la cuenta.","29 fotos, por debajo del promedio de la cuenta."]},
+       r:{en:["Never delete or recreate this listing; the reviews do not transfer.","Add 15 to 20 photos: terrace at sunset, pool table, each bedroom.","Optional: rename the internal Vrbo record to match Hostaway."],
+          es:["Nunca eliminar ni recrear este anuncio; las reseñas no se transfieren.","Agregar de 15 a 20 fotos: atardecer en la terraza, mesa de billar, cada habitación.","Opcional: renombrar el registro interno de Vrbo para que coincida con Hostaway."]}},
+      {name:"JUANILLO 39", id:"Vrbo 4912429", status:"needs", facts:{photos:"50+", rating:"", reviews:0},
+       checks:{title:"ok",desc:"ok",photos:"ok",amen:"fix",map:"ok",rev:"fix",sync:"ok"},
+       f:{en:["Amenity tags lack Pool on a 9BR villa with pool and hot tub.","The description says all 9 bedrooms are en-suite; the header shows 8 bathrooms. Verify.","Zero reviews."],
+          es:["Faltan etiquetas de Piscina en una villa de 9 habitaciones con piscina y jacuzzi.","La descripción dice 9 en-suite; el encabezado muestra 8 baños. Verificar.","Sin reseñas."]},
+       r:{en:["Complete amenity tags in Hostaway; re-publish.","Confirm the bathroom count.","Add to the review-request routine."],
+          es:["Completar etiquetas en Hostaway; republicar.","Confirmar el número de baños.","Incluir en la rutina de reseñas."]}},
+      {name:"Tortuga C9", id:"Vrbo 4783326", status:"needs", facts:{photos:"49+", rating:"", reviews:0},
+       checks:{title:"ok",desc:"fix",photos:"ok",amen:"fix",map:"ok",rev:"fix",sync:"ok"},
+       f:{en:["The description brands the property “Villa Tortuga Luxe”; the title says “Tortuga C9”.","The amenity list shows “Kitchenette”; the description details a full kitchen.","Zero reviews."],
+          es:["La descripción llama a la propiedad “Villa Tortuga Luxe”; el título dice “Tortuga C9”.","La lista muestra “Kitchenette”; la descripción detalla una cocina completa.","Sin reseñas."]},
+       r:{en:["Use one name (Tortuga C9).","Set the amenity to full Kitchen.","Add to the review-request routine."],
+          es:["Usar un solo nombre (Tortuga C9).","Corregir el servicio a Cocina completa.","Incluir en la rutina de reseñas."]}},
+      {name:"Tortuga C17", id:"Vrbo 5394583", status:"needs", facts:{photos:"79+", rating:"", reviews:0},
+       checks:{title:"ok",desc:"ok",photos:"ok",amen:"crit",map:"fix",rev:"fix",sync:"ok"},
+       f:{en:["Amenity tags show Internet and A/C only. Without a Pool tag, pool-filtered searches skip this villa.","No nearby-places data.","Rates are live ($1,923/night sample).","Zero reviews."],
+          es:["Las etiquetas muestran solo Internet y A/C. Sin etiqueta de Piscina, las búsquedas filtradas por piscina omiten esta villa.","Sin datos de lugares cercanos.","Tarifas activas (muestra $1,923/noche).","Sin reseñas."]},
+       r:{en:["Complete the amenity mapping in Hostaway; re-publish.","Verify the coordinates so area data populates."],
+          es:["Completar el mapeo de servicios en Hostaway; republicar.","Verificar las coordenadas para que se llenen los datos de zona."]}},
+      {name:"La Cana H5", id:"Vrbo 5394612", status:"needs", facts:{photos:"88+", rating:"", reviews:0},
+       checks:{title:"fix",desc:"fix",photos:"ok",amen:"crit",map:"fix",rev:"fix",sync:"fix"},
+       f:{en:["The title carries a typo (“La Cana ,Punta Cana”) and no “H5” key.","Amenity tags: Washer, A/C, Internet. No Pool.","No guest capacity in the header; no nearby-places data.","The description runs thin for this tier."],
+          es:["El título tiene un error (“La Cana ,Punta Cana”) y no incluye la clave “H5”.","Etiquetas: Washer, A/C, Internet. Sin Piscina.","Sin capacidad en el encabezado; sin datos de lugares cercanos.","La descripción se queda corta para este nivel."]},
+       r:{en:["Fix the title from Hostaway: “La Cana H5 | 4BR Villa, Punta Cana Resort”.","Complete amenities and capacity; re-publish.","Add resort-access details to the description."],
+          es:["Corregir el título desde Hostaway: “La Cana H5 | Villa 4BR, Punta Cana Resort”.","Completar servicios y capacidad; republicar.","Agregar los accesos del resort a la descripción."]}},
+      {name:"Villa WindSong", id:"Vrbo 5394562", status:"needs", facts:{photos:"44+", rating:"", reviews:0},
+       checks:{title:"fix",desc:"ok",photos:"ok",amen:"crit",map:"fix",rev:"fix",sync:"fix"},
+       f:{en:["The title (“Beachfront Paradise Pool & Staff”) has no property name or location keyword.","Amenity tags are sparse: no Pool or Beach tags on a beachfront villa.","4BR sleeping 16 (12 beds) is plausible, but the header lacks the capacity field.","No nearby-places data."],
+          es:["El título (“Beachfront Paradise Pool & Staff”) no tiene nombre de propiedad ni ubicación.","Las etiquetas son escasas: sin Piscina ni Playa en una villa frente al mar.","4 habitaciones para 16 (12 camas) es plausible, pero falta el campo de capacidad.","Sin datos de lugares cercanos."]},
+       r:{en:["Retitle: “Villa WindSong | Beachfront 4BR, Sosúa · Pool & Staff”.","Complete amenity mapping and capacity; re-publish."],
+          es:["Retitular: “Villa WindSong | 4BR frente al mar, Sosúa · Piscina y Personal”.","Completar servicios y capacidad; republicar."]}},
+      {name:"Hacienda A40", id:"Vrbo 5394753", status:"needs", facts:{photos:"64+", rating:"", reviews:0},
+       checks:{title:"fix",desc:"ok",photos:"ok",amen:"crit",map:"fix",rev:"fix",sync:"fix"},
+       f:{en:["The title omits the “A40” key (“Luxury 8BR Villa Hacienda, Punta Cana”).","Amenity tags: Washer, A/C, Internet. No Pool on an 8BR estate with full staff.","No guest capacity in the header (the description says 20); no nearby-places data."],
+          es:["El título omite la clave “A40” (“Luxury 8BR Villa Hacienda, Punta Cana”).","Etiquetas: Washer, A/C, Internet. Sin Piscina en una finca de 8 habitaciones con personal completo.","Sin capacidad en el encabezado (la descripción dice 20); sin datos de zona."]},
+       r:{en:["Retitle: “Hacienda A40 | 8BR Estate, Punta Cana Resort”.","Complete amenities and capacity; re-publish."],
+          es:["Retitular: “Hacienda A40 | Finca 8BR, Punta Cana Resort”.","Completar servicios y capacidad; republicar."]}},
+      {name:"CAYUCO 38", id:"Vrbo 4750387", status:"good", facts:{photos:"85+", rating:"", reviews:0},
+       checks:{title:"ok",desc:"ok",photos:"ok",amen:"ok",map:"ok",rev:"fix",sync:"ok"},
+       f:{en:["The title matches Hostaway: strong description, 85+ photos, complete data.","The one gap: zero reviews."],
+          es:["El título coincide con Hostaway: buena descripción, 85+ fotos, datos completos.","El único vacío: sin reseñas."]},
+       r:{en:["Add to the review-request routine. No content changes needed."],
+          es:["Incluir en la rutina de reseñas. Sin cambios de contenido."]}},
+      {name:"JUANILLO 3", id:"Vrbo 4768591", status:"good", facts:{photos:"90+", rating:"", reviews:0},
+       checks:{title:"ok",desc:"ok",photos:"ok",amen:"ok",map:"ok",rev:"fix",sync:"ok"},
+       f:{en:["The title matches Hostaway: 90+ photos, consistent 8BR/11BA data, and the beachfront claim checks out (1-minute walk shown).","The one gap: zero reviews."],
+          es:["El título coincide: 90+ fotos, datos 8BR/11BA consistentes, y la ubicación frente a la playa se verifica (1 minuto a pie).","El único vacío: sin reseñas."]},
+       r:{en:["Add to the review-request routine. No content changes needed."],
+          es:["Incluir en la rutina de reseñas. Sin cambios de contenido."]}},
+      {name:"Casa Estefania", id:"Vrbo 2832623", status:"good", facts:{photos:"45+", rating:"10", reviews:2},
+       checks:{title:"ok",desc:"ok",photos:"ok",amen:"ok",map:"ok",rev:"ok",sync:"ok"},
+       f:{en:["The cleanest listing in the account: synced title, rich description, guest-highlight badges, 10/10 from 2 reviews, correct beachfront tags."],
+          es:["El anuncio más limpio de la cuenta: título sincronizado, descripción rica, insignias de destacados, 10/10 con 2 reseñas, etiquetas de playa correctas."]},
+       r:{en:["Use it as the template when fixing the others. Keep building reviews."],
+          es:["Usarlo como plantilla al corregir los demás. Seguir sumando reseñas."]}},
+      {name:"Casa Mare (Villa Casamare)", id:"Vrbo 1503199", status:"good", facts:{photos:"49+", rating:"10", reviews:13},
+       checks:{title:"ok",desc:"ok",photos:"ok",amen:"ok",map:"ok",rev:"ok",sync:"ok"},
+       f:{en:["The flagship: “Loved by Guests”, 10/10 from 13 reviews, top-10% badge for the area.","The public title matches Hostaway. Only the internal record name (“Villa Casamare…”) differs from “Casa Mare”, a cosmetic gap."],
+          es:["El buque insignia: “Loved by Guests”, 10/10 con 13 reseñas, insignia top 10% de la zona.","El título público coincide con Hostaway. Solo el nombre interno del registro (“Villa Casamare…”) difiere de “Casa Mare”, una brecha cosmética."]},
+       r:{en:["Protect this listing; no restructuring. Optional: align the internal names for clean reporting."],
+          es:["Proteger este anuncio; sin reestructuraciones. Opcional: alinear los nombres internos para reportes limpios."]}}
+    ]
+  },
+  {
+    channel: "Airbnb",
+    tabnote: "4 accts",
+    sub: {en:"We audited all 4 host accounts, 20 active listings in total: Caribbean Dream Luxury Stays (13), Caribbean Dream Vacations (3), Caribbean Dream Properties (3), Caribbean Dream Vacation Rentals (1). Every Hostaway unit is present and Connected.",
+          es:"Auditamos las 4 cuentas de anfitrión, 20 anuncios activos en total: Caribbean Dream Luxury Stays (13), Caribbean Dream Vacations (3), Caribbean Dream Properties (3), Caribbean Dream Vacation Rentals (1). Cada unidad de Hostaway está presente y Conectada."},
+    summary: {
+      en: [
+        "<b>Full coverage confirmed.</b> Across the 4 host accounts, all 20 Hostaway units are live on Airbnb, each shows “Connected”, and each title matches the central system. The title drift found on Vrbo does not appear here. Villa Blanca makes the comparison plain: perfect bed data on Airbnb, garbled on Vrbo.",
+        "<b>The #1 issue: “not suitable for children/infants” is set on 17 of 20 listings</b> while the same pages advertise cribs, babysitters, bunk rooms and playgrounds. Two of the portfolio's four 5.0 reviews come from families who stayed with kids. Families are the core market for these villas, and this checkbox removes you from their searches.",
+        "<b>Smoke/CO alarms read “not reported” on 14 of 20 listings.</b> Airbnb shows that warning to every guest who opens the Safety section. It costs family bookings.",
+        "<b>16 of 20 listings carry the “automatically translated” banner</b> (every account except Caribbean Dream Vacations). The content source language is misconfigured, so guests read machine translation with a disclaimer.",
+        "<b>Amenity depth runs from 7 tags (Hacienda A40) to 62 (Cayuco 38)</b>, the same Hostaway source gap found on Vrbo. Cayuco 38 and Portal Del Mar 201 (48) set the standard; one completion pass in Hostaway repairs both channels.",
+        "<b>Review equity sits near zero: 4 reviews across all 20 listings</b> (all 5.0), against 70 on the Vrbo twins of Victorian U1, the Penthouse and Casamare. The accounts are 4 to 8 months old. Request a review at every checkout to close this.",
+        "<b>Caribbean Dream Vacations shows a 43% response rate</b> (“responds within a few days or more”) on each of its listings. The metric suppresses ranking across the account and blocks Superhost. The Hostaway unified inbox with response automation fixes the root cause.",
+        "<b>7 parked or unknown properties surfaced:</b> Fundadores de Golf 28, Villa NoCo, OO 1114, Aquamarina Luxe Retreat, plus three unlisted Sosúa units (a 2BR, Las Palmas 4BR, and a “Spacious 2BR aparment”, typo included). None exist in Hostaway or on Vrbo. Each needs a decision: onboard or archive."
+      ],
+      es: [
+        "<b>Cobertura completa confirmada.</b> Entre las 4 cuentas de anfitrión, las 20 unidades de Hostaway están activas en Airbnb, cada una muestra “Conectado” y cada título coincide con el sistema central. La desviación de títulos encontrada en Vrbo no aparece aquí. Villa Blanca deja clara la comparación: camas perfectas en Airbnb, confusas en Vrbo.",
+        "<b>El problema #1: “no apto para niños/bebés” está activado en 17 de 20 anuncios</b> mientras las mismas páginas anuncian cunas, niñeras, literas y parques de juegos. Dos de las cuatro reseñas 5.0 del portafolio vienen de familias que se quedaron con niños. Las familias son el mercado principal de estas villas, y esta casilla los saca de sus búsquedas.",
+        "<b>Las alarmas de humo/CO aparecen “no reportadas” en 14 de 20 anuncios.</b> Airbnb muestra esa advertencia a cada huésped que abre la sección de Seguridad. Cuesta reservas familiares.",
+        "<b>16 de 20 anuncios llevan el aviso de “traducción automática”</b> (todas las cuentas excepto Caribbean Dream Vacations). El idioma fuente está mal configurado, así que los huéspedes leen traducción de máquina con descargo.",
+        "<b>La profundidad de servicios va de 7 etiquetas (Hacienda A40) a 62 (Cayuco 38)</b>, la misma brecha de origen en Hostaway encontrada en Vrbo. Cayuco 38 y Portal Del Mar 201 (48) marcan el estándar; una pasada de completado en Hostaway repara ambos canales.",
+        "<b>El capital de reseñas está cerca de cero: 4 reseñas entre los 20 anuncios</b> (todas 5.0), frente a 70 en los gemelos de Vrbo de Victorian U1, el Penthouse y Casamare. Las cuentas tienen de 4 a 8 meses. Pedir una reseña en cada salida cierra esta brecha.",
+        "<b>Caribbean Dream Vacations muestra 43% de tasa de respuesta</b> (“responde en varios días o más”) en cada uno de sus anuncios. La métrica hunde el posicionamiento de toda la cuenta y bloquea el Superhost. La bandeja unificada de Hostaway con automatización corrige la causa raíz.",
+        "<b>Aparecieron 7 propiedades estacionadas o desconocidas:</b> Fundadores de Golf 28, Villa NoCo, OO 1114, Aquamarina Luxe Retreat, más tres unidades de Sosúa despublicadas (un 2BR, Las Palmas 4BR y un “Spacious 2BR aparment”, error incluido). Ninguna existe en Hostaway ni en Vrbo. Cada una necesita decisión: incorporar o archivar."
+      ],
+      priorities: {
+        en: [
+          "Clear “not suitable for children/infants” on the 17 affected listings.",
+          "Report (and install where missing) smoke and CO alarms on the 14 flagged listings.",
+          "Run one amenity and bed-configuration completion pass in Hostaway (the 7→62 tag gap); it repairs Airbnb and Vrbo together.",
+          "Write full descriptions for Juanillo 25, Juanillo 39, Casa Playa and Sotogrande in Hostaway; resolve the WindSong pet and check-in contradictions, the Casa Mare capacity conflict, and the Caleton 16 title typo and duplicate paragraph.",
+          "Fix the content source language on the 16 listings showing the translation banner.",
+          "Raise Caribbean Dream Vacations' response rate from 43% past 90% with the Hostaway unified inbox; start the review-request routine on all 20 listings."
+        ],
+        es: [
+          "Desactivar “no apto para niños/bebés” en los 17 anuncios afectados.",
+          "Reportar (e instalar donde falten) alarmas de humo y CO en los 14 anuncios señalados.",
+          "Hacer una pasada de completado de servicios y camas en Hostaway (la brecha de 7→62 etiquetas); repara Airbnb y Vrbo a la vez.",
+          "Redactar descripciones completas de Juanillo 25, Juanillo 39, Casa Playa y Sotogrande en Hostaway; resolver las contradicciones de mascotas y hora de entrada en WindSong, el conflicto de capacidad de Casa Mare, y el error de título y párrafo duplicado en Caleton 16.",
+          "Corregir el idioma fuente en los 16 anuncios con aviso de traducción.",
+          "Subir la tasa de respuesta de Caribbean Dream Vacations del 43% a más del 90% con la bandeja unificada de Hostaway; iniciar la rutina de reseñas en los 20 anuncios."
+        ]
+      }
+    },
+    listings: [
+      {name:"Casa Playa", id:"Airbnb ···104596 · Acct 1", status:"crit", facts:{rating:"", reviews:0},
+       checks:{title:"ok",desc:"crit",amen:"fix",safety:"fix",policies:"fix",rev:"fix",sync:"ok"},
+       f:{en:["The same two-paragraph description as Vrbo, which places the gap in the Hostaway source content.","13 amenity tags on an 11-bedroom estate.","The “No parties or events” rule contradicts a description that markets “celebrations and corporate retreats”.","Alarms not reported; children flag set."],
+          es:["La misma descripción de dos párrafos que en Vrbo, lo que ubica la brecha en el contenido fuente de Hostaway.","13 etiquetas de servicios en una finca de 11 habitaciones.","La regla “No fiestas ni eventos” contradice una descripción que promociona “celebraciones y retiros corporativos”.","Alarmas no reportadas; casilla de niños activada."]},
+       r:{en:["Write the full description once in Hostaway; it repairs both channels.","Complete amenities; align the events policy with the marketing, or the marketing with the policy.","Report alarms; clear the children flag."],
+          es:["Redactar la descripción completa una vez en Hostaway; repara ambos canales.","Completar servicios; alinear la política de eventos con el marketing, o el marketing con la política.","Reportar alarmas; desactivar la casilla de niños."]}},
+      {name:"Villa WindSong", id:"Airbnb ···262758 · Acct 1", status:"crit", facts:{rating:"", reviews:0},
+       checks:{title:"fix",desc:"ok",amen:"crit",safety:"fix",policies:"crit",rev:"fix",sync:"ok"},
+       f:{en:["The title (“Beachfront Paradise | Pool, Staff”) has no property name, same as Vrbo.","The header says 15 guests; the description says “up to 16”.","The rules say “No pets”; the description says “Pets accepted upon prior approval”.","The rules say check-in 3:00 PM; the description says 4:00 PM.","9 amenity tags; alarms not reported; children flag set."],
+          es:["El título (“Beachfront Paradise | Pool, Staff”) no tiene nombre de propiedad, igual que en Vrbo.","El encabezado dice 15 huéspedes; la descripción dice “hasta 16”.","Las reglas dicen “No mascotas”; la descripción dice “Mascotas con aprobación previa”.","Las reglas dicen entrada 3:00 PM; la descripción dice 4:00 PM.","9 etiquetas; alarmas no reportadas; casilla de niños activada."]},
+       r:{en:["Retitle with the property name from Hostaway.","Pick one capacity, one pet policy and one check-in time; set them everywhere.","Complete amenity mapping; report alarms; clear the children flag."],
+          es:["Retitular con el nombre de la propiedad desde Hostaway.","Elegir una capacidad, una política de mascotas y una hora de entrada; fijarlas en todas partes.","Completar servicios; reportar alarmas; desactivar la casilla de niños."]}},
+      {name:"Casa Mare (Villa Casamare)", id:"Airbnb ···397665 · Acct 1", status:"crit", facts:{rating:"", reviews:0},
+       checks:{title:"ok",desc:"fix",amen:"crit",safety:"fix",policies:"ok",rev:"fix",sync:"ok"},
+       f:{en:["The header says 10 guests; the description says “Sleeps 14”.","The amenity list includes “Ski-in/Ski-out” on a Caribbean beach villa, a mapping error guests will notice.","13 amenity tags; alarms not reported; children flag set.","The Vrbo twin holds 13 reviews; this Airbnb listing starts at zero and builds its own."],
+          es:["El encabezado dice 10 huéspedes; la descripción dice “Capacidad 14”.","La lista de servicios incluye “Ski-in/Ski-out” en una villa caribeña de playa, un error de mapeo que los huéspedes notarán.","13 etiquetas; alarmas no reportadas; casilla de niños activada.","El gemelo de Vrbo tiene 13 reseñas; este anuncio de Airbnb parte de cero y construye las suyas."]},
+       r:{en:["Set the true capacity in Hostaway and re-publish.","Remove the ski amenity; complete the real set.","Report alarms; clear the children flag."],
+          es:["Fijar la capacidad real en Hostaway y republicar.","Eliminar el servicio de esquí; completar el set real.","Reportar alarmas; desactivar la casilla de niños."]}},
+      {name:"Caleton 16", id:"Airbnb ···976770 · Acct 1", status:"needs", facts:{rating:"", reviews:0},
+       checks:{title:"fix",desc:"fix",amen:"ok",safety:"ok",policies:"fix",rev:"fix",sync:"ok"},
+       f:{en:["The title carries a spacing typo: “Cap.Cana4BR Luxury Getaway”.","The intro paragraph repeats at the start of “The space”.","A third bathroom count: 5 here, 6+ on Vrbo, 4 en-suites in the text.","The “right on Juanillo Beach” highlight overstates it; the beach club is a 4-minute walk.","53 amenities and alarms present. The data core is sound."],
+          es:["El título tiene un error de espaciado: “Cap.Cana4BR Luxury Getaway”.","El párrafo de introducción se repite al inicio de “El espacio”.","Un tercer número de baños: 5 aquí, 6+ en Vrbo, 4 en-suite en el texto.","El destacado “directo en Playa Juanillo” exagera; el club de playa está a 4 minutos a pie.","53 servicios y alarmas presentes. El núcleo de datos está sano."]},
+       r:{en:["Fix the title spacing in Hostaway.","Delete the repeated paragraph.","Settle the bathroom count and set it once, everywhere.","Clear the children flag."],
+          es:["Corregir el espaciado del título en Hostaway.","Eliminar el párrafo repetido.","Definir el número de baños y fijarlo una vez, en todas partes.","Desactivar la casilla de niños."]}},
+      {name:"Tortuga C9", id:"Airbnb ···758542 · Acct 1", status:"needs", facts:{rating:"", reviews:0},
+       checks:{title:"ok",desc:"fix",amen:"fix",safety:"fix",policies:"fix",rev:"fix",sync:"ok"},
+       f:{en:["The description brands it “Villa Tortuga Luxe”; the title says “Tortuga C9”, same as Vrbo.","4 of 5 bedrooms have bed data.","12 amenity tags; alarms not reported.","The listing has a children's playground and a custom bunk room, with “not suitable for children” set."],
+          es:["La descripción lo llama “Villa Tortuga Luxe”; el título dice “Tortuga C9”, igual que en Vrbo.","4 de 5 habitaciones tienen datos de camas.","12 etiquetas; alarmas no reportadas.","El anuncio tiene parque infantil y cuarto de literas, con “no apto para niños” activado."]},
+       r:{en:["One name everywhere (Tortuga C9).","Complete the fifth bedroom's bed data.","Complete amenities; report alarms; clear the children flag."],
+          es:["Un solo nombre en todas partes (Tortuga C9).","Completar las camas de la quinta habitación.","Completar servicios; reportar alarmas; desactivar la casilla de niños."]}},
+      {name:"JUANILLO 3", id:"Airbnb ···193836 · Acct 1", status:"needs", facts:{rating:"", reviews:0},
+       checks:{title:"ok",desc:"ok",amen:"fix",safety:"ok",policies:"fix",rev:"fix",sync:"ok"},
+       f:{en:["15 amenity tags on an 8BR/11BA beachfront villa.","8 beds listed for 16+ guests.","Alarms present. Children flag set despite the family positioning."],
+          es:["15 etiquetas en una villa de 8BR/11BA frente al mar.","8 camas listadas para 16+ huéspedes.","Alarmas presentes. Casilla de niños activada pese al enfoque familiar."]},
+       r:{en:["Complete amenities and per-room beds in Hostaway.","Clear the children flag."],
+          es:["Completar servicios y camas por habitación en Hostaway.","Desactivar la casilla de niños."]}},
+      {name:"Casa Estefania", id:"Airbnb ···580175 · Acct 1", status:"needs", facts:{rating:"", reviews:0},
+       checks:{title:"ok",desc:"ok",amen:"ok",safety:"crit",policies:"fix",rev:"fix",sync:"ok"},
+       f:{en:["The content ranks with the best: 49 amenities, beds configured in all 10 rooms, rich description.","The page states “No carbon monoxide alarm · No smoke alarm”, the strongest safety warning Airbnb shows.","Children flag set while the description offers cribs and babysitter recommendations."],
+          es:["El contenido está entre los mejores: 49 servicios, camas configuradas en las 10 habitaciones, descripción rica.","La página declara “Sin alarma de CO · Sin alarma de humo”, la advertencia de seguridad más fuerte que muestra Airbnb.","Casilla de niños activada mientras la descripción ofrece cunas y niñeras."]},
+       r:{en:["Install or verify alarms and update the safety section first; this is the flagship.","Clear the children flag."],
+          es:["Instalar o verificar alarmas y actualizar la sección de seguridad primero; este es el buque insignia.","Desactivar la casilla de niños."]}},
+      {name:"Hacienda A40", id:"Airbnb ···387963 · Acct 1", status:"needs", facts:{rating:"", reviews:0},
+       checks:{title:"ok",desc:"ok",amen:"crit",safety:"fix",policies:"fix",rev:"fix",sync:"ok"},
+       f:{en:["7 amenity tags, the fewest in the audit, on an 8BR estate with chef, butler and concierge.","Alarms not reported; children flag set against “designed for families” in the text."],
+          es:["7 etiquetas, las menos de toda la auditoría, en una finca de 8BR con chef, mayordomo y concierge.","Alarmas no reportadas; casilla de niños activada contra el “diseñada para familias” del texto."]},
+       r:{en:["Complete the amenity set in Hostaway: pool, staff services, A/C, workspace.","Report alarms; clear the children flag."],
+          es:["Completar el set de servicios en Hostaway: piscina, personal, A/C, espacio de trabajo.","Reportar alarmas; desactivar la casilla de niños."]}},
+      {name:"La Cana H5", id:"Airbnb ···553910 · Acct 1", status:"needs", facts:{rating:"", reviews:0},
+       checks:{title:"ok",desc:"ok",amen:"fix",safety:"fix",policies:"fix",rev:"fix",sync:"ok"},
+       f:{en:["The title reads clean here (“La Cana | Punta Cana”), better than the Vrbo variant.","4 beds listed for 10 guests.","27 amenities; alarms not reported; children flag set."],
+          es:["El título está limpio aquí (“La Cana | Punta Cana”), mejor que la variante de Vrbo.","4 camas listadas para 10 huéspedes.","27 servicios; alarmas no reportadas; casilla de niños activada."]},
+       r:{en:["Complete per-room beds.","Report alarms; clear the children flag."],
+          es:["Completar camas por habitación.","Reportar alarmas; desactivar la casilla de niños."]}},
+      {name:"Tortuga C17", id:"Airbnb ···471869 · Acct 1", status:"needs", facts:{rating:"", reviews:0},
+       checks:{title:"ok",desc:"ok",amen:"fix",safety:"fix",policies:"fix",rev:"fix",sync:"ok"},
+       f:{en:["Solid content and title; 27 amenities, more than the near-empty Vrbo set.","Alarms not reported; children flag set."],
+          es:["Contenido y título sólidos; 27 servicios, más que el set casi vacío de Vrbo.","Alarmas no reportadas; casilla de niños activada."]},
+       r:{en:["Top up amenities in Hostaway; this also fixes the Vrbo gap.","Report alarms; clear the children flag."],
+          es:["Completar servicios en Hostaway; esto también arregla la brecha de Vrbo.","Reportar alarmas; desactivar la casilla de niños."]}},
+      {name:"Juanillo 25", id:"Airbnb ···561259 · Acct 1", status:"needs", facts:{rating:"", reviews:0},
+       checks:{title:"ok",desc:"fix",amen:"fix",safety:"ok",policies:"fix",rev:"fix",sync:"ok"},
+       f:{en:["The title is correct here (“6BR Villa Cap. Cana”), which proves the Vrbo “3BR” title is stale channel content.","The description is one paragraph with no structured “The space” section.","14 amenities; alarms present; children flag set."],
+          es:["El título es correcto aquí (“Villa 6BR Cap. Cana”), lo que prueba que el “3BR” de Vrbo es contenido obsoleto del canal.","La descripción es un párrafo sin sección estructurada.","14 servicios; alarmas presentes; casilla de niños activada."]},
+       r:{en:["Write the full description in Hostaway; it repairs both channels.","Complete amenities; clear the children flag."],
+          es:["Redactar la descripción completa en Hostaway; repara ambos canales.","Completar servicios; desactivar la casilla de niños."]}},
+      {name:"JUANILLO 39", id:"Airbnb ···923976 · Acct 1", status:"needs", facts:{rating:"", reviews:0},
+       checks:{title:"ok",desc:"fix",amen:"fix",safety:"fix",policies:"fix",rev:"fix",sync:"ok"},
+       f:{en:["A one-paragraph description for a 9BR villa.","“All bedrooms en-suite” against 8 bathrooms in the header. Verify.","14 amenities; CO alarm not reported; children flag set."],
+          es:["Una descripción de un párrafo para una villa de 9 habitaciones.","“Todas las habitaciones en-suite” contra 8 baños en el encabezado. Verificar.","14 servicios; alarma de CO no reportada; casilla de niños activada."]},
+       r:{en:["Write the full description in Hostaway.","Confirm the bathroom count; complete amenities; report alarms; clear the flag."],
+          es:["Redactar la descripción completa en Hostaway.","Confirmar los baños; completar servicios; reportar alarmas; desactivar la casilla."]}},
+      {name:"Stylish 3BR Penthouse (Sosúa)", id:"Airbnb ···887869 · Acct 4", status:"needs", facts:{rating:"5.0", reviews:1},
+       checks:{title:"ok",desc:"ok",amen:"fix",safety:"fix",policies:"fix",rev:"ok",sync:"ok"},
+       f:{en:["The last missing unit: found, Connected, title synced. Its one review is 5.0 from a family that stayed with kids, and the children flag is set.","Smoke alarm not reported (CO alarm present); 29 amenity tags; translation banner.","The Vrbo twin (“La Puntilla”) holds 16 reviews at 9.8; this listing builds its own from zero."],
+          es:["La última unidad que faltaba: encontrada, Conectada, título sincronizado. Su única reseña es 5.0 de una familia que se quedó con niños, y la casilla de niños está activada.","Alarma de humo no reportada (CO presente); 29 etiquetas; aviso de traducción.","El gemelo de Vrbo (“La Puntilla”) tiene 16 reseñas con 9.8; este anuncio construye las suyas desde cero."]},
+       r:{en:["Clear the children flag; report the smoke alarm.","Top up amenities: the pool table, terrace, washer and dryer sell this unit.","Fix the content source language; add to the review-request routine."],
+          es:["Desactivar la casilla de niños; reportar la alarma de humo.","Completar servicios: la mesa de billar, la terraza y la lavadora/secadora venden esta unidad.","Corregir el idioma fuente; incluir en la rutina de reseñas."]}},
+      {name:"CAYUCO 33", id:"Airbnb ···860070 · Acct 3", status:"needs", facts:{rating:"5.0", reviews:1},
+       checks:{title:"ok",desc:"ok",amen:"fix",safety:"fix",policies:"fix",rev:"ok",sync:"ok"},
+       f:{en:["Its single review is 5.0 from a family that stayed with kids, and “not suitable for children and infants” is set.","14 amenity tags, with Kitchen absent from the visible list against a “fully equipped kitchen” in the text.","Alarms not reported; translation banner."],
+          es:["Su única reseña es 5.0 de una familia que se quedó con niños, y “no apto para niños y bebés” está activado.","14 etiquetas, con Cocina ausente de la lista visible contra la “cocina totalmente equipada” del texto.","Alarmas no reportadas; aviso de traducción."]},
+       r:{en:["Clear the children flag; the listing's own review history argues for it.","Complete the amenity set including Kitchen; report alarms.","Fix the content source language."],
+          es:["Desactivar la casilla de niños; el propio historial de reseñas lo avala.","Completar los servicios incluida la Cocina; reportar alarmas.","Corregir el idioma fuente."]}},
+      {name:"Sotogrande", id:"Airbnb ···777952 · Acct 3", status:"needs", facts:{rating:"", reviews:0},
+       checks:{title:"ok",desc:"fix",amen:"fix",safety:"fix",policies:"ok",rev:"fix",sync:"ok"},
+       f:{en:["The same one-paragraph description as the Vrbo twin; the gap sits in the Hostaway source.","17 amenity tags; alarms not reported.","The title syncs. No children flag here."],
+          es:["La misma descripción de un párrafo que el gemelo de Vrbo; la brecha está en la fuente de Hostaway.","17 etiquetas; alarmas no reportadas.","El título sincroniza. Sin casilla de niños aquí."]},
+       r:{en:["Write the full description once in Hostaway; it repairs both channels.","Complete amenities; report alarms; add to the review-request routine."],
+          es:["Redactar la descripción completa una vez en Hostaway; repara ambos canales.","Completar servicios; reportar alarmas; incluir en la rutina de reseñas."]}},
+      {name:"Sea Winds 1305", id:"Airbnb ···128436 · Acct 2", status:"needs", facts:{rating:"", reviews:0},
+       checks:{title:"fix",desc:"fix",amen:"fix",safety:"fix",policies:"fix",rev:"fix",sync:"fix"},
+       f:{en:["The title (“Sea Winds Seaside Escape | Spacious Condo”) differs from the Hostaway headline (“…Family Stay…”).","The header says 6 guests; the description says “comfortably fits 4”. The same conflict as Vrbo.","The description says “oceanfront condo in Sosúa”; the property is in Cabarete.","Smoke alarm not reported; children flag set while the complex has a children's playground.","The address is correct here, so Vrbo's “Unknown” map is a Vrbo-side gap."],
+          es:["El título (“Sea Winds Seaside Escape | Spacious Condo”) difiere del titular de Hostaway (“…Family Stay…”).","El encabezado dice 6 huéspedes; la descripción dice “cómodamente 4”. El mismo conflicto que en Vrbo.","La descripción dice “condominio frente al mar en Sosúa”; la propiedad está en Cabarete.","Alarma de humo no reportada; casilla de niños activada mientras el complejo tiene parque infantil.","La dirección aquí es correcta, así que el mapa “Unknown” de Vrbo es una brecha del lado de Vrbo."]},
+       r:{en:["Pick one capacity (4 or 6) and one title in Hostaway; re-publish to both channels.","Fix the Sosúa/Cabarete mix-up.","Report the smoke alarm; clear the children flag."],
+          es:["Elegir una capacidad (4 o 6) y un título en Hostaway; republicar a ambos canales.","Corregir la confusión Sosúa/Cabarete.","Reportar la alarma de humo; desactivar la casilla de niños."]}},
+      {name:"Victorian U1", id:"Airbnb ···608231 · Acct 2", status:"needs", facts:{rating:"", reviews:0},
+       checks:{title:"ok",desc:"ok",amen:"crit",safety:"fix",policies:"fix",rev:"fix",sync:"ok"},
+       f:{en:["The title matches the Hostaway headline; the generic-title problem lives on the Vrbo twin.","9 amenity tags; the sister listing Portal Del Mar has 48.","Alarms not reported; “not suitable for children (2–12)” set while the description sells a bunk-bed room as “ideal for families”.","The map highlight reads “right on Beach Gazibo”, a misspelled point of interest.","Zero reviews here; the unit's 41-review history lives on the Vrbo twin."],
+          es:["El título coincide con el titular de Hostaway; el problema del título genérico vive en el gemelo de Vrbo.","9 etiquetas; el anuncio hermano Portal Del Mar tiene 48.","Alarmas no reportadas; “no apto para niños (2–12)” activado mientras la descripción vende la litera como “ideal para familias”.","El destacado del mapa dice “right on Beach Gazibo”, un punto de interés mal escrito.","Cero reseñas aquí; las 41 reseñas de la unidad viven en el gemelo de Vrbo."]},
+       r:{en:["Complete the amenity set in Hostaway: pool, hot tub, beach, A/C, washer.","Report alarms; clear the children flag; fix the point-of-interest name.","Add to the review-request routine."],
+          es:["Completar el set de servicios en Hostaway: piscina, jacuzzi, playa, A/C, lavadora.","Reportar alarmas; desactivar la casilla; corregir el punto de interés.","Incluir en la rutina de reseñas."]}},
+      {name:"Villa Blanca", id:"Airbnb ···251662 · Acct 1", status:"good", facts:{rating:"", reviews:0},
+       checks:{title:"ok",desc:"ok",amen:"ok",safety:"ok",policies:"fix",rev:"fix",sync:"ok"},
+       f:{en:["The healthy version of this listing: correct title, 49 amenities, per-room beds configured, alarms present.","This shows the Hostaway source data is sound; the garbled beds on Vrbo are a Vrbo-side mapping fault.","The account-wide children flag is the one remaining item."],
+          es:["La versión sana de este anuncio: título correcto, 49 servicios, camas configuradas por habitación, alarmas presentes.","Esto muestra que los datos fuente de Hostaway están sanos; las camas confusas de Vrbo son una falla del canal Vrbo.","La casilla de niños de toda la cuenta es lo único pendiente."]},
+       r:{en:["Clear the children flag. Use as the reference when repairing the Vrbo twin."],
+          es:["Desactivar la casilla de niños. Usar como referencia al reparar el gemelo de Vrbo."]}},
+      {name:"CAYUCO 38", id:"Airbnb ···371127 · Acct 3", status:"good", facts:{rating:"", reviews:0},
+       checks:{title:"ok",desc:"ok",amen:"ok",safety:"ok",policies:"ok",rev:"fix",sync:"ok"},
+       f:{en:["A model listing: 62 amenity tags, the most in the audit, alarms reported, smartlock self check-in, no children flag, full structured description.","Remaining: zero reviews and the translation banner."],
+          es:["Un anuncio modelo: 62 etiquetas, el máximo de la auditoría, alarmas reportadas, entrada autónoma con cerradura inteligente, sin casilla de niños, descripción completa y estructurada.","Pendiente: cero reseñas y el aviso de traducción."]},
+       r:{en:["Use as the amenity-mapping reference for the other listings.","Fix the content source language; add to the review-request routine."],
+          es:["Usar como referencia de mapeo de servicios para los demás anuncios.","Corregir el idioma fuente; incluir en la rutina de reseñas."]}},
+      {name:"Portal Del Mar 201", id:"Airbnb ···383335 · Acct 2", status:"good", facts:{rating:"5.0", reviews:2},
+       checks:{title:"ok",desc:"ok",amen:"ok",safety:"ok",policies:"ok",rev:"ok",sync:"ok"},
+       f:{en:["The healthiest Airbnb listing across the four accounts: synced title, 48 amenities, alarms reported, no children flag, 5.0 from 2 reviews.","One note: “beachfront paradise” overstates a beach that sits steps away, same as the Vrbo twin."],
+          es:["El anuncio de Airbnb más sano de las cuatro cuentas: título sincronizado, 48 servicios, alarmas reportadas, sin casilla de niños, 5.0 con 2 reseñas.","Una nota: “paraíso frente al mar” exagera una playa que está a pasos, igual que el gemelo de Vrbo."]},
+       r:{en:["Use as the account-2 reference. Soften the beachfront wording in Hostaway; it fixes both channels.","Keep building reviews."],
+          es:["Usar como referencia de la cuenta 2. Suavizar el texto de “frente al mar” en Hostaway; arregla ambos canales.","Seguir sumando reseñas."]}}
+    ]
+  }]
+};
+
+let lang = "es";
+let activeTab = 0;
+function statusClass(s){return s==="crit"?"crit":s==="needs"?"needs":"good";}
+function pillClass(s){return s==="crit"?"crit":s==="needs"?"fix":"ok";}
+
+function render(){
+  const T = L10N[lang];
+  document.documentElement.lang = lang;
+  document.getElementById("t-title").textContent = T.title;
+  document.getElementById("t-client").innerHTML = T.client(DATA.client);
+  document.getElementById("t-updated").textContent = T.updated(DATA.updated);
+  document.getElementById("langbtn").textContent = T.toggle;
+  document.getElementById("foot").innerHTML = T.foot;
+
+  document.getElementById("tabs").innerHTML = DATA.sections.map((s,i)=>
+    `<button class="tab${i===activeTab?" active":""}" role="tab" aria-selected="${i===activeTab}" data-i="${i}" type="button">${s.channel}${s.tabnote?`<span class="cnt">${s.tabnote}</span>`:""}</button>`
+  ).join("");
+  document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{activeTab=+b.dataset.i;render();}));
+
+  const sec = DATA.sections[activeTab];
+  const ls = sec.listings;
+  const crit = ls.filter(x=>x.status==="crit").length;
+  const good = ls.filter(x=>x.status==="good").length;
+  const norev = ls.filter(x=>(x.facts.reviews||0)===0).length;
+
+  const stats = `
+    <div class="stats">
+      <div class="stat"><div class="k">${ls.length}</div><div class="l">${T.stats.audited}</div></div>
+      <div class="stat crit"><div class="k">${crit}</div><div class="l">${T.stats.crit}</div></div>
+      <div class="stat"><div class="k">${good}</div><div class="l">${T.stats.clean}</div></div>
+      <div class="stat crit"><div class="k">${norev}<small>/${ls.length}</small></div><div class="l">${T.stats.noreviews}</div></div>
+    </div>`;
+  const sum = `<div class="panel"><h3>${T.sum}</h3><ul>${sec.summary[lang].map(x=>`<li>${x}</li>`).join("")}</ul></div>
+    <div class="panel"><h3>${T.pri}</h3><ul>${sec.summary.priorities[lang].map((x,i)=>`<li><b>${i+1}.</b> ${x}</li>`).join("")}</ul></div>`;
+  const cards = ls.map(x=>{
+    const facts = [];
+    if(x.facts.photos) facts.push(`<span>${T.facts.photos} <b>${x.facts.photos}</b></span>`);
+    facts.push(`<span>${T.facts.rating} <b>${x.facts.rating||"—"}</b></span>`);
+    facts.push(`<span>${T.facts.reviews} <b>${x.facts.reviews}</b></span>`);
+    return `
+    <div class="card ${statusClass(x.status)}">
+      <div class="card-h">
+        <div><div class="n">${x.name}</div><div class="meta">${x.id}</div></div>
+        <span class="pill ${pillClass(x.status)}">${T.status[x.status]}</span>
+      </div>
+      <div class="facts">${facts.join("")}</div>
+      <div class="checks">${Object.entries(x.checks).map(([k,v])=>`<span class="chk ${v}">${T.checks[k]}</span>`).join("")}</div>
+      <div class="lbl">${T.findings}</div><ul class="fnd">${x.f[lang].map(i=>`<li>${i}</li>`).join("")}</ul>
+      <div class="lbl">${T.recs}</div><ul class="rec">${x.r[lang].map(i=>`<li>${i}</li>`).join("")}</ul>
+    </div>`;}).join("");
+
+  document.getElementById("report").innerHTML = `<p class="sub">${sec.sub[lang]}</p>${stats}${sum}${cards}`;
+}
+document.getElementById("langbtn").addEventListener("click",()=>{lang=lang==="es"?"en":"es";render();});
+render();
+</script>
