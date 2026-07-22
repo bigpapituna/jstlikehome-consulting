@@ -136,7 +136,7 @@ const L10N = {
     title:"OTA Listing Audit", client:c=>`Prepared for <b>${c}</b> · channel-by-channel review of every live listing`,
     updated:d=>`Audited ${d}`, toggle:"ES",
     stats:{audited:"Listings audited", crit:"Critical issues", clean:"In good shape", noreviews:"With zero reviews"},
-    sum:"What we found, in short", pri:"Top priorities",
+    sum:"What we found, in short", pri:"Top priorities", money:"Where the money is",
     findings:"Findings", recs:"Recommendations",
     status:{good:"Good shape", needs:"Needs work", crit:"Critical"},
     checks:{title:"Title",desc:"Description",photos:"Photos",amen:"Amenities",map:"Map/Address",safety:"Safety info",policies:"Policies",rev:"Reviews",sync:"Hostaway sync"},
@@ -147,7 +147,7 @@ const L10N = {
     title:"Auditoría de Anuncios OTA", client:c=>`Preparado para <b>${c}</b> · revisión canal por canal de cada anuncio activo`,
     updated:d=>`Auditado ${d}`, toggle:"EN",
     stats:{audited:"Anuncios auditados", crit:"Problemas críticos", clean:"En buen estado", noreviews:"Sin reseñas"},
-    sum:"Lo que encontramos, en resumen", pri:"Prioridades principales",
+    sum:"Lo que encontramos, en resumen", pri:"Prioridades principales", money:"Dónde está el dinero",
     findings:"Hallazgos", recs:"Recomendaciones",
     status:{good:"Buen estado", needs:"Requiere trabajo", crit:"Crítico"},
     checks:{title:"Título",desc:"Descripción",photos:"Fotos",amen:"Servicios",map:"Mapa/Dirección",safety:"Seguridad",policies:"Políticas",rev:"Reseñas",sync:"Sincronización"},
@@ -180,6 +180,20 @@ const DATA = {
         "<b>7 anuncios muestran títulos genéricos</b> (“Beachfront Condo with Pool”) en lugar de los títulos optimizados de Hostaway: sin nombre de propiedad, sin palabra clave de ubicación, peor rendimiento en búsquedas.",
         "<b>Errores de datos que confunden al huésped:</b> un anuncio anuncia 3 habitaciones y tiene 6; otro muestra su ubicación como “Desconocida”; dos declaran capacidades contradictorias."
       ],
+      money: {
+        en: [
+          "<b>Casa Playa turns away 4-night groups:</b> its minimum stay rejects a December 4-night request. An 11-bedroom estate lives off group bookings; audit minimum stays across the portfolio in Hostaway.",
+          "<b>Cancellation terms are stricter than a zero-review portfolio can afford:</b> Casamare requires cancellation 30 days out for any refund. Looser terms until the review base builds converts more of the traffic these listings already get.",
+          "<b>The pets contradiction costs bookings both ways:</b> the Penthouse description says pet-friendly while the rules say no pets. Pet travelers book elsewhere; non-pet travelers may distrust the page.",
+          "<b>Pricing is one flat rate year-round on all 20 listings</b> — captured as the baseline for the pricing phase (PriceLabs) already on the roadmap. Peak-season December currently sells at the same rate as low season."
+        ],
+        es: [
+          "<b>Casa Playa rechaza grupos de 4 noches:</b> su estadía mínima rechazó una solicitud de 4 noches en diciembre. Una finca de 11 habitaciones vive de reservas grupales; auditar las estadías mínimas de todo el portafolio en Hostaway.",
+          "<b>Los términos de cancelación son más estrictos de lo que un portafolio sin reseñas puede permitirse:</b> Casamare exige cancelar 30 días antes para cualquier reembolso. Términos más flexibles hasta construir la base de reseñas convierten más del tráfico que estos anuncios ya reciben.",
+          "<b>La contradicción de mascotas cuesta reservas en ambos sentidos:</b> la descripción del Penthouse dice pet-friendly mientras las reglas dicen no mascotas. Los viajeros con mascota reservan en otro lado; los demás desconfían de la página.",
+          "<b>El precio es una tarifa plana todo el año en los 20 anuncios</b> — capturado como línea base para la fase de precios (PriceLabs) ya en la hoja de ruta. Diciembre de temporada alta se vende hoy a la misma tarifa que la temporada baja."
+        ]
+      },
       priorities: {
         en: [
           "Fix the Juanillo 25 title (it says 3BR; the villa has 6).",
@@ -346,6 +360,20 @@ const DATA = {
         "<b>Caribbean Dream Vacations muestra 43% de tasa de respuesta</b> (“responde en varios días o más”) en cada uno de sus anuncios. La métrica hunde el posicionamiento de toda la cuenta y bloquea el Superhost. La bandeja unificada de Hostaway con automatización corrige la causa raíz.",
         "<b>Aparecieron 7 propiedades estacionadas o desconocidas:</b> Fundadores de Golf 28, Villa NoCo, OO 1114, Aquamarina Luxe Retreat, más tres unidades de Sosúa despublicadas (un 2BR, Las Palmas 4BR y un “Spacious 2BR aparment”, error incluido). Ninguna existe en Hostaway ni en Vrbo. Cada una necesita decisión: incorporar o archivar."
       ],
+      money: {
+        en: [
+          "<b>Instant Book is ON across every account we probed — protect it.</b> It's the single strongest ranking and conversion setting on Airbnb, and it's already right.",
+          "<b>Every sampled listing uses the Firm cancellation policy:</b> 24-hour grace, then partial refund only 30+ days out. On zero-review listings, guests have no reviews to trust AND strict terms; loosening to Moderate until reviews build converts more lookers.",
+          "<b>No launch promotions are running.</b> The accounts are past Airbnb's new-listing window, but weekly/monthly discounts and custom promotions remain unused levers on 20 listings with near-zero forward occupancy.",
+          "<b>The children flag (17 of 20) is a market-access issue, not just a settings error:</b> these villas sleep 10–20 — the family and multi-family group segment IS the buyer. One checkbox per listing reopens that market."
+        ],
+        es: [
+          "<b>Instant Book está activo en cada cuenta que probamos — protegerlo.</b> Es el ajuste de posicionamiento y conversión más fuerte de Airbnb, y ya está bien puesto.",
+          "<b>Cada anuncio muestreado usa la política de cancelación Firme:</b> 24 horas de gracia, luego reembolso parcial solo con 30+ días. En anuncios sin reseñas, el huésped no tiene reseñas en las que confiar Y términos estrictos; aflojar a Moderada hasta construir reseñas convierte más visitantes.",
+          "<b>No hay promociones de lanzamiento activas.</b> Las cuentas ya pasaron la ventana de anuncio nuevo de Airbnb, pero los descuentos semanales/mensuales y las promociones personalizadas siguen sin usarse en 20 anuncios con ocupación futura casi nula.",
+          "<b>La casilla de niños (17 de 20) es un problema de acceso al mercado, no solo de configuración:</b> estas villas duermen 10–20 — el segmento familiar y de grupos multifamiliares ES el comprador. Una casilla por anuncio reabre ese mercado."
+        ]
+      },
       priorities: {
         en: [
           "Clear “not suitable for children/infants” on the 17 affected listings.",
@@ -514,6 +542,20 @@ const DATA = {
         "<b>La brecha de alarmas llega al tercer canal:</b> cada anuncio lleva el descargo “detector no indicado”, y la mayoría repite la advertencia de niños en espacios exteriores.",
         "<b>Cero reseñas en los 20</b> — igual que Airbnb. Los puntajes de contenido de Expedia van de 59% a 94%; las correcciones de arriba son lo que los cierra."
       ],
+      money: {
+        en: [
+          "<b>One promotion exists across all 20 properties:</b> the contracted 10% Member Only Deal. No general-audience promotion, no mobile rate, no packages — on the channel built around deal merchandising. The bulk-promotion tool sets one up across all 20 properties in a single pass.",
+          "<b>Expedia is already telling you what to fix:</b> the Opportunities queue has recommendations waiting per property (Victorian alone shows 5), and every property carries two identical “Standard” rate plans where differentiated plans could merchandise.",
+          "<b>The visibility baseline is on record: average sort order 181, revenue $0</b> (CAYUCO 38 dashboard). That's the before-number; re-read it after the fixes as your proof of impact.",
+          "<b>13 check-in windows close at 5 PM.</b> Every late-arrival traveler who filters or reads policies books a villa they can actually enter — someone else's."
+        ],
+        es: [
+          "<b>Existe una sola promoción en las 20 propiedades:</b> el Member Only Deal contratado del 10%. Sin promoción general, sin tarifa móvil, sin paquetes — en el canal construido alrededor de ofertas. La herramienta de promociones masivas configura una para las 20 propiedades en una sola pasada.",
+          "<b>Expedia ya te está diciendo qué arreglar:</b> la cola de Oportunidades tiene recomendaciones por propiedad (solo Victorian muestra 5), y cada propiedad tiene dos planes “Standard” idénticos donde planes diferenciados podrían vender.",
+          "<b>La línea base de visibilidad quedó registrada: orden de aparición promedio 181, ingresos $0</b> (panel de CAYUCO 38). Ese es el número de antes; releerlo después de las correcciones como prueba de impacto.",
+          "<b>13 ventanas de entrada cierran a las 5 PM.</b> Cada viajero de llegada tardía que filtra o lee políticas reserva una villa a la que sí puede entrar — la de otro."
+        ]
+      },
       priorities: {
         en: [
           "Push the real descriptions to Expedia (room configuration + property text in Hostaway, then re-sync); fix the six wrong bathroom counts and add bedroom counts everywhere.",
@@ -690,7 +732,9 @@ function render(){
       <div class="stat"><div class="k">${good}</div><div class="l">${T.stats.clean}</div></div>
       <div class="stat crit"><div class="k">${norev}<small>/${ls.length}</small></div><div class="l">${T.stats.noreviews}</div></div>
     </div>`;
+  const moneyPanel = sec.summary.money ? `<div class="panel"><h3>${T.money}</h3><ul>${sec.summary.money[lang].map(x=>`<li>${x}</li>`).join("")}</ul></div>` : "";
   const sum = `<div class="panel"><h3>${T.sum}</h3><ul>${sec.summary[lang].map(x=>`<li>${x}</li>`).join("")}</ul></div>
+    ${moneyPanel}
     <div class="panel"><h3>${T.pri}</h3><ul>${sec.summary.priorities[lang].map((x,i)=>`<li><b>${i+1}.</b> ${x}</li>`).join("")}</ul></div>`;
   const cards = ls.map(x=>{
     const facts = [];
