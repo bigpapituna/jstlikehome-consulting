@@ -1,0 +1,121 @@
+<!-- Derek Giovanetti & Roxanne Dreyer — intake summary + initial pricing. Portal password lives in Vercel env (CLIENT_PASSWORDS), never here. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>JSTLIKEHOME · Derek & Roxanne — Meeting Summary & Pricing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FBF8F3; --surface:#FFFFFF; --surface-2:#F3EEE6;
+    --ink:#211d18; --muted:#5d564c; --border:#e7e0d5;
+    --accent:#F0625E; --accent-ink:#d14b47; --done:#1f8a5b;
+    --fh:'Fraunces',Georgia,ui-serif,serif;
+    --fb:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--fb);line-height:1.6;-webkit-text-size-adjust:100%}
+  .wrap{max-width:780px;margin:0 auto;padding:30px 20px 80px}
+  .brand{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  h1{font-family:var(--fh);font-weight:600;font-size:clamp(27px,6.5vw,38px);line-height:1.08;margin:10px 0 8px;letter-spacing:-.01em;text-wrap:balance}
+  .meta{color:var(--muted);font-size:14.5px;margin:0}
+  .meta b{color:var(--ink)}
+  h2{font-family:var(--fh);font-weight:600;font-size:21px;margin:38px 0 6px}
+  h3{font-size:15px;font-weight:700;margin:18px 0 4px}
+  p{margin:8px 0;font-size:15px}
+  ul{margin:8px 0;padding-left:22px;font-size:15px}
+  li{margin:6px 0}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px 22px;margin-top:14px;box-shadow:0 4px 14px rgba(33,29,24,.05)}
+  .price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:14px}
+  .price{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px 22px;box-shadow:0 4px 14px rgba(33,29,24,.05)}
+  .price .amt{font-family:var(--fh);font-size:32px;font-weight:600;color:var(--accent);letter-spacing:-.02em;line-height:1}
+  .price .amt small{font-size:15px;color:var(--muted);font-weight:500}
+  .price .name{font-weight:700;font-size:14px;margin-top:8px}
+  .price .desc{color:var(--muted);font-size:13.5px;margin-top:6px}
+  .tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--done);
+    background:color-mix(in srgb,var(--done) 12%,transparent);border-radius:999px;padding:3px 10px;margin-bottom:8px}
+  .steps{counter-reset:s;list-style:none;padding:0}
+  .steps li{counter-increment:s;position:relative;padding-left:40px;margin:12px 0}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;
+    background:var(--accent);color:#fff;font-weight:700;font-size:13px;display:grid;place-items:center}
+  .note{background:var(--surface-2);border-radius:12px;padding:14px 16px;font-size:13.5px;color:var(--muted);margin-top:14px}
+  .note b{color:var(--ink)}
+  .foot{margin-top:44px;border-top:1px solid var(--border);padding-top:18px;color:var(--muted);font-size:13.5px}
+  a{color:var(--accent-ink)}
+</style>
+
+<div class="wrap">
+  <div class="brand">JSTLIKEHOME</div>
+  <h1>Meeting Summary &amp; Initial Pricing</h1>
+  <p class="meta">Prepared for <b>Derek Giovanetti &amp; Roxanne Dreyer</b> · Intake call of <b>July 23, 2026</b> · Roy Younes, JSTLIKEHOME</p>
+
+  <h2>Your portfolio, as we discussed</h2>
+  <div class="card">
+    <ul>
+      <li><b>Tiajuna Halekai #2 (Kauai, 2BR)</b> — six years running, your review anchor.</li>
+      <li><b>Kauai #1 (1BR)</b> — renovated and listed this month.</li>
+      <li><b>Kauai #3 (1BR)</b> — closed July 6 with inherited bookings, furniture stays for now.</li>
+      <li><b>La Quinta — Spanish Hacienda</b> — relisted in January, ~25 reviews, season picks up in October.</li>
+      <li><b>Tahoe</b> — on the market; current management ends August 27. We plan around it.</li>
+    </ul>
+    <p>Today everything sells through <b>Airbnb only</b>. The listings are strong; the exposure is the gap — one platform means one point of failure and one price ceiling.</p>
+  </div>
+
+  <h2>What we agreed the work looks like</h2>
+  <div class="card">
+    <ul>
+      <li><b>Full audit first</b> — every listing reviewed in writing: content, pricing posture, market analysis per area (including typical booking windows — Kauai books ~120 days out, La Quinta ~45), plus a check of county/municipal rules on which OTAs each property can use.</li>
+      <li><b>Channel manager (Hostaway)</b> — one dashboard for every platform, synced calendars and pricing. You get full admin access, and I train you both on it.</li>
+      <li><b>Diversification</b> — add Vrbo (a fit for Kauai's older clientele), Booking.com, and Hopper alongside Airbnb.</li>
+      <li><b>Dynamic pricing (PriceLabs)</b> — competitive, seasonal, demand-driven rates replacing flat pricing.</li>
+      <li><b>Payments</b> — a processor (Stripe or Authorize.net) connected to the channel manager, with automated invoicing; I'll recommend the platform and train you.</li>
+      <li><b>Direct bookings</b> — a simple booking engine so repeat guests can book you commission-free.</li>
+    </ul>
+    <p><b>Rollout: pilot La Quinta first</b> — proof of concept before its October season, when OTAs need ~90 days of runway — then phase two rolls out the three Kauai units once you're both comfortable.</p>
+  </div>
+
+  <h2>Initial pricing</h2>
+  <div class="price-grid">
+    <div class="price">
+      <span class="tag">Start here</span>
+      <div class="amt">$450 <small>one-time</small></div>
+      <div class="name">Portfolio audit — all 5 listings</div>
+      <div class="desc">Written audit and recommendations per listing, market analysis and booking windows per area, OTA permit check. The report is yours: take it and run with it, or continue with me.</div>
+    </div>
+    <div class="price">
+      <div class="amt">$1,500 <small>per listing</small></div>
+      <div class="name">Optimization &amp; implementation</div>
+      <div class="desc">Channel manager setup, OTA launches, PriceLabs configuration, payment automation, training. 30–90 days; payments spread over 90 days.</div>
+    </div>
+    <div class="price">
+      <div class="amt">3–5% <small>ongoing</small></div>
+      <div class="name">Optional: continuous optimization</div>
+      <div class="desc">Instead of (or after) the one-time route: I keep optimizing listings, pricing, and campaigns for a small share of revenue. No property management involved.</div>
+    </div>
+  </div>
+  <div class="note">
+    <b>Your protection, both routes:</b> payments spread over 90 days with a halfway checkpoint — if the work isn't delivered, you exit without the remaining payments and keep everything built. On request, we can also set a reservation quota for the new channels: miss it by the agreed date and the remaining balance is waived.
+  </div>
+  <div class="note">
+    <b>Software costs (billed at cost, not marked up):</b> Hostaway through my partner account runs about <b>$35/listing/month</b> (direct subscription would be $55–85); PriceLabs is a separate small per-listing subscription.
+  </div>
+
+  <h2>Suggested path for you</h2>
+  <div class="card">
+    <ol class="steps">
+      <li><b>Audit — $450, all five listings.</b> You get the full written report and market analyses.</li>
+      <li><b>Pilot La Quinta — $1,500.</b> Hostaway + Vrbo, Booking.com, Hopper + PriceLabs + payments, live before the October season, with training for you and Roxanne.</li>
+      <li><b>Phase two: Kauai ×3 — $4,500.</b> Same playbook once the pilot feels comfortable.</li>
+      <li><b>Tahoe — decide later.</b> If it doesn't sell by August 27, we fold it in on the same terms.</li>
+    </ol>
+    <p style="color:var(--muted);font-size:13.5px">Timing matters most for La Quinta: OTAs perform best with ~90 days of booking runway, and its season starts picking up in October.</p>
+  </div>
+
+  <h2>Next step</h2>
+  <div class="card">
+    <p>Reply by email with the direction you'd like to take — audit only, or audit + La Quinta pilot — and I'll start the audit right away and confirm the kickoff schedule.</p>
+    <p style="margin-top:12px">Roy Younes · <a href="mailto:roy.y@jstlikehome.com">roy.y@jstlikehome.com</a></p>
+  </div>
+
+  <p class="foot">This page is private to you, behind your portal password. As we work together it grows into your full client portal — audit results, project status, and shared tasks, like the case study I showed you on our call. Congratulations again on your baby boy!</p>
+</div>
