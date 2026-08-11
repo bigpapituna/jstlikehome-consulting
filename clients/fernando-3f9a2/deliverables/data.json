@@ -1,6 +1,19 @@
 {
  "tasks": [
   {
+   "id": "tmsorfpmw",
+   "title": "Add Booking.com Listings",
+   "desc": "",
+   "assignee": "Alondra",
+   "due": "2026-08-14",
+   "eta": "",
+   "status": "open",
+   "created": "2026-08-11 14:33",
+   "created_by": "Roy",
+   "completed_at": "",
+   "completed_by": ""
+  },
+  {
    "id": "tmrqk7055",
    "title": "Listings title updated -Expedia",
    "desc": "",
