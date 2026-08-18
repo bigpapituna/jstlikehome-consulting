@@ -6,8 +6,8 @@
    "total": 2294.05,
    "currency": "USD",
    "issued": "2026-08-17",
-   "status": "outstanding",
-   "paid_at": "",
+   "status": "paid",
+   "paid_at": "2026-08-18",
    "pdf": "files/invoice-2026-08.pdf"
   },
   {
