@@ -7,11 +7,11 @@
    "assignee": "Roy",
    "due": "2026-08-14",
    "eta": "",
-   "status": "open",
+   "status": "done",
    "created": "2026-08-11 14:33",
    "created_by": "Roy",
-   "completed_at": "",
-   "completed_by": ""
+   "completed_at": "2026-08-18 14:55",
+   "completed_by": "Roy"
   },
   {
    "id": "tmsorg3qd",
@@ -122,21 +122,5 @@
    "eta_by": "Alondra"
   }
  ],
- "archive": [
-  {
-   "id": "tmsorfpmw",
-   "title": "Add Booking.com Listings",
-   "desc": "",
-   "assignee": "Alondra",
-   "due": "2026-08-14",
-   "eta": "",
-   "status": "open",
-   "created": "2026-08-11 14:33",
-   "created_by": "Roy",
-   "completed_at": "",
-   "completed_by": "",
-   "deleted_at": "2026-08-11 14:33",
-   "deleted_by": "Roy"
-  }
- ]
+ "archive": []
 }
