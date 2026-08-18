@@ -1,6 +1,16 @@
 {
  "invoices": [
   {
+   "number": "JSTL-FP-2026-0002",
+   "month": "2026-08",
+   "total": 2294.05,
+   "currency": "USD",
+   "issued": "2026-08-17",
+   "status": "outstanding",
+   "paid_at": "",
+   "pdf": "files/invoice-2026-08.pdf"
+  },
+  {
    "number": "JSTL-FP-2026-0001",
    "month": "2026-07",
    "total": 2200.0,
